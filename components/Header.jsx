@@ -232,8 +232,8 @@ const Header = () => {
     <>
       <header
         className={cn(
-          "overflow-x-clip overflow-y-visible relative w-full z-50 bg-white text-black",
-          isCityRoute ? "" : "",
+          "overflow-x-clip overflow-y-visible w-full z-50",
+          pathname === "/" ? "absolute top-0 left-0 bg-transparent text-slate-900" : "relative bg-white text-black"
         )}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4">
