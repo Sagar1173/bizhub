@@ -142,8 +142,8 @@ const Hero = () => {
               <h1 className="font-serif text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl">
                 Find your next business here
               </h1>
-              <p className="mx-auto text-sm leading-relaxed text-slate-600 sm:text-2xl">
-                100+ Restaurants, Convenience Stores & Hotels for sale
+              <p className="mx-auto text-base leading-relaxed text-slate-900 sm:text-3xl font-medium">
+                <span className="text-black font-semibold text-lg sm:text-4xl">100+</span> Restaurants, Convenience Stores & Hotels for sale
               </p>
             </div>
 

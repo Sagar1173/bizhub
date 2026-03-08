@@ -240,7 +240,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <div className="flex-1 min-w-0 flex items-center justify-start gap-2 sm:gap-4 md:gap-6">
               <Link href="/" className="flex shrink-0">
-                <span className="text-xl md:text-2xl font-bold text-blue-950">bizmonk.</span>
+                <span className="text-2xl md:text-3xl font-bold text-blue-950">bizmonk.</span>
               </Link>
 
               {showHeaderSearch && (
