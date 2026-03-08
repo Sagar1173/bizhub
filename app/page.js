@@ -28,6 +28,18 @@ export default async function Home() {
       cityToPass: "Toronto",
       href: "/toronto",
     },
+    {
+      title: "Restaurants in Brampton",
+      businessType: "Restaurant",
+      cityToPass: "Brampton",
+      href: "/brampton?businessType=Restaurant",
+    },
+    {
+      title: "Businesses for Sale in Ajax",
+      businessType: undefined,
+      cityToPass: "Ajax",
+      href: "/ajax",
+    },
   ];
 
   const featuredSections = await Promise.all(
