@@ -1,20 +1,35 @@
 import CityComponent from "@/components/CityComponent";
 import { fetchProperties, fetchMedia } from "@/lib/api";
 import { slugToCity } from "@/lib/slug";
+import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params, searchParams }) {
   const { city } = await params;
+  const sParams = await searchParams;
   const cityName = slugToCity(city);
+  
+  const businessType = sParams.businessType || undefined;
+  const listingType = sParams.listingType || "sale";
+
   const data = await fetchProperties({
     cityToPass: cityName,
+    businessType,
+    listingType,
     top: 1,
   });
+  
   const count = data.totalCount || 0;
   const countStr = count > 0 ? `${count}+ ` : "";
+  const listingLabel = listingType === "lease" ? "for lease" : "for sale";
+  const businessLabel = businessType ? (BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType) : "Business Opportunities";
 
   return {
-    title: `Business Opportunities for Sale in ${cityName} | Ravi Singh Godara`,
-    description: `Explore ${countStr}business listings for sale in ${cityName}. Find your next investment opportunity among our curated selection of properties.`,
+    title: businessType ? `${businessLabel} ${listingLabel} in ${cityName} | Bizmonk` : `Business Opportunities in ${cityName} | Bizmonk`,
+    description: businessType ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.` : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`,
+    openGraph: {
+      title: businessType ? `${businessLabel} ${listingLabel} in ${cityName} | Bizmonk` : `Business Opportunities in ${cityName} | Bizmonk`,
+      description: businessType ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.` : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`,
+    },
   };
 }
 

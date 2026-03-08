@@ -4,7 +4,8 @@ import React from "react";
 import { Square, Home, Heart } from "lucide-react";
 import nProgress from "nprogress";
 import { useRouter } from "next/navigation";
-import { cityToSlug } from "@/lib/slug";
+import { cityToSlug, generatePropertySlug } from "@/lib/slug";
+import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
 function getTimeAgo(dateString) {
   if (!dateString) return "New";
@@ -84,7 +85,7 @@ export default function PropertyCard({ property }) {
   const businessType = Array.isArray(property.BusinessType) 
     ? property.BusinessType[0] 
     : property.BusinessType;
-  const propertyType = businessType || property.PropertySubType || "Property";
+  const propertyType = BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType || property.PropertySubType || "Property";
   const fullAddress =
     property.UnparsedAddress ||
     `${property.StreetNumber} ${property.StreetName}`;
@@ -111,7 +112,7 @@ export default function PropertyCard({ property }) {
         if (typeof window !== "undefined") {
           window.scrollTo({ top: 0, left: 0, behavior: "auto" });
         }
-        router.push(`/${cityToSlug(city)}/${mls}`, { scroll: true });
+        router.push(`/${cityToSlug(city)}/${generatePropertySlug(property)}`, { scroll: true });
       }}
       className="group w-full bg-white rounded-xl overflow-hidden cursor-pointer shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-slate-300"
     >
@@ -135,7 +136,7 @@ export default function PropertyCard({ property }) {
         )}
 
         {/* Status Badge */}
-        <div className="absolute bottom-3 right-3 bg-blue-700 text-white text-xs font-semibold px-2 py-1 rounded ">
+        <div className="absolute bottom-3 left-3 bg-blue-700 text-white text-xs font-semibold px-2 py-1 rounded ">
           {timeAgoLabel}
         </div>
 
@@ -147,7 +148,10 @@ export default function PropertyCard({ property }) {
       {/* Content Section */}
       <div className="px-3.5 pt-2 pb-4 space-y-1">
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold text-blue-950">
+          <h3 
+            className="text-xl sm:text-2xl font-bold"
+            style={{ color: "lab(13 29.78 -57.75)" }}
+          >
             {formattedPrice}
           </h3>
           <p className="text-sm text-gray-700 truncate font-medium">

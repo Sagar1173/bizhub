@@ -9,7 +9,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { BUSINESS_TYPES } from "@/constants/cities";
+import { BUSINESS_TYPES, BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
 // Beds and Baths removed for business listings focus
 
@@ -207,7 +207,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                 setPriceRange={setPriceRange}
               />
 
-              <DesktopDropdown label="Business Type" value={businessType || null}>
+              <DesktopDropdown label="Business Type" value={BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType || null}>
                 {(close) =>
                   BUSINESS_TYPES.map((type) => (
                     <DropdownItem
@@ -218,7 +218,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                         close();
                       }}
                     >
-                      {type}
+                      {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
                     </DropdownItem>
                   ))
                 }
@@ -337,7 +337,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
           <h3 className="font-medium mt-4 mb-2">Business Type</h3>
           <DesktopDropdown
             label="Business Type"
-            value={businessType || null}
+            value={BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType || null}
             isMobile={true}
           >
             {(close) =>
@@ -350,7 +350,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                     close();
                   }}
                 >
-                  {type}
+                  {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
                 </DropdownItem>
               ))
             }

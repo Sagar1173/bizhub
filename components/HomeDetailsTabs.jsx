@@ -4,19 +4,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const TABS = [
   { key: "overview", label: "Overview" },
-  { key: "interior", label: "Interior" },
-  { key: "amenities", label: "Amenities & utilities" },
-  { key: "structure", label: "Structure" },
-  { key: "lease", label: "Lease details" },
+  { key: "financial", label: "Financial" },
+  { key: "business", label: "Business" },
   { key: "location", label: "Location" },
 ];
 
 export default function HomeDetailsTabs({
-  highlights = [],
-  interior = [],
-  utilities = [],
-  structure = [],
-  leaseInfo = [],
+  overview = [],
+  financial = [],
+  business = [],
   location = [],
 }) {
   const [activeTab, setActiveTab] = useState("overview");
@@ -30,29 +26,17 @@ export default function HomeDetailsTabs({
   const items = useMemo(() => {
     switch (activeTab) {
       case "overview":
-        return highlights;
-      case "interior":
-        return interior;
-      case "amenities":
-        return utilities;
-      case "structure":
-        return structure;
-      case "lease":
-        return leaseInfo;
+        return overview;
+      case "financial":
+        return financial;
+      case "business":
+        return business;
       case "location":
         return location;
       default:
-        return highlights;
+        return overview;
     }
-  }, [
-    activeTab,
-    highlights,
-    interior,
-    utilities,
-    structure,
-    leaseInfo,
-    location,
-  ]);
+  }, [activeTab, overview, financial, business, location]);
 
   useEffect(() => {
     const updateIndicator = () => {

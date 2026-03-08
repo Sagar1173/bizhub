@@ -76,7 +76,10 @@ export default function FranchiseCard({ franchise, locationSlug = "ontario" }) {
       {/* Content Section */}
       <div className="px-3.5 pt-2 pb-4 space-y-1">
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold text-blue-950">
+          <h3 
+            className="text-xl sm:text-2xl font-bold"
+            style={{ color: "lab(13 29.78 -57.75)" }}
+          >
             {investment}
           </h3>
           <p className="text-sm text-gray-700 truncate font-medium">{name}</p>

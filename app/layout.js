@@ -3,7 +3,6 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -38,7 +37,6 @@ export default function RootLayout({ children }) {
           speed={200}
         />
         <Header />
-        <FloatingWhatsApp />
         {children}
         <Footer />
       </body>

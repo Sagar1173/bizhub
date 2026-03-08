@@ -11,6 +11,25 @@ const cities = Object.keys(franchiseLocations).map((key) => {
     .join(" ");
 });
 
+export async function generateMetadata({ params }) {
+  const { location } = await params;
+  const locationData = getLocationContent(location);
+  
+  const title = locationData?.title ? `Franchise Opportunities in ${locationData.title} | Bizmonk` : `Franchise Opportunities in ${location} | Bizmonk`;
+  const description = locationData?.title 
+    ? `Explore franchise opportunities and business listings available in ${locationData.title}. Start your business journey today with Bizmonk.`
+    : `Explore franchise opportunities and business listings available in ${location}. Start your business journey today with Bizmonk.`;
+    
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+    }
+  };
+}
+
 export default async function FranchiseOpportunityPage({ params }) {
   const { location } = await params;
 

@@ -139,12 +139,12 @@ const Hero = () => {
               <h1 className="font-serif text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl">
                 Find your next business here
               </h1>
-              <p className="mx-auto max-w-lg text-sm leading-relaxed text-slate-600 sm:text-base">
-                Search by MLS® number, address, or business type.
+              <p className="mx-auto text-sm leading-relaxed text-slate-600 sm:text-2xl">
+                100+ Restaurants, Convenience Stores & Hotels for sale
               </p>
             </div>
 
-            <div className="mt-8 flex w-full flex-col items-center gap-6">
+            <div className="mt-8 flex max-w-xl mx-auto flex-col items-center gap-6">
               {/* SEARCH BAR */}
               <div ref={containerRef} className="relative w-full">
                 <div

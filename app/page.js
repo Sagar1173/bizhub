@@ -7,9 +7,9 @@ import { fetchMedia, fetchProperties } from "@/lib/api";
 import { cityToSlug } from "@/lib/slug";
 
 export const metadata = {
-  title: "Ravi Singh Godara | GTA Business Listings",
+  title: "Bizmonk | Restaurants, Convenience Store, Franchise and Commercial Space in Ontario",
   description:
-    "Explore business listings for sale and lease across the Greater Toronto Area with local expertise.",
+    "Looking for a business space in Greater Toronto Area? Bizmonk is the best place to find your business space.",
 };
 
 export default async function Home() {

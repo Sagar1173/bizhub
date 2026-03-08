@@ -1,9 +1,9 @@
 import ContactSection from "@/components/ContactSection";
 
 export const metadata = {
-  title: "Contact Ravi Singh Godara",
+  title: "Contact Bizmonk",
   description:
-    "Get in touch with Ravi Singh Godara for buying, selling, and real estate guidance across the GTA.",
+    "Get in touch with Bizmonk for buying, selling, and commercial real estate guidance across the GTA.",
 };
 
 export default function ContactPage() {

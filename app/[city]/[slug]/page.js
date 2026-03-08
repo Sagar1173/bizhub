@@ -5,12 +5,13 @@ import GoSeeThisHome from "@/components/GoSeeThisHome";
 import ScheduleViewing from "@/components/ScheduleViewing";
 import FeaturedPropertiesSection from "@/components/FeaturedPropertiesSection";
 import { fetchMedia, fetchProperties, fetchProperty } from "@/lib/api";
-import { slugToCity } from "@/lib/slug";
+import { slugToCity, extractListingKeyFromSlug } from "@/lib/slug";
 import PropertyMediaGallery from "@/components/PropertyMediaGallery";
 import ScrollToTop from "@/components/ScrollToTop";
 import ShareButton from "@/components/ShareButton";
 import HomeDetailsTabs from "@/components/HomeDetailsTabs";
 import CityComponent from "@/components/CityComponent";
+import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
 const formatMoney = (value) => {
   if (value === null || value === undefined || value === "") return "-";
@@ -45,7 +46,7 @@ const pluralizeBusinessType = (type) => {
     Office: "Offices",
     "Professional Office": "Professional Offices",
     Retail: "Retail Units",
-    "Convenience/Variety": "Convenience/Variety Stores",
+    "Convenience/Variety": "Convenience Stores",
     "Medical/Dental": "Medical/Dental Practices",
   };
   return mapping[type] || `${type} Businesses`;
@@ -113,18 +114,24 @@ export async function generateMetadata({ params }) {
     const count = data.totalCount || 0;
     const countStr = count > 0 ? `${count}+ ` : "";
     const typeLabel = filter.businessType;
-    const listingLabel = filter.listingType === "lease" ? "for Lease" : "for Sale";
+    const listingLabel = filter.listingType === "lease" ? "for lease" : "for sale";
+    const businessLabel = BUSINESS_TYPE_DISPLAY_MAP[typeLabel] || typeLabel;
 
     return {
-      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Ravi Singh Godara`,
-      description: `Find the perfect ${typeLabel.toLowerCase()} ${listingLabel} in ${cityName}. Browse ${countStr}available listings and book a showing for your next business venture.`,
+      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
+      description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
+      openGraph: {
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
+      }
     };
   }
 
-  const data = await fetchProperty(slug);
+  const extractedSlug = extractListingKeyFromSlug(slug);
+  const data = await fetchProperty(extractedSlug);
   if (!data) {
     return {
-      title: "Property Not Found | Ravi Singh Godara ",
+      title: "Property Not Found | Bizmonk",
       description: "The property you are looking for is no longer available.",
     };
   }
@@ -133,8 +140,12 @@ export async function generateMetadata({ params }) {
     ? `$${Number(data.ListPrice).toLocaleString()}`
     : "Property";
   return {
-    title: `${price} · ${address} | Ravi Singh Godara `,
+    title: `${price} · ${address} | Bizmonk`,
     description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
+    openGraph: {
+      title: `${price} · ${address} | Bizmonk`,
+      description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
+    }
   };
 }
 
@@ -181,12 +192,15 @@ export default async function SlugPage({ params, searchParams }) {
   }
 
   // Property Detail View (Existing Logic)
-  const data = await fetchProperty(slug);
-  const media = await fetchMedia(slug, 25);
+  const extractedSlug = extractListingKeyFromSlug(slug);
+  const data = await fetchProperty(extractedSlug);
+  const media = await fetchMedia(extractedSlug, 25);
 
   if (!data) return notFound();
 
-  const businessType = Array.isArray(data.BusinessType) ? data.BusinessType[0] : (data.BusinessType || data.PropertySubType);
+  const businessTypeRaw = Array.isArray(data.BusinessType) ? data.BusinessType[0] : data.BusinessType;
+  const businessType = businessTypeRaw || data.PropertySubType;
+  console.log("DEBUG: businessType =>", businessType, "from data.BusinessType:", data.BusinessType, "PropertySubType:", data.PropertySubType);
   
   const property = {
     price: data.ListPrice,
@@ -222,15 +236,16 @@ export default async function SlugPage({ params, searchParams }) {
       ? data.Flooring.join(", ")
       : fallbackText(data.Flooring);
 
-  const highlights = [
+  const overview = [
     {
       label: "Status",
       value: fallbackText(data.StandardStatus || data.MlsStatus),
     },
-    { label: "Type", value: fallbackText(data.PropertyType) },
-    { label: "Business Type", value: fallbackText(businessType) },
+    { label: "Property Type", value: fallbackText(data.PropertyType) },
+    { label: "Property Sub Type", value: fallbackText(data.PropertySubType) },
     { label: "Style", value: formatList(data.ArchitecturalStyle) },
-    { label: "Living Area", value: fallbackText(data.LivingAreaRange) },
+    { label: "Building Area", value: fallbackText(data.LivingAreaRange || data.BuildingAreaTotal) + (data.BuildingAreaUnits ? ` ${data.BuildingAreaUnits}` : " sq. ft.") },
+    { label: "Zoning", value: fallbackText(data.ZoningDescription || data.Zoning) },
     {
       label: "Lot Size",
       value:
@@ -243,32 +258,37 @@ export default async function SlugPage({ params, searchParams }) {
     { label: "Occupancy", value: fallbackText(data.OccupantType) },
   ];
 
-  const utilities = [
-    { label: "Cooling", value: formatList(data.Cooling) },
-    { label: "Heat Type", value: fallbackText(data.HeatType) },
-    { label: "Heat Source", value: fallbackText(data.HeatSource) },
-    { label: "Sewer", value: formatList(data.Sewer) },
-    { label: "Water", value: formatList(data.Water) },
-    { label: "Laundry", value: formatList(data.LaundryFeatures) },
-  ];
+  const financial = [
+    { label: "List Price", value: property.price ? `$${formatMoney(property.price)}` : "-" },
+    { label: "Transaction Type", value: fallbackText(data.TransactionType) },
+    data.GrossRevenue && { label: "Gross Revenue", value: `$${formatMoney(data.GrossRevenue)}` },
+    data.NetOperatingIncome && { label: "Net Operating Income", value: `$${formatMoney(data.NetOperatingIncome)}` },
+    data.TaxAnnualAmount && { label: "Annual Taxes", value: `$${formatMoney(data.TaxAnnualAmount)}` },
+    data.TaxYear && { label: "Tax Year", value: String(data.TaxYear) },
+    data.AssociationFee && { label: "Maintenance Fee", value: `$${formatMoney(data.AssociationFee)}` },
+    data.LeaseAmount && { label: "Lease Amount", value: `$${formatMoney(data.LeaseAmount)}` },
+    data.LeaseTerm && { label: "Lease Term", value: data.LeaseTerm },
+    data.EstimatedInventoryValueAtCost && { label: "Est. Inventory Value", value: `$${formatMoney(data.EstimatedInventoryValueAtCost)}` },
+  ].filter(Boolean);
 
-  const structure = [
-    { label: "Basement", value: formatList(data.Basement) },
-    { label: "Foundation", value: formatList(data.FoundationDetails) },
-    { label: "Roof", value: formatList(data.Roof) },
-    { label: "Construction", value: formatList(data.ConstructionMaterials) },
-    { label: "Interior Features", value: formatList(data.InteriorFeatures) },
-  ];
+  const business = [
+    { label: "Business Type", value: formatList((data.BusinessType || []).map(t => BUSINESS_TYPE_DISPLAY_MAP[t] || t)) },
+    data.YearsInBusiness && { label: "Years in Business", value: data.YearsInBusiness },
+    data.FranchiseYN ? { label: "Franchise", value: "Yes" } : null,
+    data.NumberOfFullTimeEmployees && { label: "Full Time Employees", value: data.NumberOfFullTimeEmployees },
+    (data.HoursDaysOfOperationDescription || formatList(data.HoursDaysOfOperation)) && { label: "Hours of Operation", value: data.HoursDaysOfOperationDescription || formatList(data.HoursDaysOfOperation) },
+    data.SeatingCapacity && { label: "Seating Capacity", value: data.SeatingCapacity },
+    data.ChattelsYN ? { label: "Chattels Included", value: "Yes" } : null,
+    { label: "Last Updated", value: getTimeAgo(data.ModificationTimestamp) },
+  ].filter(Boolean);
 
-  const leaseInfo = [
-    { label: "Transaction", value: fallbackText(data.TransactionType) },
-    { label: "Furnished", value: fallbackText(data.Furnished) },
-    {
-      label: "Possession",
-      value: fallbackText(data.PossessionType || data.PossessionDetails),
-    },
-    { label: "Rent Includes", value: formatList(data.RentIncludes) },
-    { label: "Parking", value: formatList(data.ParkingFeatures) },
+  const locationTab = [
+    { label: "Address", value: property.address },
+    { label: "City", value: fallbackText(data.City) },
+    { label: "Municipality", value: fallbackText(data.CountyOrParish) },
+    { label: "State / Province", value: fallbackText(data.StateOrProvince) },
+    { label: "Postal Code", value: fallbackText(data.PostalCode) },
+    { label: "Cross Street", value: fallbackText(data.CrossStreet) },
   ];
 
   const descriptionSections = [
@@ -284,20 +304,6 @@ export default async function SlugPage({ params, searchParams }) {
   const shareText = `${property.neighborhood} · ${fallbackText(
     data.CountyOrParish,
   )} · ${fallbackText(data.StateOrProvince)}`;
-  const interior = [
-    {
-      label: "Business Type",
-      value: fallbackText(businessType),
-    },
-    { label: "Kitchens", value: fallbackText(data.KitchensTotal) },
-    { label: "Flooring", value: flooringValue },
-  ];
-  const location = [
-    { label: "Neighbourhood", value: fallbackText(property.neighborhood) },
-    { label: "Municipality", value: fallbackText(data.CountyOrParish) },
-    { label: "Postal Code", value: fallbackText(data.PostalCode) },
-    { label: "Cross Street", value: fallbackText(data.CrossStreet) },
-  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -313,10 +319,10 @@ export default async function SlugPage({ params, searchParams }) {
             </Link>
             <ChevronRight size={12} />
             <Link
-              className="hover:text-gray-900 cursor-pointer "
-              href={`/${city}`}
+              className="hover:text-gray-900 cursor-pointer"
+              href={property.businessType ? `/${city}/${property.businessType.toLowerCase().replace(/\//g, "-").replace(/ /g, "-")}-for-${listingType}` : `/${city}`}
             >
-              {slugToCity(city)} Listings
+              {property.businessType ? `${pluralizeBusinessType(property.businessType)} for ${listingType}` : `${slugToCity(city)} Listings`}
             </Link>
             <ChevronRight size={12} />
             <span className="text-gray-900 font-medium truncate max-w-[200px] md:max-w-none ">
@@ -339,7 +345,10 @@ export default async function SlugPage({ params, searchParams }) {
               </span>
             </div>
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">
+              <h1 
+                className="text-3xl md:text-5xl font-bold tracking-tight"
+                style={{ color: "lab(13 29.78 -57.75)" }}
+              >
                 ${formatMoney(property.price)}
                 <span className="ml-2 text-sm md:text-base font-semibold text-teal-700">
                   {data.TransactionType || "For Sale"}
@@ -419,15 +428,13 @@ export default async function SlugPage({ params, searchParams }) {
 
           <section className="bg-white mb-20">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">
-              Listing Details
+              Business Details
             </h2>
             <HomeDetailsTabs
-              highlights={highlights}
-              interior={interior}
-              utilities={utilities}
-              structure={structure}
-              leaseInfo={leaseInfo}
-              location={location}
+              overview={overview}
+              financial={financial}
+              business={business}
+              location={locationTab}
             />
           </section>
 
@@ -436,7 +443,7 @@ export default async function SlugPage({ params, searchParams }) {
           {nearbyProperties.length > 0 ? (
             <div className="mt-10">
               <h2 className=" text-xl font-bold md:text-3xl">
-                Similar Properties Nearby
+                Browse Similar {pluralizeBusinessType(businessType)} Nearby
               </h2>
               <FeaturedPropertiesSection
                 cityName={data.City || slugToCity(city)}

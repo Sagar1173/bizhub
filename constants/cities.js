@@ -18,6 +18,14 @@ export const BUSINESS_TYPES = [
   "Medical/Dental",
 ];
 
+export const BUSINESS_TYPE_DISPLAY_MAP = {
+  "Convenience/Variety": "Convenience",
+};
+
+export const BUSINESS_TYPE_REVERSE_MAP = {
+  "Convenience": "Convenience/Variety",
+};
+
 export const ALL_ONTARIO_CITIES = [
   "Toronto", "Ajax", "Pickering", "Oshawa", "Whitby", "Clarington", "Brock", "Scugog", "Uxbridge", 
   "Burlington", "Oakville", "Milton", "Halton Hills", "Mississauga", "Brampton", "Caledon", 

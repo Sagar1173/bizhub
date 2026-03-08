@@ -64,7 +64,7 @@ const FeaturedPropertiesSection = ({
       id={sectionId}
       className={`bg-white w-full ${hideHeader ? "pt-6 pb-10" : "py-12"}`}
     >
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className={!hideHeader ? "w-full px-4 sm:px-6 lg:px-8" : "w-full"}>
         {!hideHeader ? (
           <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
             <Link

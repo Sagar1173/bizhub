@@ -4,6 +4,7 @@ import PropertyCard from "./PropertyCard";
 import FilterBar from "./FilterBar";
 import { useRouter, useSearchParams } from "next/navigation";
 import { slugToCity } from "@/lib/slug";
+import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 import CitySkeleton from "./CitySkeleton";
 import BusinessInterlinks from "./BusinessInterlinks";
 
@@ -14,7 +15,7 @@ const pluralizeBusinessType = (type) => {
     Office: "Offices",
     "Professional Office": "Professional Offices",
     Retail: "Retail Units",
-    "Convenience/Variety": "Convenience/Variety Stores",
+    "Convenience/Variety": "Convenience Stores",
     "Medical/Dental": "Medical/Dental Offices",
   };
   return mapping[type] || `${type} Businesses`;
@@ -41,9 +42,8 @@ const CityComponent = ({ city, properties, pagination, filter }) => {
     ? `${pluralizeBusinessType(businessType)} ${listingLabel} in ${cityName}`
     : `Business Opportunities ${listingLabel} in ${cityName}`;
 
-  const pageDescription = businessType
-    ? `Find the perfect ${businessType.toLowerCase()} ${listingLabel} in ${cityName}. Browse ${countStr}available listings and book a showing for your next business venture.`
-    : `Explore ${countStr}business listings ${listingLabel} in ${cityName}. Find your next investment opportunity among our curated selection of properties.`;
+  const businessLabel = businessType ? (BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType) : "Business Opportunities";
+  const pageDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on bizmonk.`;
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
