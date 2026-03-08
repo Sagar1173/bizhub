@@ -178,9 +178,9 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
       <div className="sticky top-0 z-40 -mt-px bg-white w-full py-2">
         <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           {/* Filters */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full min-w-0">
             {/* Desktop */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2">
               <DesktopDropdown
                 label="Listing"
                 value={LISTING_TYPE_MAP[listingType] || "Sale"}
@@ -206,42 +206,63 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                 maxPrice={maxPrice}
                 setPriceRange={setPriceRange}
               />
+            </div>
 
-              <DesktopDropdown label="Business Type" value={BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType || null}>
-                {(close) =>
-                  BUSINESS_TYPES.map((type) => (
-                    <DropdownItem
-                      key={type}
-                      active={businessType === type}
-                      onClick={() => {
-                        set("businessType", type);
-                        close();
-                      }}
-                    >
-                      {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
-                    </DropdownItem>
-                  ))
-                }
-              </DesktopDropdown>
+            <div className="hidden lg:flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              {BUSINESS_TYPES.map((type) => (
+                <button
+                  key={type}
+                  onClick={() =>
+                    set("businessType", businessType === type ? null : type)
+                  }
+                  className={`flex items-center shrink-0 gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors cursor-pointer whitespace-nowrap ${
+                    businessType === type
+                      ? "bg-blue-50 border-blue-500 text-blue-700 font-semibold"
+                      : "border-gray-300 text-gray-700 hover:border-gray-800"
+                  }`}
+                >
+                  {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
+                  {businessType === type && <X size={14} className="text-blue-500" />}
+                </button>
+              ))}
 
               {hasActiveFilters && (
                 <button
                   onClick={clearAll}
-                  className="text-sm underline font-medium text-red-600 inline-flex items-center gap-1 cursor-pointer"
+                  className="text-sm shrink-0 underline font-medium text-red-600 inline-flex items-center gap-1 cursor-pointer whitespace-nowrap ml-2"
                 >
                   <X size={12} /> Clear all
                 </button>
               )}
             </div>
 
-            {/* Mobile */}
-            <button
-              onClick={() => setPanelOpen(true)}
-              className="lg:hidden flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 hover:border-gray-800 transition-colors rounded-full text-sm font-semibold cursor-pointer"
-            >
-              <SlidersHorizontal size={16} />
-              Filters
-            </button>
+            {/* Mobile (we'll also show the quick business type pills here inline) */}
+            <div className="lg:hidden flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full">
+              <button
+                onClick={() => setPanelOpen(true)}
+                className="flex shrink-0 items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 hover:border-gray-800 transition-colors rounded-full text-sm font-semibold cursor-pointer whitespace-nowrap"
+              >
+                <SlidersHorizontal size={16} />
+                Filters
+              </button>
+              
+              {BUSINESS_TYPES.map((type) => (
+                <button
+                  key={type}
+                  onClick={() =>
+                    set("businessType", businessType === type ? null : type)
+                  }
+                  className={`flex shrink-0 items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors cursor-pointer whitespace-nowrap ${
+                    businessType === type
+                      ? "bg-blue-50 border-blue-500 text-blue-700 font-semibold"
+                      : "border-gray-300 text-gray-700 hover:border-gray-800"
+                  }`}
+                >
+                  {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
+                  {businessType === type && <X size={14} className="text-blue-500" />}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Sort */}
@@ -277,7 +298,9 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
             )}
           </div>
         </div>
+
       </div>
+
 
       {/* Mobile Slide-over */}
       <div
@@ -334,27 +357,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
             onCommit={setPriceRange}
           />
 
-          <h3 className="font-medium mt-4 mb-2">Business Type</h3>
-          <DesktopDropdown
-            label="Business Type"
-            value={BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType || null}
-            isMobile={true}
-          >
-            {(close) =>
-              BUSINESS_TYPES.map((type) => (
-                <DropdownItem
-                  key={type}
-                  active={businessType === type}
-                  onClick={() => {
-                    set("businessType", type);
-                    close();
-                  }}
-                >
-                  {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
-                </DropdownItem>
-              ))
-            }
-          </DesktopDropdown>
+
           {hasActiveFilters && (
             <div className="mt-6">
               <button

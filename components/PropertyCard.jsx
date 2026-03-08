@@ -135,9 +135,17 @@ export default function PropertyCard({ property }) {
           </div>
         )}
 
-        {/* Status Badge */}
-        <div className="absolute bottom-3 left-3 bg-blue-700 text-white text-xs font-semibold px-2 py-1 rounded ">
-          {timeAgoLabel}
+        {/* Status Badges */}
+        <div className="absolute bottom-3 left-3 flex items-center gap-2">
+          <div className="bg-blue-700 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-sm">
+            {timeAgoLabel}
+          </div>
+          {propertyType && (
+            <div className="bg-white text-gray-900 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+              <span>{propertyType}</span>
+            </div>
+          )}
         </div>
 
         <button className="absolute top-3 right-3 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full transition-colors">
@@ -163,12 +171,6 @@ export default function PropertyCard({ property }) {
         <div className="space-y-1.5 text-gray-700 mt-2">
           {/* Area and MLS Line */}
           <div className="flex items-center justify-start gap-3">
-            <div className="flex items-center gap-1.5">
-              <Home size={14} className="text-gray-700" />
-              <span className="text-xs font-medium text-gray-700 truncate">
-                {propertyType}
-              </span>
-            </div>
             <p className="flex items-center text-xs text-gray-700 font-medium uppercase tracking-tighter">
               <span>MLS® {mls}</span>
               {property.TransactionType && (

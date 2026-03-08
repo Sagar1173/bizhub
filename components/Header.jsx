@@ -238,28 +238,27 @@ const Header = () => {
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex-1 min-w-0 flex items-center justify-start gap-3 sm:gap-6">
+            <div className="flex-1 min-w-0 flex items-center justify-start gap-2 sm:gap-4 md:gap-6">
               <Link href="/" className="flex shrink-0">
-                <span className="text-2xl font-bold text-blue-950">bizmonk.</span>
-
+                <span className="text-xl md:text-2xl font-bold text-blue-950">bizmonk.</span>
               </Link>
 
               {showHeaderSearch && (
                 <div
                   ref={desktopSearchRef}
-                  className="relative hidden md:block flex-1 min-w-0 max-w-md ml-1 mr-3"
+                  className="relative flex-1 min-w-0 max-w-md ml-1 md:ml-2 mr-2 md:mr-3"
                 >
                   <div
                     className={cn(
                       "relative flex items-center bg-gray-100 border border-transparent transition-all duration-200 hover:border-gray-200 hover:shadow-lg focus-within:border-gray-200 focus-within:bg-white focus-within:shadow-lg",
                       isExpanded && suggestions.length > 0
-                        ? "rounded-t-2xl"
+                        ? "rounded-t-xl md:rounded-t-2xl"
                         : "rounded-full",
                     )}
                   >
                     <input
                       type="text"
-                      placeholder="Search by MLS number or city"
+                      placeholder="Search MLS or city"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       onFocus={() => setIsExpanded(true)}
@@ -269,32 +268,32 @@ const Header = () => {
                           handleSearch();
                         }
                       }}
-                      className="w-full h-11 bg-transparent pl-6 pr-14 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none"
+                      className="w-full h-9 md:h-11 bg-transparent pl-3 md:pl-6 pr-10 md:pr-14 text-xs md:text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none"
                     />
                     <button
                       onClick={handleSearch}
                       disabled={isSearching}
                       aria-label="Search"
-                      className="absolute right-3 p-1 text-gray-700 hover:text-gray-900 disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="absolute right-2 md:right-3 p-1 text-gray-700 hover:text-gray-900 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {isSearching ? (
-                        <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-400 border-t-gray-700" />
+                        <span className="inline-block h-3 w-3 md:h-4 md:w-4 animate-spin rounded-full border-2 border-gray-400 border-t-gray-700" />
                       ) : (
-                        <Search className="w-5 h-5" />
+                        <Search className="w-4 h-4 md:w-5 md:h-5" />
                       )}
                     </button>
                   </div>
 
                   {isExpanded && suggestions.length > 0 && (
-                    <div className="absolute left-0 right-0 bg-white rounded-b-2xl shadow-xl border border-t-0 border-gray-200 overflow-hidden z-120">
+                    <div className="absolute left-0 right-0 bg-white rounded-b-xl md:rounded-b-2xl shadow-xl border border-t-0 border-gray-200 overflow-hidden z-120">
                       {suggestions.map((city) => (
                         <button
                           key={city}
                           onClick={() => handleSelect(city)}
-                          className="w-full px-4 py-2.5 text-left text-gray-900 hover:bg-gray-50 transition flex items-center gap-2 border-b border-gray-100 last:border-0"
+                          className="w-full px-3 md:px-4 py-2 md:py-2.5 text-left text-gray-900 hover:bg-gray-50 transition flex items-center gap-2 border-b border-gray-100 last:border-0"
                         >
-                          <MapPin className="w-4 h-4 text-[#38003c]" />
-                          <span className="text-sm font-medium">{city}</span>
+                          <MapPin className="w-3 h-3 md:w-4 md:h-4 text-[#38003c]" />
+                          <span className="text-xs md:text-sm font-medium">{city}</span>
                         </button>
                       ))}
                     </div>
@@ -406,61 +405,6 @@ const Header = () => {
               <Menu className="w-6 h-6 sm:w-7 sm:h-7" />
             </button>
           </div>
-
-          {showHeaderSearch && (
-            <div ref={mobileSearchRef} className="relative mt-2.5 md:hidden">
-              <div
-                className={cn(
-                  "relative flex items-center bg-gray-100 border border-transparent transition-all duration-200 hover:border-gray-200 hover:bg-white hover:shadow-lg focus-within:border-gray-200 focus-within:bg-white focus-within:shadow-lg",
-                  isExpanded && suggestions.length > 0
-                    ? "rounded-t-2xl"
-                    : "rounded-full",
-                )}
-              >
-                <input
-                  type="text"
-                  placeholder="Search by MLS or city"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onFocus={() => setIsExpanded(true)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleSearch();
-                    }
-                  }}
-                  className="w-full h-10 bg-transparent pl-5 pr-12 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none"
-                />
-                <button
-                  onClick={handleSearch}
-                  disabled={isSearching}
-                  aria-label="Search"
-                  className="absolute right-3 p-1 text-gray-700 hover:text-gray-900 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {isSearching ? (
-                    <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-400 border-t-gray-700" />
-                  ) : (
-                    <Search className="w-5 h-5" />
-                  )}
-                </button>
-              </div>
-
-              {isExpanded && suggestions.length > 0 && (
-                <div className="absolute left-0 right-0 bg-white rounded-b-2xl shadow-xl border border-t-0 border-gray-200 overflow-hidden z-120">
-                  {suggestions.map((city) => (
-                    <button
-                      key={city}
-                      onClick={() => handleSelect(city)}
-                      className="w-full px-4 py-2.5 text-left text-gray-900 hover:bg-gray-50 transition flex items-center gap-2 border-b border-gray-100 last:border-0"
-                    >
-                      <MapPin className="w-4 h-4 text-[#38003c]" />
-                      <span className="text-sm font-medium">{city}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
         </div>
       </header>
 

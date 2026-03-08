@@ -117,17 +117,20 @@ const Hero = () => {
   const quickCities = ["Toronto", "Richmond Hill", "Markham", "Bradford"];
 
   return (
-    <section className="relative isolate w-full overflow-hidden bg-white py-10 sm:py-16 md:py-20">
-      {/* subtle background pattern */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(1200px_circle_at_20%_-10%,rgba(59,130,246,0.12),transparent_55%),radial-gradient(900px_circle_at_90%_10%,rgba(99,102,241,0.10),transparent_60%),radial-gradient(1100px_circle_at_50%_110%,rgba(14,165,233,0.10),transparent_55%)]" />
-        <div className="absolute inset-0 opacity-[0.55] mask-[radial-gradient(circle_at_center,black,transparent_72%)] bg-[linear-gradient(to_right,rgba(15,23,42,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.10)_1px,transparent_1px)] bg-size-[52px_52px]" />
+    <section className="relative isolate w-full overflow-hidden bg-white pb-10 sm:pb-16 md:pb-20 min-h-[500px]">
+      {/* Sweeping curve background from top-left to bottom-right, bulging outwards */}
+      <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden mix-blend-multiply">
+        <svg
+          viewBox="200 0 1240 800"
+          className="w-full h-full text-sky-100 fill-current"
+          preserveAspectRatio="none"
+        >
+          {/* Perfect elliptical arc from top-left to bottom-right, bulging out towards bottom-left */}
+          <path d="M0,0 A1440,600 0 0,0 1440,600 L1440,0 Z"></path>
+        </svg>
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-16 md:mt-20">
         <div className="flex flex-col items-center justify-center">
           {/* COPY + SEARCH */}
           <div className="w-full max-w-3xl text-center">

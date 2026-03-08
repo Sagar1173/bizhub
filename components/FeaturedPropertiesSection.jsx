@@ -13,6 +13,7 @@ const FeaturedPropertiesSection = ({
   totalCount,
   hideHeader = false,
   title,
+  href,
 }) => {
   const scrollRef = useRef(null);
 
@@ -55,6 +56,7 @@ const FeaturedPropertiesSection = ({
   if (!properties?.length) return null;
 
   const targetCitySlug = citySlug || cityToSlug(cityName);
+  const finalHref = href || `/${targetCitySlug}`;
   const listingCount = Number(totalCount) || properties.length;
   const formattedListingCount = new Intl.NumberFormat("en-CA").format(
     listingCount,
@@ -62,7 +64,7 @@ const FeaturedPropertiesSection = ({
   return (
     <section
       id={sectionId}
-      className={`bg-white w-full ${hideHeader ? "pt-6 pb-10" : "py-12"}`}
+      className={`bg-white w-full ${hideHeader ? "pt-6 pb-10" : "py-8"}`}
     >
       <div className={!hideHeader ? "w-full px-4 sm:px-6 lg:px-8" : "w-full"}>
         {!hideHeader ? (
@@ -72,7 +74,7 @@ const FeaturedPropertiesSection = ({
               onClick={() =>
                 window.scrollTo({ top: 0, left: 0, behavior: "auto" })
               }
-              href={`/${targetCitySlug}`}
+              href={finalHref}
               className="text-xl font-serif text-slate-900 tracking-tight hover:underline sm:text-2xl md:text-3xl"
             >
               {title || `Businesses for sale in ${cityName}`}{" "}
@@ -81,7 +83,7 @@ const FeaturedPropertiesSection = ({
               </span>
             </Link>
             <Link
-              href={`/${targetCitySlug}`}
+              href={finalHref}
               scroll={true}
               onClick={() =>
                 window.scrollTo({ top: 0, left: 0, behavior: "auto" })
