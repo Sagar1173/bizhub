@@ -29,7 +29,7 @@ const ContactForm = ({ contactImage, pageName }) => {
           name,
           email,
           phone,
-          "Source Page": `https://bizmonk.ca/${pathname}`,
+          "Page URL": window.location.href,
         },
         title: "Info from Bizmonk",
       });

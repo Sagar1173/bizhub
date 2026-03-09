@@ -50,6 +50,7 @@ export default function ScheduleViewing({ property }) {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
+          "Page URL": window.location.href,
         },
         title: "Schedule Viewing - Inquiry",
       });
