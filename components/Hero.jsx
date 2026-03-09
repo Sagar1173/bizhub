@@ -133,9 +133,9 @@ const Hero = () => {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-16 md:mt-20">
         <div className="flex flex-col items-center justify-center">
           {/* COPY + SEARCH */}
-          <div className="w-full max-w-3xl text-center mt-10">
+          <div className="w-full max-w-3xl text-center mt-40 sm:mt-10">
             <div className="space-y-3">
-              <h1 className="font-serif text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+              <h1 className="font-serif text-2xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl">
                 Find your next business here
               </h1>
               <p className="mx-auto text-base leading-relaxed text-slate-900 sm:text-3xl font-medium">
