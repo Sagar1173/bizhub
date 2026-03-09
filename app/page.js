@@ -27,7 +27,7 @@ export default async function Home() {
     {
       title: "Convenience Stores for Sale",
       businessType: "Convenience/Variety",
-      href: "/toronto/convenience-variety-for-sale",
+      href: "/toronto/convenience-store-for-sale",
     },
     {
       title: "Businesses for Sale in Toronto",

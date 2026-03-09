@@ -91,6 +91,7 @@ const parseSlug = (slug) => {
   const mapping = {
     "medical-dental": "Medical/Dental",
     "convenience-variety": "Convenience/Variety",
+    "convenience-store": "Convenience/Variety",
     "professional-office": "Professional Office",
   };
 
@@ -515,7 +516,18 @@ export default async function SlugPage({ params, searchParams }) {
               className="hover:text-gray-900 cursor-pointer"
               href={
                 property.businessType
-                  ? `/${city}/${property.businessType.toLowerCase().replace(/\//g, "-").replace(/ /g, "-")}-for-${listingType}`
+                  ? (() => {
+                      const businessTypeSlugMap = {
+                        "Convenience/Variety": "convenience-store",
+                      };
+                      const baseSlug =
+                        businessTypeSlugMap[property.businessType] ||
+                        property.businessType
+                          .toLowerCase()
+                          .replace(/\//g, "-")
+                          .replace(/ /g, "-");
+                      return `/${city}/${baseSlug}-for-${listingType}`;
+                    })()
                   : `/${city}`
               }
             >

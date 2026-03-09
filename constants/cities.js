@@ -19,7 +19,7 @@ export const BUSINESS_TYPES = [
 ];
 
 export const BUSINESS_TYPE_DISPLAY_MAP = {
-  "Convenience/Variety": "Convenience",
+  "Convenience/Variety": "Convenience Stores",
 };
 
 export const BUSINESS_TYPE_REVERSE_MAP = {

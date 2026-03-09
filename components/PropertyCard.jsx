@@ -76,10 +76,14 @@ export default function PropertyCard({ property }) {
   }).format(property.ListPrice || 0);
 
   const sqft = property.BuildingAreaTotal || property.LivingAreaRange || null;
-  const businessType = Array.isArray(property.BusinessType) 
-    ? property.BusinessType[0] 
+  const businessType = Array.isArray(property.BusinessType)
+    ? property.BusinessType[0]
     : property.BusinessType;
-  const propertyType = BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType || property.PropertySubType || "Property";
+  const propertyType =
+    BUSINESS_TYPE_DISPLAY_MAP[businessType] ||
+    businessType ||
+    property.PropertySubType ||
+    "Property";
   const fullAddress =
     property.UnparsedAddress ||
     `${property.StreetNumber} ${property.StreetName}`;

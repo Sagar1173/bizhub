@@ -145,7 +145,20 @@ export default async function CityPage({ params, searchParams }) {
     (data.items || []).map(async (property) => {
       const media = await fetchMedia(property.ListingKey, 1);
 
-      return { ...property, Media: media };
+      let thumbnail = property.thumbnail || media?.[0]?.MediaURL || null;
+
+      if (thumbnail) {
+        try {
+          const res = await fetch(thumbnail, { method: "HEAD" });
+          if (!res.ok) {
+            thumbnail = null;
+          }
+        } catch {
+          thumbnail = null;
+        }
+      }
+
+      return { ...property, Media: media, thumbnail };
     }),
   );
 

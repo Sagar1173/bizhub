@@ -81,11 +81,21 @@ function useUrlFilters(onNavigate, city, pathFilter) {
 
   const getTargetUrl = (updates) => {
     const next = { ...local, ...updates };
-    const hasExtraFilters = next.minPrice || next.maxPrice || next.sortKey !== "newest";
-    
+    const hasExtraFilters =
+      next.minPrice || next.maxPrice || next.sortKey !== "newest";
+
     // If it's a simple businessType + listingType filter, use SEO path
     if (next.businessType && !hasExtraFilters) {
-      const slug = `${next.businessType.toLowerCase().replace(/\//g, "-").replace(/ /g, "-")}-for-${next.listingType}`;
+      const businessTypeSlugMap = {
+        "Convenience/Variety": "convenience-store",
+      };
+      const baseSlug =
+        businessTypeSlugMap[next.businessType] ||
+        next.businessType
+          .toLowerCase()
+          .replace(/\//g, "-")
+          .replace(/ /g, "-");
+      const slug = `${baseSlug}-for-${next.listingType}`;
       return `/${city}/${slug}`;
     }
 

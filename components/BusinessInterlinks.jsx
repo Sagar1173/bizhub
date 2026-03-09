@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ALL_ONTARIO_CITIES, BUSINESS_TYPES } from '@/constants/cities';
+import { ALL_ONTARIO_CITIES, BUSINESS_TYPES, BUSINESS_TYPE_DISPLAY_MAP } from '@/constants/cities';
 import { cityToSlug, slugToCity } from '@/lib/slug';
 
 const BusinessInterlinks = ({ city, filter }) => {
@@ -12,28 +12,42 @@ const BusinessInterlinks = ({ city, filter }) => {
   let links = [];
 
   const getSlug = (type, lType) => {
-    return `${type.toLowerCase().replace(/\//g, "-").replace(/ /g, "-")}-for-${lType}`;
+    const businessTypeSlugMap = {
+      "Convenience/Variety": "convenience-store",
+    };
+    const baseSlug =
+      businessTypeSlugMap[type] ||
+      type.toLowerCase().replace(/\//g, "-").replace(/ /g, "-");
+    return `${baseSlug}-for-${lType}`;
   };
 
   if (businessType) {
     // Case A: Specific Business Type Page
-    title = `Explore ${businessType}s for ${listingType === 'lease' ? 'Lease' : 'Sale'}`;
+    const baseLabel = BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType;
+    const pluralLabel = baseLabel.endsWith('s') ? baseLabel : `${baseLabel}s`;
+    title = `Explore ${pluralLabel} for ${listingType === 'lease' ? 'Lease' : 'Sale'}`;
     links = ALL_ONTARIO_CITIES.map(cityName => ({
-      label: `${businessType} for ${listingType} in ${cityName}`,
+      label: `${baseLabel} for ${listingType} in ${cityName}`,
       href: `/${cityToSlug(cityName)}/${getSlug(businessType, listingType)}`
     }));
   } else {
     // Case B: General City Page
     title = `Explore ${currentCityName} Business Listings`;
     // Links to all business types in THIS city
-    const typeLinks = BUSINESS_TYPES.map(type => ({
-      label: `${type} for sale in ${currentCityName}`,
-      href: `/${city}/${getSlug(type, 'sale')}`
-    }));
-    const leaseLinks = BUSINESS_TYPES.map(type => ({
-      label: `${type} for lease in ${currentCityName}`,
-      href: `/${city}/${getSlug(type, 'lease')}`
-    }));
+    const typeLinks = BUSINESS_TYPES.map(type => {
+      const labelType = BUSINESS_TYPE_DISPLAY_MAP[type] || type;
+      return {
+        label: `${labelType} for sale in ${currentCityName}`,
+        href: `/${city}/${getSlug(type, 'sale')}`
+      };
+    });
+    const leaseLinks = BUSINESS_TYPES.map(type => {
+      const labelType = BUSINESS_TYPE_DISPLAY_MAP[type] || type;
+      return {
+        label: `${labelType} for lease in ${currentCityName}`,
+        href: `/${city}/${getSlug(type, 'lease')}`
+      };
+    });
     
     // Also links to OTHER cities general pages
     const cityLinks = ALL_ONTARIO_CITIES.filter(c => c !== currentCityName).map(cityName => ({
