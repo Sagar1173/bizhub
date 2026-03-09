@@ -388,11 +388,11 @@ const Header = () => {
 
               <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
                 <Link
-                  href="tel:416-816-6001"
+                  href="tel:905-226-7284"
                   className="flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-blue-600 transition-colors"
                 >
                   <Phone className="w-5 h-5" />
-                  <span className="hidden xl:inline">416-816-6001</span>
+                  <span className="hidden xl:inline">905-226-7284</span>
                 </Link>
               </div>
             </div>
@@ -535,10 +535,10 @@ const Header = () => {
 
           <div className="mt-auto pt-6 flex flex-col gap-4">
             <Link
-              href="tel:647-409-4848"
+              href="tel:905-226-7284"
               className="text-md font-bold text-blue-600"
             >
-              647-409-4848
+              905-226-7284
             </Link>
           </div>
         </nav>

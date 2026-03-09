@@ -105,7 +105,7 @@ const Hero = () => {
     }
   };
 
-  const quickCities = ["Toronto", "Richmond Hill", "Markham", "Bradford"];
+  const quickCities = ["Toronto", "Brampton", "Mississauga", "Markham"];
 
   return (
     <section className="relative isolate w-full overflow-hidden bg-white pb-10 sm:pb-16 md:pb-20 min-h-[500px]">

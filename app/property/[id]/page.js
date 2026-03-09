@@ -1,4 +1,5 @@
 import { fetchProperty } from "@/lib/api";
+import RegisterNowModal from "@/components/RegisterNowModal";
 
 export default async function PropertyPage({ params }) {
   const { id } = params;
@@ -12,14 +13,7 @@ export default async function PropertyPage({ params }) {
         </pre>
       </div>
 
-      <div className="md:hidden fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex justify-center px-4">
-        <a
-          href="#book-showing-form"
-          className="inline-flex w-full max-w-xs items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform duration-150 hover:scale-[1.02] active:scale-95"
-        >
-          Book a Showing
-        </a>
-      </div>
+      <RegisterNowModal />
 
       <section
         id="book-showing-form"

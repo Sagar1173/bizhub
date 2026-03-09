@@ -61,17 +61,6 @@ const ContactSection = ({ header }) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10">
-          <div className="mb-5 flex justify-center sm:mb-6">
-            <div className="rounded-full bg-linear-to-br from-blue-600/20 via-sky-500/10 to-indigo-600/20 p-1 shadow-sm">
-              <div className="h-48 w-48 overflow-hidden rounded-full bg-white ring-1 ring-slate-200/70 sm:h-56 sm:w-56">
-                <img
-                  src="/profile2.jpg"
-                  alt="Ravi Singh Godara"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-            </div>
-          </div>
           <p className="mx-auto mb-2 inline-flex items-center rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-[11px] ">
             Get in touch
           </p>
@@ -83,13 +72,13 @@ const ContactSection = ({ header }) => {
         {/* Contact Info */}
         <div className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:mb-10">
           <a
-            href="tel:+14168166001"
+            href="tel:+19052267284"
             className="group inline-flex items-center gap-2 rounded-full  px-4 py-2 text-slate-900 transition bg-slate-50"
           >
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-900 transition group-hover:bg-slate-200/70">
               <Phone className="h-4 w-4" />
             </span>
-            <span className="text-xs font-medium">(416) 816-6001</span>
+            <span className="text-xs font-medium">(905) 226-7284</span>
           </a>
           <a
             href="mailto:info@ravigodara.com"
