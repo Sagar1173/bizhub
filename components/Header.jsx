@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { cityToSlug, slugToCity } from "@/lib/slug";
 import { usePathname, useRouter } from "next/navigation";
 import nProgress from "nprogress";
-import { cities as MAIN_CITIES } from "@/constants/cities";
+import { cities as MAIN_CITIES, ALL_ONTARIO_CITIES } from "@/constants/cities";
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -131,7 +131,7 @@ const Header = () => {
   const suggestions =
     query.trim() === ""
       ? []
-      : communities.filter((city) =>
+      : ALL_ONTARIO_CITIES.filter((city) =>
           city.toLowerCase().includes(query.toLowerCase()),
         );
 
@@ -179,7 +179,7 @@ const Header = () => {
     const raw = query.trim();
     if (!raw || isSearching) return;
 
-    const exactCity = communities.find(
+    const exactCity = ALL_ONTARIO_CITIES.find(
       (city) => city.toLowerCase() === raw.toLowerCase(),
     );
     if (exactCity) {
@@ -187,7 +187,7 @@ const Header = () => {
       return;
     }
 
-    const firstPartialCity = communities.find((city) =>
+    const firstPartialCity = ALL_ONTARIO_CITIES.find((city) =>
       city.toLowerCase().includes(raw.toLowerCase()),
     );
     const shouldLookupListingFirst = looksLikeListingInput(raw);

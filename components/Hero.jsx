@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import nProgress from "nprogress";
 import { cityToSlug } from "@/lib/slug";
 import { cn } from "@/lib/utils";
+import { ALL_ONTARIO_CITIES } from "@/constants/cities";
 
 const Hero = () => {
   const router = useRouter();
@@ -14,17 +15,7 @@ const Hero = () => {
   const [isSearching, setIsSearching] = useState(false);
   const containerRef = useRef(null);
 
-  const cities = [
-    "Toronto",
-    "Richmond Hill",
-    "Markham",
-    "Bradford",
-    "Vaughan",
-    "Aurora",
-    "Oakville",
-    "Barrie",
-    "Whitby",
-  ];
+  const cities = ALL_ONTARIO_CITIES;
 
   const suggestions =
     query.trim() === ""

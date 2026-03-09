@@ -53,7 +53,7 @@ const pluralizeBusinessType = (type) => {
   const mapping = {
     Restaurant: "Restaurants",
     Office: "Offices",
-    "Professional Office": "Professional Offices",
+    "Professional Office": "Offices",
     Retail: "Retail Units",
     "Convenience/Variety": "Convenience Stores",
     "Medical/Dental": "Medical/Dental Practices",
@@ -92,7 +92,8 @@ const parseSlug = (slug) => {
     "medical-dental": "Medical/Dental",
     "convenience-variety": "Convenience/Variety",
     "convenience-store": "Convenience/Variety",
-    "professional-office": "Professional Office",
+    "professional-office": "Office",
+    "office": "Office",
   };
 
   const mapped = mapping[businessTypeRaw];
