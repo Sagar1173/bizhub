@@ -26,7 +26,10 @@ const ContactSection = ({ header }) => {
 
     try {
       const result = await sendEmail({
-        content: formData,
+        content: {
+          ...formData,
+          "Page URL": window.location.href,
+        },
         title: "Contact Section - Inquiry",
       });
 

@@ -33,6 +33,7 @@ export default function GoSeeThisHome() {
           phone: formData.phone,
           message: formData.message,
           marketingConsent: formData.marketing ? "Yes" : "No",
+          "Page URL": window.location.href,
         },
         title: "Go See This Home - Inquiry",
       });
