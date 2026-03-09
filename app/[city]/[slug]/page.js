@@ -150,7 +150,7 @@ export async function generateMetadata({ params }) {
     ? `$${Number(data.ListPrice).toLocaleString()}`
     : "Property";
   return {
-    title: `${price} · ${address} | Bizmonk`,
+    title: `${address} · ${price}  | Bizmonk`,
     description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
     openGraph: {
       title: `${price} · ${address} | Bizmonk`,
