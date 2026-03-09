@@ -19,7 +19,15 @@ const pluralizeBusinessType = (type) => {
   return mapping[type] || `${type} Businesses`;
 };
 
-const CityComponent = ({ city, properties, pagination, filter, basePath, searchParams }) => {
+const CityComponent = ({
+  city,
+  properties,
+  pagination,
+  filter,
+  basePath,
+  searchParams,
+  showHeader = true,
+}) => {
   const { currentPage, totalPages, totalCount } = pagination;
 
   const cityName = slugToCity(city);
@@ -33,7 +41,9 @@ const CityComponent = ({ city, properties, pagination, filter, basePath, searchP
     ? `${pluralizeBusinessType(businessType)} ${listingLabel} in ${cityName}`
     : `Business Opportunities ${listingLabel} in ${cityName}`;
 
-  const businessLabel = businessType ? (BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType) : "Business Opportunities";
+  const businessLabel = businessType
+    ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
+    : "Business Opportunities";
   const pageDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on bizmonk.`;
 
   const buildPageHref = (page) => {
@@ -53,16 +63,18 @@ const CityComponent = ({ city, properties, pagination, filter, basePath, searchP
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
-        <div className="mb-3 sm:mb-4">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 capitalize leading-tight">
-            {h1Title}
-          </h1>
-          <h2 className="text-gray-600 text-sm sm:text-base mt-2 leading-relaxed">
-            {pageDescription}
-          </h2>
+      {showHeader && (
+        <div className="w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
+          <div className="mb-3 sm:mb-4">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 capitalize leading-tight">
+              {h1Title}
+            </h1>
+            <h2 className="text-gray-600 text-sm sm:text-base mt-2 leading-relaxed">
+              {pageDescription}
+            </h2>
+          </div>
         </div>
-      </div>
+      )}
 
       <FilterBar city={city} pathFilter={filter} />
 

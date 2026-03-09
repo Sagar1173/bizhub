@@ -22,12 +22,12 @@ export default async function Home() {
     {
       title: "Restaurants for Sale",
       businessType: "Restaurant",
-      href: "/ontario?businessType=Restaurant",
+      href: "/toronto/restaurant-for-sale",
     },
     {
       title: "Convenience Stores for Sale",
       businessType: "Convenience/Variety",
-      href: "/ontario?businessType=Convenience%2FVariety",
+      href: "/toronto/convenience-variety-for-sale",
     },
     {
       title: "Businesses for Sale in Toronto",
@@ -39,7 +39,7 @@ export default async function Home() {
       title: "Restaurants in Brampton",
       businessType: "Restaurant",
       cityToPass: "Brampton",
-      href: "/brampton?businessType=Restaurant",
+      href: "/brampton/restaurant-for-sale",
     },
     {
       title: "Businesses for Sale in Ajax",
@@ -86,6 +86,30 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-white">
       <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Bizmonk",
+              url: "https://www.bizmonk.ca",
+              logo: "https://www.bizmonk.ca/office.jpeg",
+              description:
+                "Bizmonk connects buyers and sellers of restaurants, convenience stores, and other businesses for sale across Ontario.",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "1065 Canadian Place #207",
+                addressLocality: "Mississauga",
+                addressRegion: "ON",
+                postalCode: "L4W 0C2",
+                addressCountry: "CA",
+              },
+              email: "mailto:info@ravigodara.com",
+              telephone: ["+1-416-816-6001", "+1-416-352-7547"],
+            }),
+          }}
+        />
         <Hero />
         <div className="py-5"></div>
         {activeSections.map((section, index) => (

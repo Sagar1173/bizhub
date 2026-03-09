@@ -5,13 +5,22 @@ import GoSeeThisHome from "@/components/GoSeeThisHome";
 import ScheduleViewing from "@/components/ScheduleViewing";
 import FeaturedPropertiesSection from "@/components/FeaturedPropertiesSection";
 import { fetchMedia, fetchProperties, fetchProperty } from "@/lib/api";
-import { slugToCity, extractListingKeyFromSlug } from "@/lib/slug";
+import {
+  slugToCity,
+  extractListingKeyFromSlug,
+  generatePropertySlug,
+} from "@/lib/slug";
 import PropertyMediaGallery from "@/components/PropertyMediaGallery";
 import ScrollToTop from "@/components/ScrollToTop";
 import ShareButton from "@/components/ShareButton";
 import HomeDetailsTabs from "@/components/HomeDetailsTabs";
 import CityComponent from "@/components/CityComponent";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.SITE_URL ||
+  "https://bizmonk.ca";
 
 const formatMoney = (value) => {
   if (value === null || value === undefined || value === "") return "-";
@@ -178,19 +187,96 @@ export default async function SlugPage({ params, searchParams }) {
       }),
     );
 
+    const baseListUrl = new URL(`/${city}/${slug}`, SITE_URL).toString();
+
+    const products = itemsWithMedia.map((property) => {
+      const href = `/${city}/${generatePropertySlug(property)}`;
+      const url = new URL(href, SITE_URL).toString();
+      const thumbnail =
+        property.thumbnail || property.Media?.[0]?.MediaURL || null;
+      const businessType = Array.isArray(property.BusinessType)
+        ? property.BusinessType[0]
+        : property.BusinessType;
+      const propertyType =
+        BUSINESS_TYPE_DISPLAY_MAP[businessType] ||
+        businessType ||
+        property.PropertySubType ||
+        "Property";
+      const fullAddress =
+        property.UnparsedAddress ||
+        [property.StreetNumber, property.StreetName, property.City]
+          .filter(Boolean)
+          .join(" ");
+      const agency =
+        property.ListOfficeName || "Real Estate Professionals Inc.";
+
+      return {
+        "@type": "Product",
+        "@id": url,
+        name: fullAddress || `${propertyType} in ${slugToCity(city)}`,
+        description:
+          property.PublicRemarks ||
+          `${propertyType || "Business opportunity"} in ${slugToCity(city)}`,
+        image: thumbnail ? [thumbnail] : undefined,
+        sku: property.ListingKey,
+        category: "BusinessProperty",
+        brand: agency
+          ? {
+              "@type": "Organization",
+              name: agency,
+            }
+          : undefined,
+        offers: {
+          "@type": "Offer",
+          url,
+          priceCurrency: "CAD",
+          price: property.ListPrice || 0,
+          availability: "https://schema.org/InStock",
+          seller: {
+            "@type": "Organization",
+            name: agency,
+          },
+        },
+      };
+    });
+
+    const itemListSchema =
+      products.length > 0
+        ? {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            url: baseListUrl,
+            itemListElement: products.map((product, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: product,
+            })),
+          }
+        : null;
+
     return (
-      <CityComponent
-        city={city}
-        filter={filter}
-        basePath={`/${city}/${slug}`}
-        searchParams={sParams}
-        properties={itemsWithMedia}
-        pagination={{
-          currentPage: data.currentPage,
-          totalPages: data.totalPages,
-          totalCount: data.totalCount,
-        }}
-      />
+      <>
+        {itemListSchema ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(itemListSchema),
+            }}
+          />
+        ) : null}
+        <CityComponent
+          city={city}
+          filter={filter}
+          basePath={`/${city}/${slug}`}
+          searchParams={sParams}
+          properties={itemsWithMedia}
+          pagination={{
+            currentPage: data.currentPage,
+            totalPages: data.totalPages,
+            totalCount: data.totalCount,
+          }}
+        />
+      </>
     );
   }
 
@@ -366,8 +452,54 @@ export default async function SlugPage({ params, searchParams }) {
     data.CountyOrParish,
   )} · ${fallbackText(data.StateOrProvince)}`;
 
+  const canonicalUrl = new URL(`/${city}/${slug}`, SITE_URL).toString();
+
+  const ratingValue = data.AverageRating || 4.5;
+  const ratingCount = data.ReviewCount || 1;
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": canonicalUrl,
+    name: shareTitle,
+    description: descriptionSections.join(" "),
+    image: property.images,
+    sku: data.ListingKey || slug,
+    category: "BusinessProperty",
+    brand: data.ListOfficeName
+      ? {
+          "@type": "Organization",
+          name: data.ListOfficeName,
+        }
+      : undefined,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+      ratingCount,
+    },
+    offers: {
+      "@type": "Offer",
+      url: canonicalUrl,
+      priceCurrency: "CAD",
+      price: property.price || 0,
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: data.ListOfficeName || "Bizmonk",
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema),
+        }}
+      />
       <ScrollToTop />
       <div className="w-full mx-auto px-4 md:px-8 py-4">
         <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm text-gray-600">

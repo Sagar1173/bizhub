@@ -97,76 +97,76 @@ export default function PropertyCard({ property }) {
       scroll={true}
       className="group block w-full bg-white rounded-xl overflow-hidden cursor-pointer shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-slate-300"
     >
-      {/* Image Section */}
-      <div className="relative h-52 sm:h-56 w-full bg-gray-100">
-        {thumbnail ? (
-          <img
-            src={thumbnail}
-            alt={fullAddress}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 gap-2">
-            <Home size={40} strokeWidth={1} />
-            <span className="text-[10px] uppercase font-bold tracking-wider">
-              No Photo
-            </span>
-          </div>
-        )}
-
-        {/* Status Badges */}
-        <div className="absolute bottom-3 left-3 flex items-center gap-2">
-          <div className="bg-blue-700 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-sm">
-            {timeAgoLabel}
-          </div>
-          {propertyType && (
-            <div className="bg-white text-gray-900 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-              <span>{propertyType}</span>
+        {/* Image Section */}
+        <div className="relative h-52 sm:h-56 w-full bg-gray-100">
+          {thumbnail ? (
+            <img
+              src={thumbnail}
+              alt={fullAddress}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 gap-2">
+              <Home size={40} strokeWidth={1} />
+              <span className="text-[10px] uppercase font-bold tracking-wider">
+                No Photo
+              </span>
             </div>
           )}
+
+          {/* Status Badges */}
+          <div className="absolute bottom-3 left-3 flex items-center gap-2">
+            <div className="bg-blue-700 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-sm">
+              {timeAgoLabel}
+            </div>
+            {propertyType && (
+              <div className="bg-white text-gray-900 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                <span>{propertyType}</span>
+              </div>
+            )}
+          </div>
+
+          <span className="absolute top-3 right-3 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full transition-colors">
+            <Heart size={18} className="text-white" />
+          </span>
         </div>
 
-        <span className="absolute top-3 right-3 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full transition-colors">
-          <Heart size={18} className="text-white" />
-        </span>
-      </div>
-
-      {/* Content Section */}
-      <div className="px-3.5 pt-2 pb-4 space-y-1">
-        <div>
-          <h3 
-            className="text-xl sm:text-2xl font-bold"
-            style={{ color: "lab(13 29.78 -57.75)" }}
-          >
-            {formattedPrice}
-          </h3>
-          <p className="text-sm text-gray-700 truncate font-medium">
-            {fullAddress}
-          </p>
-        </div>
-
-        {/* Property Specs */}
-        <div className="space-y-1.5 text-gray-700 mt-2">
-          {/* Area and MLS Line */}
-          <div className="flex items-center justify-start gap-3">
-            <p className="flex items-center text-xs text-gray-700 font-medium uppercase tracking-tighter">
-              <span>MLS® {mls}</span>
-              {property.TransactionType && (
-                <>
-                  <span className="mx-2 h-1 w-1 rounded-full bg-emerald-500 shadow-sm"></span>
-                  <span>{property.TransactionType.replace("For ", "")}</span>
-                </>
-              )}
+        {/* Content Section */}
+        <div className="px-3.5 pt-2 pb-4 space-y-1">
+          <div>
+            <h3
+              className="text-xl sm:text-2xl font-bold"
+              style={{ color: "lab(13 29.78 -57.75)" }}
+            >
+              {formattedPrice}
+            </h3>
+            <p className="text-sm text-gray-700 truncate font-medium">
+              {fullAddress}
             </p>
           </div>
-          
-          <p className="text-xs text-gray-700 truncate font-medium">
-            Listing Brokerage : {agency}
-          </p>
+
+          {/* Property Specs */}
+          <div className="space-y-1.5 text-gray-700 mt-2">
+            {/* Area and MLS Line */}
+            <div className="flex items-center justify-start gap-3">
+              <p className="flex items-center text-xs text-gray-700 font-medium uppercase tracking-tighter">
+                <span>MLS® {mls}</span>
+                {property.TransactionType && (
+                  <>
+                    <span className="mx-2 h-1 w-1 rounded-full bg-emerald-500 shadow-sm"></span>
+                    <span>{property.TransactionType.replace("For ", "")}</span>
+                  </>
+                )}
+              </p>
+            </div>
+
+            <p className="text-xs text-gray-700 truncate font-medium">
+              Listing Brokerage : {agency}
+            </p>
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
   );
 }
