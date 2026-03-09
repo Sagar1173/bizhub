@@ -5,9 +5,16 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import { fetchMedia, fetchProperties } from "@/lib/api";
 
 export const metadata = {
-  title: "Bizmonk | Restaurants, Convenience Store, Franchise and Commercial Space in Ontario",
+  title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
   description:
-    "Looking for a business space in Greater Toronto Area? Bizmonk is the best place to find your business space.",
+    "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+  keywords: "Restaurants, Convenience Stores, Businesses for Sale, Ontario",
+  openGraph: {
+    title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
+    description:
+      "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+    images: "/office.jpeg",
+  },
 };
 
 export default async function Home() {

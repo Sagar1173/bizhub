@@ -78,13 +78,13 @@ const parseSlug = (slug) => {
   const match = slug.match(/^(.+)-for-(sale|lease)$/);
   if (!match) return null;
   const businessTypeRaw = match[1];
-  
+
   const mapping = {
     "medical-dental": "Medical/Dental",
     "convenience-variety": "Convenience/Variety",
     "professional-office": "Professional Office",
   };
-  
+
   const mapped = mapping[businessTypeRaw];
   if (mapped) return { businessType: mapped, listingType: match[2] };
 
@@ -114,7 +114,8 @@ export async function generateMetadata({ params }) {
     const count = data.totalCount || 0;
     const countStr = count > 0 ? `${count}+ ` : "";
     const typeLabel = filter.businessType;
-    const listingLabel = filter.listingType === "lease" ? "for lease" : "for sale";
+    const listingLabel =
+      filter.listingType === "lease" ? "for lease" : "for sale";
     const businessLabel = BUSINESS_TYPE_DISPLAY_MAP[typeLabel] || typeLabel;
 
     return {
@@ -123,7 +124,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
         description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
-      }
+      },
     };
   }
 
@@ -145,7 +146,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${price} · ${address} | Bizmonk`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
-    }
+    },
   };
 }
 
@@ -174,13 +175,15 @@ export default async function SlugPage({ params, searchParams }) {
       (data.items || []).map(async (property) => {
         const media = await fetchMedia(property.ListingKey, 1);
         return { ...property, Media: media };
-      })
+      }),
     );
 
     return (
       <CityComponent
         city={city}
         filter={filter}
+        basePath={`/${city}/${slug}`}
+        searchParams={sParams}
         properties={itemsWithMedia}
         pagination={{
           currentPage: data.currentPage,
@@ -198,10 +201,19 @@ export default async function SlugPage({ params, searchParams }) {
 
   if (!data) return notFound();
 
-  const businessTypeRaw = Array.isArray(data.BusinessType) ? data.BusinessType[0] : data.BusinessType;
+  const businessTypeRaw = Array.isArray(data.BusinessType)
+    ? data.BusinessType[0]
+    : data.BusinessType;
   const businessType = businessTypeRaw || data.PropertySubType;
-  console.log("DEBUG: businessType =>", businessType, "from data.BusinessType:", data.BusinessType, "PropertySubType:", data.PropertySubType);
-  
+  console.log(
+    "DEBUG: businessType =>",
+    businessType,
+    "from data.BusinessType:",
+    data.BusinessType,
+    "PropertySubType:",
+    data.PropertySubType,
+  );
+
   const property = {
     price: data.ListPrice,
     address: formatAddress(data),
@@ -244,8 +256,16 @@ export default async function SlugPage({ params, searchParams }) {
     { label: "Property Type", value: fallbackText(data.PropertyType) },
     { label: "Property Sub Type", value: fallbackText(data.PropertySubType) },
     { label: "Style", value: formatList(data.ArchitecturalStyle) },
-    { label: "Building Area", value: fallbackText(data.LivingAreaRange || data.BuildingAreaTotal) + (data.BuildingAreaUnits ? ` ${data.BuildingAreaUnits}` : " sq. ft.") },
-    { label: "Zoning", value: fallbackText(data.ZoningDescription || data.Zoning) },
+    {
+      label: "Building Area",
+      value:
+        fallbackText(data.LivingAreaRange || data.BuildingAreaTotal) +
+        (data.BuildingAreaUnits ? ` ${data.BuildingAreaUnits}` : " sq. ft."),
+    },
+    {
+      label: "Zoning",
+      value: fallbackText(data.ZoningDescription || data.Zoning),
+    },
     {
       label: "Lot Size",
       value:
@@ -259,25 +279,66 @@ export default async function SlugPage({ params, searchParams }) {
   ];
 
   const financial = [
-    { label: "List Price", value: property.price ? `$${formatMoney(property.price)}` : "-" },
+    {
+      label: "List Price",
+      value: property.price ? `$${formatMoney(property.price)}` : "-",
+    },
     { label: "Transaction Type", value: fallbackText(data.TransactionType) },
-    data.GrossRevenue && { label: "Gross Revenue", value: `$${formatMoney(data.GrossRevenue)}` },
-    data.NetOperatingIncome && { label: "Net Operating Income", value: `$${formatMoney(data.NetOperatingIncome)}` },
-    data.TaxAnnualAmount && { label: "Annual Taxes", value: `$${formatMoney(data.TaxAnnualAmount)}` },
+    data.GrossRevenue && {
+      label: "Gross Revenue",
+      value: `$${formatMoney(data.GrossRevenue)}`,
+    },
+    data.NetOperatingIncome && {
+      label: "Net Operating Income",
+      value: `$${formatMoney(data.NetOperatingIncome)}`,
+    },
+    data.TaxAnnualAmount && {
+      label: "Annual Taxes",
+      value: `$${formatMoney(data.TaxAnnualAmount)}`,
+    },
     data.TaxYear && { label: "Tax Year", value: String(data.TaxYear) },
-    data.AssociationFee && { label: "Maintenance Fee", value: `$${formatMoney(data.AssociationFee)}` },
-    data.LeaseAmount && { label: "Lease Amount", value: `$${formatMoney(data.LeaseAmount)}` },
+    data.AssociationFee && {
+      label: "Maintenance Fee",
+      value: `$${formatMoney(data.AssociationFee)}`,
+    },
+    data.LeaseAmount && {
+      label: "Lease Amount",
+      value: `$${formatMoney(data.LeaseAmount)}`,
+    },
     data.LeaseTerm && { label: "Lease Term", value: data.LeaseTerm },
-    data.EstimatedInventoryValueAtCost && { label: "Est. Inventory Value", value: `$${formatMoney(data.EstimatedInventoryValueAtCost)}` },
+    data.EstimatedInventoryValueAtCost && {
+      label: "Est. Inventory Value",
+      value: `$${formatMoney(data.EstimatedInventoryValueAtCost)}`,
+    },
   ].filter(Boolean);
 
   const business = [
-    { label: "Business Type", value: formatList((data.BusinessType || []).map(t => BUSINESS_TYPE_DISPLAY_MAP[t] || t)) },
-    data.YearsInBusiness && { label: "Years in Business", value: data.YearsInBusiness },
+    {
+      label: "Business Type",
+      value: formatList(
+        (data.BusinessType || []).map((t) => BUSINESS_TYPE_DISPLAY_MAP[t] || t),
+      ),
+    },
+    data.YearsInBusiness && {
+      label: "Years in Business",
+      value: data.YearsInBusiness,
+    },
     data.FranchiseYN ? { label: "Franchise", value: "Yes" } : null,
-    data.NumberOfFullTimeEmployees && { label: "Full Time Employees", value: data.NumberOfFullTimeEmployees },
-    (data.HoursDaysOfOperationDescription || formatList(data.HoursDaysOfOperation)) && { label: "Hours of Operation", value: data.HoursDaysOfOperationDescription || formatList(data.HoursDaysOfOperation) },
-    data.SeatingCapacity && { label: "Seating Capacity", value: data.SeatingCapacity },
+    data.NumberOfFullTimeEmployees && {
+      label: "Full Time Employees",
+      value: data.NumberOfFullTimeEmployees,
+    },
+    (data.HoursDaysOfOperationDescription ||
+      formatList(data.HoursDaysOfOperation)) && {
+      label: "Hours of Operation",
+      value:
+        data.HoursDaysOfOperationDescription ||
+        formatList(data.HoursDaysOfOperation),
+    },
+    data.SeatingCapacity && {
+      label: "Seating Capacity",
+      value: data.SeatingCapacity,
+    },
     data.ChattelsYN ? { label: "Chattels Included", value: "Yes" } : null,
     { label: "Last Updated", value: getTimeAgo(data.ModificationTimestamp) },
   ].filter(Boolean);
@@ -320,9 +381,15 @@ export default async function SlugPage({ params, searchParams }) {
             <ChevronRight size={12} />
             <Link
               className="hover:text-gray-900 cursor-pointer"
-              href={property.businessType ? `/${city}/${property.businessType.toLowerCase().replace(/\//g, "-").replace(/ /g, "-")}-for-${listingType}` : `/${city}`}
+              href={
+                property.businessType
+                  ? `/${city}/${property.businessType.toLowerCase().replace(/\//g, "-").replace(/ /g, "-")}-for-${listingType}`
+                  : `/${city}`
+              }
             >
-              {property.businessType ? `${pluralizeBusinessType(property.businessType)} for ${listingType}` : `${slugToCity(city)} Listings`}
+              {property.businessType
+                ? `${pluralizeBusinessType(property.businessType)} for ${listingType}`
+                : `${slugToCity(city)} Listings`}
             </Link>
             <ChevronRight size={12} />
             <span className="text-gray-900 font-medium truncate max-w-[200px] md:max-w-none ">
@@ -345,7 +412,7 @@ export default async function SlugPage({ params, searchParams }) {
               </span>
             </div>
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-              <h1 
+              <h1
                 className="text-3xl md:text-5xl font-bold tracking-tight"
                 style={{ color: "lab(13 29.78 -57.75)" }}
               >

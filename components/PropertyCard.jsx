@@ -1,9 +1,5 @@
-"use client";
-
-import React from "react";
-import { Square, Home, Heart } from "lucide-react";
-import nProgress from "nprogress";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Home, Heart } from "lucide-react";
 import { cityToSlug, generatePropertySlug } from "@/lib/slug";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
@@ -72,8 +68,6 @@ function formatBedroomDisplay(aboveGrade, belowGrade, total) {
 }
 
 export default function PropertyCard({ property }) {
-  const router = useRouter();
-
   // Price Formatting
   const formattedPrice = new Intl.NumberFormat("en-CA", {
     style: "currency",
@@ -92,45 +86,31 @@ export default function PropertyCard({ property }) {
   const city = property.City || "";
   const mls = property.ListingKey;
   const thumbnail = property.thumbnail || property.Media?.[0]?.MediaURL || null;
-  const [imageLoadError, setImageLoadError] = React.useState(false);
   const listedDate = property.OriginalEntryTimestamp;
   const agency = property.ListOfficeName || "Real Estate Professionals Inc.";
-  const [timeAgoLabel, setTimeAgoLabel] = React.useState("Listed");
-
-  React.useEffect(() => {
-    setImageLoadError(false);
-  }, [thumbnail]);
-
-  React.useEffect(() => {
-    setTimeAgoLabel(getTimeAgo(listedDate));
-  }, [listedDate]);
+  const timeAgoLabel = getTimeAgo(listedDate);
+  const href = `/${cityToSlug(city)}/${generatePropertySlug(property)}`;
 
   return (
-    <div
-      onClick={() => {
-        nProgress.start();
-        if (typeof window !== "undefined") {
-          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        }
-        router.push(`/${cityToSlug(city)}/${generatePropertySlug(property)}`, { scroll: true });
-      }}
-      className="group w-full bg-white rounded-xl overflow-hidden cursor-pointer shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-slate-300"
+    <Link
+      href={href}
+      scroll={true}
+      className="group block w-full bg-white rounded-xl overflow-hidden cursor-pointer shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-slate-300"
     >
       {/* Image Section */}
       <div className="relative h-52 sm:h-56 w-full bg-gray-100">
-        {thumbnail && !imageLoadError ? (
+        {thumbnail ? (
           <img
             src={thumbnail}
             alt={fullAddress}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
-            onError={() => setImageLoadError(true)}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 gap-2">
             <Home size={40} strokeWidth={1} />
             <span className="text-[10px] uppercase font-bold tracking-wider">
-              {thumbnail ? "Image not found" : "No Photo"}
+              No Photo
             </span>
           </div>
         )}
@@ -148,9 +128,9 @@ export default function PropertyCard({ property }) {
           )}
         </div>
 
-        <button className="absolute top-3 right-3 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full transition-colors">
+        <span className="absolute top-3 right-3 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full transition-colors">
           <Heart size={18} className="text-white" />
-        </button>
+        </span>
       </div>
 
       {/* Content Section */}
@@ -187,6 +167,6 @@ export default function PropertyCard({ property }) {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

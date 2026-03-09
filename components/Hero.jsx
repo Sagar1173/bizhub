@@ -133,17 +133,16 @@ const Hero = () => {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-16 md:mt-20">
         <div className="flex flex-col items-center justify-center">
           {/* COPY + SEARCH */}
-          <div className="w-full max-w-3xl text-center">
+          <div className="w-full max-w-3xl text-center mt-10">
             <div className="space-y-3">
-              <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
-                Explore businesses across the GTA
-              </p>
               <h1 className="font-serif text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl">
                 Find your next business here
               </h1>
               <p className="mx-auto text-base leading-relaxed text-slate-900 sm:text-3xl font-medium">
-                <span className="text-black font-semibold text-lg sm:text-4xl">100+</span> Restaurants, Convenience Stores & Hotels for sale
+                <span className="text-black font-semibold text-lg sm:text-4xl">
+                  100+
+                </span>{" "}
+                Restaurants, Convenience Stores & Hotels for sale
               </p>
             </div>
 

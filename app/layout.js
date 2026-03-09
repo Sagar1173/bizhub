@@ -18,9 +18,31 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bizmonk.ca";
+
 export const metadata = {
-  title: "Ravi Singh Godara | Find, finance and own your home",
-  description: "Real estate search and mortgage services",
+  metadataBase: new URL(siteUrl),
+  title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
+  description:
+    "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+  keywords: "Restaurants, Convenience Stores, Businesses for Sale, Ontario",
+  openGraph: {
+    title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
+    description:
+      "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+    url: "/",
+    siteName: "Bizmonk",
+    type: "website",
+    images: [{ url: "/office.jpeg" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
+    description:
+      "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+    images: ["/office.jpeg"],
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -3,6 +3,14 @@ import { fetchProperties, fetchMedia } from "@/lib/api";
 import { slugToCity } from "@/lib/slug";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bizmonk.ca";
+
+const toOgImage = (url, alt) => {
+  if (!url) return null;
+  return { url, alt: alt || "Bizmonk listing" };
+};
+
 export async function generateMetadata({ params, searchParams }) {
   const { city } = await params;
   const sParams = await searchParams;
@@ -10,6 +18,17 @@ export async function generateMetadata({ params, searchParams }) {
   
   const businessType = sParams.businessType || undefined;
   const listingType = sParams.listingType || "sale";
+
+  const hasNonCanonicalParams =
+    Boolean(businessType) ||
+    listingType !== "sale" ||
+    (Number(sParams.page) || 1) > 1 ||
+    (sParams.sort && sParams.sort !== "newest") ||
+    Boolean(sParams.minPrice) ||
+    Boolean(sParams.maxPrice) ||
+    Boolean(sParams.priceMax) ||
+    Boolean(sParams.beds) ||
+    Boolean(sParams.baths);
 
   const data = await fetchProperties({
     cityToPass: cityName,
@@ -23,12 +42,64 @@ export async function generateMetadata({ params, searchParams }) {
   const listingLabel = listingType === "lease" ? "for lease" : "for sale";
   const businessLabel = businessType ? (BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType) : "Business Opportunities";
 
+  const canonicalPath = `/${city}`;
+  const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
+
+  const title = businessType
+    ? `${businessLabel} ${listingLabel} in ${cityName} | Bizmonk`
+    : `Business Opportunities in ${cityName} | Bizmonk`;
+
+  const description = businessType
+    ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`
+    : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`;
+
+  let ogImageUrl = null;
+  const first = data.items?.[0];
+  if (first?.ListingKey) {
+    const media = await fetchMedia(first.ListingKey, 1);
+    ogImageUrl = media?.[0]?.MediaURL || null;
+  }
+
+  const fallbackImage = "/office.jpeg";
+  const ogImage = toOgImage(ogImageUrl || fallbackImage, `${title}`);
+
   return {
-    title: businessType ? `${businessLabel} ${listingLabel} in ${cityName} | Bizmonk` : `Business Opportunities in ${cityName} | Bizmonk`,
-    description: businessType ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.` : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalPath,
+    },
+    robots: hasNonCanonicalParams
+      ? {
+          index: false,
+          follow: true,
+          googleBot: {
+            index: false,
+            follow: true,
+          },
+        }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+          },
+        },
     openGraph: {
-      title: businessType ? `${businessLabel} ${listingLabel} in ${cityName} | Bizmonk` : `Business Opportunities in ${cityName} | Bizmonk`,
-      description: businessType ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.` : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`,
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "Bizmonk",
+      type: "website",
+      locale: "en_CA",
+      images: ogImage ? [ogImage] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImage?.url ? [ogImage.url] : undefined,
     },
   };
 }
@@ -77,6 +148,9 @@ export default async function CityPage({ params, searchParams }) {
   return (
     <CityComponent
       city={city}
+      basePath={`/${city}`}
+      searchParams={sParams}
+      filter={{ businessType, listingType }}
       properties={itemsWithMedia}
       pagination={{
         currentPage: data.currentPage,

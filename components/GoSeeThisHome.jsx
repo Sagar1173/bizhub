@@ -141,11 +141,19 @@ export default function GoSeeThisHome() {
             htmlFor="marketing"
             className="text-xs text-gray-700 leading-snug cursor-pointer"
           >
-            I would like to book a tour of this property. I consent to recieve
+            I would like to book a tour of this business. I consent to receive
             marketing and promotional messages by phone, text message, and email
             from Ravi Singh Godara.
           </label>
         </div>
+
+        {/* Disclaimer */}
+        <p className="mt-2 px-1 text-[11px] text-gray-500 leading-snug">
+          This inquiry relates to a business property. All information provided
+          is for informational purposes only and should be independently
+          verified. Submitting this form does not create any agency, advisory,
+          or brokerage relationship.
+        </p>
 
         {/* Primary Action */}
         <button
