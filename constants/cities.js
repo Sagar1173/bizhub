@@ -12,7 +12,6 @@ export const cities = [
 export const BUSINESS_TYPES = [
   "Restaurant",
   "Office",
-  "Professional Office",
   "Retail",
   "Convenience/Variety",
   "Medical/Dental",
