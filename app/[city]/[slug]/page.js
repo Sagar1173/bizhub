@@ -15,6 +15,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import ShareButton from "@/components/ShareButton";
 import HomeDetailsTabs from "@/components/HomeDetailsTabs";
 import CityComponent from "@/components/CityComponent";
+import RegisterNowModal from "@/components/RegisterNowModal";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
 const SITE_URL =
@@ -675,14 +676,7 @@ export default async function SlugPage({ params, searchParams }) {
         </div>
       </main>
 
-      <div className="md:hidden fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex justify-center px-4">
-        <a
-          href="#book-showing-form"
-          className="inline-flex w-full max-w-xs items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform duration-150 hover:scale-[1.02] active:scale-95"
-        >
-          Book a Showing
-        </a>
-      </div>
+      <RegisterNowModal />
     </div>
   );
 }

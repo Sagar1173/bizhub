@@ -106,7 +106,7 @@ export default async function Home() {
                 addressCountry: "CA",
               },
               email: "mailto:info@ravigodara.com",
-              telephone: ["+1-416-816-6001", "+1-416-352-7547"],
+              telephone: ["+1-905-226-7284"],
             }),
           }}
         />
@@ -125,7 +125,7 @@ export default async function Home() {
 
         {/* <InstagramFeed /> */}
         <TestimonialsSection />
-        <ContactSection header="Let's Connect" />
+        <ContactSection header="Couldn't find what you are looking for?" />
       </main>
     </div>
   );

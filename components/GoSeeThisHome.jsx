@@ -78,7 +78,7 @@ export default function GoSeeThisHome() {
             Ravi Singh Godara
           </h2>
           <p className="text-sm md:text-base text-gray-700 font-medium">
-            416-816-6001
+            905-226-7284
           </p>
         </div>
       </div>

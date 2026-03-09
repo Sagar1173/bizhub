@@ -15,7 +15,7 @@ export default function FloatingWhatsApp() {
     const currentUrl = window.location.href;
     const message = `Hi Ravi,\nI would like to visit this property.\n\n${currentUrl}`;
     const encodedMessage = encodeURIComponent(message);
-    const phoneNumber = "14168166001";
+    const phoneNumber = "19052267284";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");

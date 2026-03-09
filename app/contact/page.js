@@ -9,7 +9,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <main className="bg-white">
-      <ContactSection header="Let's Connect" />
+      <ContactSection header="Couldn't find what you are looking for?" />
     </main>
   );
 }
