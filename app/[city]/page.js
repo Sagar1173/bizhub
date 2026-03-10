@@ -2,6 +2,7 @@ import CityComponent from "@/components/CityComponent";
 import { fetchProperties, fetchMedia } from "@/lib/api";
 import { slugToCity, generatePropertySlug } from "@/lib/slug";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
+import RegisterNowModal from "@/components/RegisterNowModal";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -274,6 +275,7 @@ export default async function CityPage({ params, searchParams }) {
           showHeader={false}
         />
       </main>
+      <RegisterNowModal />
     </>
   );
 }

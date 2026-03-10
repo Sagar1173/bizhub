@@ -9,7 +9,7 @@ export default function GoSeeThisHome() {
     email: "",
     phone: "",
     message: "Please send me additional information about this business. Thank you",
-    marketing: false,
+    marketing: true,
   });
   const [loading, setLoading] = useState(false);
 
@@ -49,7 +49,7 @@ export default function GoSeeThisHome() {
           email: "",
           phone: "",
           message: "Please send me additional information about this business. Thank you",
-          marketing: false,
+          marketing: true,
         });
       } else {
         swal("Message Failed", "Cannot send your message", "error");

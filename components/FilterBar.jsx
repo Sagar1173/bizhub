@@ -185,10 +185,10 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
   return (
     <>
       {/* Top Bar */}
-      <div className="sticky top-0 z-40 -mt-px bg-white w-full py-2">
-        <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+      <div className="sticky top-0 z-40 -mt-px bg-white/90 backdrop-blur border-b border-gray-100 w-full py-2">
+        <div className="w-full px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2">
           {/* Filters */}
-          <div className="flex items-center gap-3 w-full min-w-0">
+          <div className="flex flex-wrap items-center gap-3 w-full min-w-0">
             {/* Desktop */}
             <div className="hidden lg:flex items-center gap-2">
               <DesktopDropdown
@@ -218,14 +218,14 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
               />
             </div>
 
-            <div className="hidden lg:flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="hidden lg:flex flex-wrap items-center gap-2">
               {BUSINESS_TYPES.map((type) => (
                 <button
                   key={type}
                   onClick={() =>
                     set("businessType", businessType === type ? null : type)
                   }
-                  className={`flex items-center shrink-0 gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center shrink-0 gap-1.5 px-3 py-1.5 rounded-full border text-xs md:text-sm transition-colors cursor-pointer whitespace-nowrap ${
                     businessType === type
                       ? "bg-blue-50 border-blue-500 text-blue-700 font-semibold"
                       : "border-gray-300 text-gray-700 hover:border-gray-800"
@@ -247,10 +247,10 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
             </div>
 
             {/* Mobile (we'll also show the quick business type pills here inline) */}
-            <div className="lg:hidden flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full">
+            <div className="lg:hidden flex flex-wrap items-center gap-2 w-full">
               <button
                 onClick={() => setPanelOpen(true)}
-                className="flex shrink-0 items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 hover:border-gray-800 transition-colors rounded-full text-sm font-semibold cursor-pointer whitespace-nowrap"
+                className="flex shrink-0 items-center gap-1.5 px-3 py-1.5 border border-gray-300 hover:border-gray-800 transition-colors rounded-full text-xs sm:text-sm font-semibold cursor-pointer whitespace-nowrap"
               >
                 <SlidersHorizontal size={16} />
                 Filters
@@ -262,7 +262,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                   onClick={() =>
                     set("businessType", businessType === type ? null : type)
                   }
-                  className={`flex shrink-0 items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors cursor-pointer whitespace-nowrap ${
+                  className={`flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs sm:text-sm transition-colors cursor-pointer whitespace-nowrap ${
                     businessType === type
                       ? "bg-blue-50 border-blue-500 text-blue-700 font-semibold"
                       : "border-gray-300 text-gray-700 hover:border-gray-800"
@@ -275,8 +275,8 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
             </div>
           </div>
 
-          {/* Sort */}
-          <div className="relative" ref={sortRef}>
+          {/* Sort - hidden on all viewports */}
+          <div className="relative hidden" ref={sortRef}>
             <button
               onClick={() => setOpenSort((p) => !p)}
               className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 hover:border-gray-800 hover:bg-gray-50 transition-colors cursor-pointer"

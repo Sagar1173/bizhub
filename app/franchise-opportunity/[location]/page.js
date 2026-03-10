@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import RegisterNowModal from "@/components/RegisterNowModal";
 
 import FranchisesList from "@/components/FranchisesList";
-import { getLocationContent, franchiseLocations } from "@/constants/franchise-data";
+import {
+  getLocationContent,
+  franchiseLocations,
+} from "@/constants/franchise-data";
 
 const cities = Object.keys(franchiseLocations).map((key) => {
   return key
@@ -14,19 +18,21 @@ const cities = Object.keys(franchiseLocations).map((key) => {
 export async function generateMetadata({ params }) {
   const { location } = await params;
   const locationData = getLocationContent(location);
-  
-  const title = locationData?.title ? `Franchise Opportunities in ${locationData.title} | Bizmonk` : `Franchise Opportunities in ${location} | Bizmonk`;
-  const description = locationData?.title 
+
+  const title = locationData?.title
+    ? `Franchise Opportunities in ${locationData.title} | Bizmonk`
+    : `Franchise Opportunities in ${location} | Bizmonk`;
+  const description = locationData?.title
     ? `Explore franchise opportunities and business listings available in ${locationData.title}. Start your business journey today with Bizmonk.`
     : `Explore franchise opportunities and business listings available in ${location}. Start your business journey today with Bizmonk.`;
-    
+
   return {
     title,
     description,
     openGraph: {
       title,
       description,
-    }
+    },
   };
 }
 
@@ -110,7 +116,7 @@ export default async function FranchiseOpportunityPage({ params }) {
         </div>
 
         <FranchisesList />
-
+        <RegisterNowModal />
         {/* City Navigation Section */}
         <div className="py-24 bg-gray-50">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getLocationContent, franchiseLocations } from "@/constants/franchise-data";
+import {
+  getLocationContent,
+  franchiseLocations,
+} from "@/constants/franchise-data";
 import HeroSection from "./_components/HeroSection";
 import RelatedFranchises from "./_components/RelatedFranchises";
 import ExploreMoreCities from "./_components/ExploreMoreCities";
@@ -75,7 +78,6 @@ export default async function FranchiseDetailPage({ params }) {
               franchise={franchise}
               franchiseData={franchiseData}
             />
-
           </div>
         </div>
 
@@ -114,7 +116,11 @@ export async function generateMetadata({ params }, parent) {
     );
 
     const metadata = {
-      title: franchiseData?.name + " Franchise Opportunity in " + locationText + " | Bizmonk",
+      title:
+        franchiseData?.name +
+        " Franchise Opportunity in " +
+        locationText +
+        " | Bizmonk",
       description: `${franchiseData?.name} franchise opportunities now available in ${locationText}. Start your own successful business with expert guidance and a trusted brand.`,
     };
     return metadata;

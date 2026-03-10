@@ -15,7 +15,6 @@ import ScrollToTop from "@/components/ScrollToTop";
 import ShareButton from "@/components/ShareButton";
 import HomeDetailsTabs from "@/components/HomeDetailsTabs";
 import CityComponent from "@/components/CityComponent";
-import RegisterNowModal from "@/components/RegisterNowModal";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
 const SITE_URL =
@@ -93,8 +92,7 @@ const parseSlug = (slug) => {
     "medical-dental": "Medical/Dental",
     "convenience-variety": "Convenience/Variety",
     "convenience-store": "Convenience/Variety",
-    "professional-office": "Office",
-    "office": "Office",
+    office: "Professional Office",
   };
 
   const mapped = mapping[businessTypeRaw];
@@ -675,8 +673,6 @@ export default async function SlugPage({ params, searchParams }) {
           </div>
         </div>
       </main>
-
-      <RegisterNowModal />
     </div>
   );
 }

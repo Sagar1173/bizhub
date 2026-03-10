@@ -11,7 +11,8 @@ export default function RegisterNowModal() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    message: "I would like more information.",
+    message:
+      "I would like to get updates on the business opportunities in Ontario.",
   });
 
   const handleChange = (e) => {
@@ -37,7 +38,7 @@ export default function RegisterNowModal() {
         swal(
           `Thank You, ${formData.name}`,
           "Please expect a call from us shortly",
-          "success"
+          "success",
         );
         setFormData({
           name: "",
@@ -61,9 +62,9 @@ export default function RegisterNowModal() {
       <div className="md:hidden fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex justify-center px-4">
         <button
           onClick={() => setIsOpen(true)}
-          className="inline-flex w-full max-w-xs items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform duration-150 hover:scale-[1.02] active:scale-95"
+          className="inline-flex w-fit max-w-xs items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-base font-semibold text-white shadow-2xl transition-transform duration-150 hover:scale-[1.02] active:scale-95"
         >
-          Register Now
+          Register For Updates
         </button>
       </div>
 
@@ -80,7 +81,8 @@ export default function RegisterNowModal() {
             <div className="mb-4 text-center">
               <h3 className="text-xl font-bold text-gray-900">Register Now</h3>
               <p className="mt-1 text-sm text-gray-500">
-                Register for new updates for Restaurants, Convenience Stores, and more!
+                Register for new updates for Restaurants, Convenience Stores,
+                and more!
               </p>
             </div>
 

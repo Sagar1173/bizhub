@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import FeaturedPropertiesSection from "@/components/FeaturedPropertiesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import { fetchMedia, fetchProperties } from "@/lib/api";
+import RegisterNowModal from "@/components/RegisterNowModal";
 
 export const metadata = {
   title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
@@ -126,6 +127,7 @@ export default async function Home() {
         {/* <InstagramFeed /> */}
         <TestimonialsSection />
         <ContactSection header="Couldn't find what you are looking for?" />
+        <RegisterNowModal />
       </main>
     </div>
   );
