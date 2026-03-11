@@ -81,6 +81,17 @@ export const sendEmail = async ({ content, title = null }) => {
 
   if (content && typeof content === "object") {
     for (const [key, value] of Object.entries(content)) {
+      if (!key || !value) continue;
+
+      const normalizedKey = String(key).toLowerCase();
+      // Skip marketing consent from the email payload
+      if (
+        normalizedKey.includes("marketing") &&
+        normalizedKey.includes("consent")
+      ) {
+        continue;
+      }
+
       if (key && value) {
         contentArray.push(`${capitalizeFirstLetter(key)}: ${value}`);
       }
@@ -89,11 +100,13 @@ export const sendEmail = async ({ content, title = null }) => {
 
   const crmPromise = sendLeadToCrm({ content, title, contentArray });
 
+  const emailTitle = "Bizmonk inquiry";
+
   const { data, error } = await resend.emails.send({
     from: "info@homebaba.ca",
     to: ["info@bizmonk.ca"],
-    subject: title || "Bizmonk Inquiry",
-    html: `<h1>${title || "Bizmonk Inquiry"}</h1><br/><ul>${contentArray
+    subject: emailTitle,
+    html: `<h1>${emailTitle}</h1><br/><ul>${contentArray
       .map((val) => `<li>${val}</li>`)
       .join("\n")}</ul>`,
   });

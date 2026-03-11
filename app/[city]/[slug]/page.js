@@ -593,7 +593,7 @@ export default async function SlugPage({ params, searchParams }) {
         <PropertyMediaGallery images={property.images} />
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <main className="max-w-7xl mx-auto px-4 md:px-8 pt-12 pb-32 grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2">
           <div className="mb-8   ">
             <div className="mb-2">
@@ -717,6 +717,16 @@ export default async function SlugPage({ params, searchParams }) {
           <div id="book-showing-form" className="sticky  top-32">
             <GoSeeThisHome />
           </div>
+        </div>
+
+        {/* Mobile fixed bottom "Schedule a viewing" button */}
+        <div className="lg:hidden">
+          <a
+            href="#book-showing-form"
+            className="fixed inset-x-4 bottom-4 z-40 flex items-center justify-center rounded-full bg-teal-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-teal-500/40 hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+          >
+            Schedule a viewing
+          </a>
         </div>
       </main>
     </div>

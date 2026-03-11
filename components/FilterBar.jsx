@@ -248,19 +248,19 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
             <div className="lg:hidden flex flex-wrap items-center gap-2 w-full">
               <button
                 onClick={() => setPanelOpen(true)}
-                className="flex shrink-0 items-center gap-1.5 px-3 py-1.5 border border-gray-300 hover:border-gray-800 transition-colors rounded-full text-xs sm:text-sm font-semibold cursor-pointer whitespace-nowrap"
+                className="flex shrink-0 items-center justify-center gap-2 px-4 py-2 border border-gray-300 hover:border-gray-800 transition-colors rounded-full text-sm font-semibold cursor-pointer whitespace-nowrap min-h-[44px]"
               >
-                <SlidersHorizontal size={16} />
+                <SlidersHorizontal size={18} />
                 Filters
               </button>
-              
+
               {BUSINESS_TYPES.map((type) => (
                 <button
                   key={type}
                   onClick={() =>
                     set("businessType", businessType === type ? null : type)
                   }
-                  className={`flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs sm:text-sm transition-colors cursor-pointer whitespace-nowrap ${
+                  className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-full border text-sm transition-colors cursor-pointer whitespace-nowrap min-h-[40px] ${
                     businessType === type
                       ? "bg-blue-50 border-blue-500 text-blue-700 font-semibold"
                       : "border-gray-300 text-gray-700 hover:border-gray-800"
