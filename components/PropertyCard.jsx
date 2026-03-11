@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Home, Heart } from "lucide-react";
 import { cityToSlug, generatePropertySlug } from "@/lib/slug";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
+import { pickPropertyMainImage } from "@/lib/media";
 
 function getTimeAgo(dateString) {
   if (!dateString) return "New";
@@ -89,7 +90,7 @@ export default function PropertyCard({ property }) {
     `${property.StreetNumber} ${property.StreetName}`;
   const city = property.City || "";
   const mls = property.ListingKey;
-  const thumbnail = property.thumbnail || property.Media?.[0]?.MediaURL || null;
+  const mainImage = pickPropertyMainImage(property);
   const listedDate = property.OriginalEntryTimestamp;
   const agency = property.ListOfficeName || "Real Estate Professionals Inc.";
   const timeAgoLabel = getTimeAgo(listedDate);
@@ -103,9 +104,9 @@ export default function PropertyCard({ property }) {
     >
         {/* Image Section */}
         <div className="relative h-52 sm:h-56 w-full bg-gray-100">
-          {thumbnail ? (
+          {mainImage ? (
             <img
-              src={thumbnail}
+              src={mainImage}
               alt={fullAddress}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"

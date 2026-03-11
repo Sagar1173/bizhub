@@ -1,7 +1,11 @@
-import React from 'react';
-import Link from 'next/link';
-import { ALL_ONTARIO_CITIES, BUSINESS_TYPES, BUSINESS_TYPE_DISPLAY_MAP } from '@/constants/cities';
-import { cityToSlug, slugToCity } from '@/lib/slug';
+import React from "react";
+import Link from "next/link";
+import {
+  ALL_ONTARIO_CITIES,
+  BUSINESS_TYPES,
+  BUSINESS_TYPE_DISPLAY_MAP,
+} from "@/constants/cities";
+import { cityToSlug, slugToCity, toCategorySlug } from "@/lib/slug";
 
 const BusinessInterlinks = ({ city, filter }) => {
   const currentCityName = slugToCity(city);
@@ -16,8 +20,7 @@ const BusinessInterlinks = ({ city, filter }) => {
       "Convenience/Variety": "convenience-store",
     };
     const baseSlug =
-      businessTypeSlugMap[type] ||
-      type.toLowerCase().replace(/\//g, "-").replace(/ /g, "-");
+      businessTypeSlugMap[type] || toCategorySlug(type);
     return `${baseSlug}-for-${lType}`;
   };
 

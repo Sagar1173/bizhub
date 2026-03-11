@@ -1,0 +1,167 @@
+{
+  "overridesBySlug": {
+    "restaurant-for-sale": {
+      "title": "Restaurants for sale in {city}",
+      "intro": [
+        "Browse restaurants for sale in {city}—from turnkey concepts to established spots with loyal customers.",
+        "Use the filters above to narrow down by price, location, and listing freshness, then compare the details side by side."
+      ],
+      "sections": [
+        {
+          "heading": "What to look for in a restaurant listing",
+          "bullets": [
+            "Lease terms, remaining term, and renewal options",
+            "Sales history and expense breakdown (when available)",
+            "Equipment/chattels included and condition of the kitchen",
+            "Seating capacity, permits, and use/zoning compatibility"
+          ]
+        },
+        {
+          "heading": "Next steps after shortlisting",
+          "body": [
+            "Shortlist 3–5 options, request additional financials where available, and schedule viewings.",
+            "If you’re moving forward, verify licensing requirements and consult professionals for due diligence."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do listings include financial statements?",
+          "a": "Some do. When they’re not public in the listing, you can often request them through the agent after signing an NDA."
+        },
+        {
+          "q": "Can I change the cuisine or concept after purchase?",
+          "a": "Often yes, but confirm lease restrictions, required permits, and any franchisor or branding obligations before committing."
+        }
+      ]
+    }
+  },
+  "templatesByBusinessType": {
+    "default": {
+      "intro": [
+        "Explore {category} {listingLabel} in {city}. Listings change often—check back for the newest opportunities.",
+        "Compare price, location, and key business details, then book a viewing for the ones that match your plan."
+      ],
+      "sections": [
+        {
+          "heading": "How to use these listings",
+          "bullets": [
+            "Sort by newest to catch fresh opportunities early",
+            "Set a realistic budget range before you shortlist",
+            "Review location notes and any restrictions in remarks",
+            "Validate business details during due diligence"
+          ]
+        },
+        {
+          "heading": "Buying tips for {category}",
+          "body": [
+            "Focus on unit economics, lease terms, and operational requirements—then confirm everything with documents.",
+            "If you’re new to the industry, prioritize listings with clear numbers and a simple transition."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Are these listings updated regularly?",
+          "a": "Yes—new listings and updates can appear daily, so it’s worth checking often or saving your shortlist."
+        },
+        {
+          "q": "What should I verify before making an offer?",
+          "a": "Lease conditions, licenses/permits, financials (when available), and the inclusions/exclusions in the sale."
+        }
+      ]
+    },
+    "Restaurant": {
+      "intro": [
+        "Find restaurants {listingLabel} in {city}, including dine-in, takeout, and quick-service concepts.",
+        "Use the results above to narrow your search, then review each listing for lease details, equipment, and seating."
+      ],
+      "sections": [
+        {
+          "heading": "Key restaurant due diligence items",
+          "bullets": [
+            "Lease assignment terms and landlord approvals",
+            "Hood/ventilation condition and fire inspection requirements",
+            "Liquor license status (if applicable)",
+            "Staffing needs, hours, and seating capacity"
+          ]
+        },
+        {
+          "heading": "Financing and transition",
+          "body": [
+            "Confirm what’s included (chattels, brand, recipes, training) and what isn’t.",
+            "Plan your transition timeline—especially if renovations or rebranding are needed."
+          ]
+        }
+      ]
+    },
+    "Retail": {
+      "intro": [
+        "Explore retail businesses {listingLabel} in {city}, from small storefronts to established operations.",
+        "Pay attention to foot traffic, visibility, lease terms, and the surrounding tenant mix."
+      ],
+      "sections": [
+        {
+          "heading": "Retail considerations",
+          "bullets": [
+            "Lease rate, additional rent, and escalation clauses",
+            "Parking/visibility and proximity to anchors",
+            "Inventory included (if any) and supplier relationships",
+            "Transferability of name, signage, and online assets"
+          ]
+        }
+      ]
+    },
+    "Professional Office": {
+      "intro": [
+        "Browse office opportunities {listingLabel} in {city}. Many listings highlight location, build-out, and lease flexibility.",
+        "Shortlist by size, layout, and accessibility—then verify permitted use and occupancy details."
+      ],
+      "sections": [
+        {
+          "heading": "Office checklist",
+          "bullets": [
+            "Zoning and permitted professional uses",
+            "Parking availability and transit access",
+            "Build-out quality (reception, rooms, washrooms)",
+            "Operating costs and any shared amenities"
+          ]
+        }
+      ]
+    },
+    "Medical/Dental": {
+      "intro": [
+        "Discover medical and dental listings {listingLabel} in {city}, including clinics and practice setups.",
+        "Verify licensing requirements, build-out specs, and whether equipment is included in the purchase."
+      ],
+      "sections": [
+        {
+          "heading": "Medical/dental due diligence",
+          "bullets": [
+            "Regulatory compliance and required approvals",
+            "Build-out and equipment condition (operatories, sterilization)",
+            "Patient base transition details (where applicable)",
+            "Lease and permitted use language"
+          ]
+        }
+      ]
+    },
+    "Convenience/Variety": {
+      "intro": [
+        "Browse convenience store opportunities {listingLabel} in {city}. Location and steady repeat traffic are often key.",
+        "Confirm lease terms, supplier arrangements, and any restrictions on product mix."
+      ],
+      "sections": [
+        {
+          "heading": "Convenience store checklist",
+          "bullets": [
+            "Lease terms and operating hours restrictions",
+            "Lottery/tobacco permissions (where applicable)",
+            "Inventory valuation and POS systems",
+            "Storage space and delivery access"
+          ]
+        }
+      ]
+    }
+  }
+}

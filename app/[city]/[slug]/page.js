@@ -9,13 +9,16 @@ import {
   slugToCity,
   extractListingKeyFromSlug,
   generatePropertySlug,
+  toCategorySlug,
 } from "@/lib/slug";
 import PropertyMediaGallery from "@/components/PropertyMediaGallery";
 import ScrollToTop from "@/components/ScrollToTop";
 import ShareButton from "@/components/ShareButton";
 import HomeDetailsTabs from "@/components/HomeDetailsTabs";
 import CityComponent from "@/components/CityComponent";
+import CategorySeoContent from "@/components/CategorySeoContent";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
+import { pickPropertyMainImage } from "@/lib/media";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -40,6 +43,17 @@ const formatAddress = (p) => {
     p.PostalCode,
   ].filter(Boolean);
   return parts.join(", ");
+};
+
+const formatBreadcrumbAddress = (p) => {
+  if (!p) return "Listing";
+  const street = [p.StreetNumber, p.StreetName, p.StreetSuffix]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+  if (street) return street;
+  if (p.UnparsedAddress) return String(p.UnparsedAddress).split(",")[0].trim();
+  return "Listing";
 };
 
 const formatList = (arr) =>
@@ -84,7 +98,11 @@ const getTimeAgo = (dateString) => {
 };
 
 const parseSlug = (slug) => {
-  const match = slug.match(/^(.+)-for-(sale|lease)$/);
+  const normalized = String(slug || "")
+    .trim()
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+  const match = normalized.match(/^(.+)-for-(sale|lease)$/);
   if (!match) return null;
   const businessTypeRaw = match[1];
 
@@ -92,6 +110,8 @@ const parseSlug = (slug) => {
     "medical-dental": "Medical/Dental",
     "convenience-variety": "Convenience/Variety",
     "convenience-store": "Convenience/Variety",
+    "fast-food-takeout": "Fast Food/Takeout",
+    "dry-cleaning-laundry": "Dry Cleaning/Laundry",
     office: "Professional Office",
   };
 
@@ -183,8 +203,10 @@ export default async function SlugPage({ params, searchParams }) {
 
     const itemsWithMedia = await Promise.all(
       (data.items || []).map(async (property) => {
-        const media = await fetchMedia(property.ListingKey, 1);
-        return { ...property, Media: media };
+        const media = await fetchMedia(property.ListingKey, 5);
+        const withMedia = { ...property, Media: media };
+        const mainImage = pickPropertyMainImage(withMedia);
+        return { ...withMedia, mainImage };
       }),
     );
 
@@ -193,8 +215,7 @@ export default async function SlugPage({ params, searchParams }) {
     const products = itemsWithMedia.map((property) => {
       const href = `/${city}/${generatePropertySlug(property)}`;
       const url = new URL(href, SITE_URL).toString();
-      const thumbnail =
-        property.thumbnail || property.Media?.[0]?.MediaURL || null;
+      const thumbnail = property.mainImage || pickPropertyMainImage(property);
       const businessType = Array.isArray(property.BusinessType)
         ? property.BusinessType[0]
         : property.BusinessType;
@@ -276,6 +297,16 @@ export default async function SlugPage({ params, searchParams }) {
             totalPages: data.totalPages,
             totalCount: data.totalCount,
           }}
+        />
+        <CategorySeoContent
+          cityName={slugToCity(city)}
+          slug={slug}
+          businessType={filter.businessType}
+          listingType={filter.listingType}
+          categoryLabel={
+            BUSINESS_TYPE_DISPLAY_MAP[filter.businessType] ||
+            pluralizeBusinessType(filter.businessType)
+          }
         />
       </>
     );
@@ -511,33 +542,48 @@ export default async function SlugPage({ params, searchParams }) {
             >
               Home
             </Link>
-            <ChevronRight size={12} />
+            <ChevronRight
+              aria-hidden="true"
+              size={14}
+              className="text-gray-400"
+            />
+            <Link
+              href={`/${city}`}
+              className="font-medium hover:text-gray-900 cursor-pointer"
+            >
+              {slugToCity(city)}
+            </Link>
+            <ChevronRight
+              aria-hidden="true"
+              size={14}
+              className="text-gray-400"
+            />
             <Link
               className="hover:text-gray-900 cursor-pointer"
-              href={
-                property.businessType
-                  ? (() => {
-                      const businessTypeSlugMap = {
-                        "Convenience/Variety": "convenience-store",
-                      };
-                      const baseSlug =
-                        businessTypeSlugMap[property.businessType] ||
-                        property.businessType
-                          .toLowerCase()
-                          .replace(/\//g, "-")
-                          .replace(/ /g, "-");
-                      return `/${city}/${baseSlug}-for-${listingType}`;
-                    })()
-                  : `/${city}`
-              }
+              href={(() => {
+                const businessTypeSlugMap = {
+                  "Convenience/Variety": "convenience-store",
+                };
+                const baseSlug = property.businessType
+                  ? businessTypeSlugMap[property.businessType] ||
+                    toCategorySlug(property.businessType)
+                  : null;
+                return baseSlug
+                  ? `/${city}/${baseSlug}-for-${listingType}`
+                  : `/${city}`;
+              })()}
             >
-              {property.businessType
-                ? `${pluralizeBusinessType(property.businessType)} for ${listingType}`
-                : `${slugToCity(city)} Listings`}
+              {(BUSINESS_TYPE_DISPLAY_MAP[property.businessType] ||
+                property.businessType ||
+                "Businesses") + ` for ${listingType}`}
             </Link>
-            <ChevronRight size={12} />
-            <span className="text-gray-900 font-medium truncate max-w-[200px] md:max-w-none ">
-              {property.address}
+            <ChevronRight
+              aria-hidden="true"
+              size={14}
+              className="text-gray-400"
+            />
+            <span className="text-gray-900 font-medium truncate max-w-[220px] md:max-w-none">
+              {formatBreadcrumbAddress(data)}
             </span>
           </div>
         </div>

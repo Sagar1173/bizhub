@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BUSINESS_TYPES, BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
+import { toCategorySlug } from "@/lib/slug";
 
 // Beds and Baths removed for business listings focus
 
@@ -91,10 +92,7 @@ function useUrlFilters(onNavigate, city, pathFilter) {
       };
       const baseSlug =
         businessTypeSlugMap[next.businessType] ||
-        next.businessType
-          .toLowerCase()
-          .replace(/\//g, "-")
-          .replace(/ /g, "-");
+        toCategorySlug(next.businessType);
       const slug = `${baseSlug}-for-${next.listingType}`;
       return `/${city}/${slug}`;
     }

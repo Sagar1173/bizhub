@@ -4,6 +4,7 @@ import FeaturedPropertiesSection from "@/components/FeaturedPropertiesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import { fetchMedia, fetchProperties } from "@/lib/api";
 import RegisterNowModal from "@/components/RegisterNowModal";
+import { pickPropertyMainImage } from "@/lib/media";
 
 export const metadata = {
   title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
@@ -62,11 +63,11 @@ export default async function Home() {
 
       const properties = await Promise.all(
         (data.items || []).map(async (property) => {
-          const media = await fetchMedia(property.ListingKey, 1);
+          const media = await fetchMedia(property.ListingKey, 5);
+          const withMedia = { ...property, Media: media };
           return {
-            ...property,
-            Media: media,
-            thumbnail: media?.[0]?.MediaURL || null,
+            ...withMedia,
+            mainImage: pickPropertyMainImage(withMedia),
           };
         }),
       );

@@ -3,6 +3,7 @@ import { fetchProperties, fetchMedia } from "@/lib/api";
 import { slugToCity, generatePropertySlug } from "@/lib/slug";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 import RegisterNowModal from "@/components/RegisterNowModal";
+import { getPropertyImageCandidates, pickPropertyMainImage } from "@/lib/media";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -144,22 +145,25 @@ export default async function CityPage({ params, searchParams }) {
   });
   const itemsWithMedia = await Promise.all(
     (data.items || []).map(async (property) => {
-      const media = await fetchMedia(property.ListingKey, 1);
+      const media = await fetchMedia(property.ListingKey, 5);
 
-      let thumbnail = property.thumbnail || media?.[0]?.MediaURL || null;
+      const withMedia = { ...property, Media: media };
+      const candidates = getPropertyImageCandidates(withMedia);
 
-      if (thumbnail) {
-        try {
-          const res = await fetch(thumbnail, { method: "HEAD" });
-          if (!res.ok) {
-            thumbnail = null;
-          }
-        } catch {
-          thumbnail = null;
+      let mainImage = pickPropertyMainImage(withMedia);
+      if (!mainImage) return { ...withMedia, mainImage: null };
+
+      // Keep the old safety check, but fall back to another candidate if the first breaks.
+      try {
+        const res = await fetch(mainImage, { method: "HEAD" });
+        if (!res.ok) {
+          mainImage = candidates.find((u) => u && u !== mainImage) || null;
         }
+      } catch {
+        mainImage = candidates.find((u) => u && u !== mainImage) || null;
       }
 
-      return { ...property, Media: media, thumbnail };
+      return { ...withMedia, mainImage };
     }),
   );
 
@@ -179,8 +183,7 @@ export default async function CityPage({ params, searchParams }) {
   const products = itemsWithMedia.map((property) => {
     const href = `/${city}/${generatePropertySlug(property)}`;
     const url = new URL(href, SITE_URL).toString();
-    const thumbnail =
-      property.thumbnail || property.Media?.[0]?.MediaURL || null;
+    const thumbnail = property.mainImage || pickPropertyMainImage(property);
     const businessType = Array.isArray(property.BusinessType)
       ? property.BusinessType[0]
       : property.BusinessType;
