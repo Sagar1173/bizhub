@@ -11,6 +11,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { BUSINESS_TYPES, BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 import { toCategorySlug } from "@/lib/slug";
+import NotifyMeModal from "./NotifyMeModal";
 
 // Beds and Baths removed for business listings focus
 
@@ -180,6 +181,11 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
     listingType !== "sale" || businessType || minPrice || maxPrice,
   );
 
+  const notifyBusinessLabel = businessType
+    ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
+    : "Business Opportunities";
+  const notifyListingLabel = listingType === "lease" ? "for Lease" : "for Sale";
+
   return (
     <>
       {/* Top Bar */}
@@ -234,6 +240,12 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                 </button>
               ))}
 
+              <NotifyMeModal
+                cityName={city}
+                listingLabel={notifyListingLabel}
+                businessLabel={notifyBusinessLabel}
+              />
+
               {hasActiveFilters && (
                 <button
                   onClick={clearAll}
@@ -253,6 +265,12 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                 <SlidersHorizontal size={18} />
                 Filters
               </button>
+
+              <NotifyMeModal
+                cityName={city}
+                listingLabel={notifyListingLabel}
+                businessLabel={notifyBusinessLabel}
+              />
 
               {BUSINESS_TYPES.map((type) => (
                 <button

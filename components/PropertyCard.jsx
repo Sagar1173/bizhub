@@ -3,6 +3,7 @@ import { Home, Heart } from "lucide-react";
 import { cityToSlug, generatePropertySlug } from "@/lib/slug";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 import { pickPropertyMainImage } from "@/lib/media";
+import RequestInfoModal from "./RequestInfoModal";
 
 function getTimeAgo(dateString) {
   if (!dateString) return "New";
@@ -97,11 +98,12 @@ export default function PropertyCard({ property }) {
   const href = `/${cityToSlug(city)}/${generatePropertySlug(property)}`;
 
   return (
-    <Link
-      href={href}
-      scroll={true}
-      className="group block w-full bg-white rounded-xl overflow-hidden cursor-pointer shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-slate-300"
-    >
+    <div className="group w-full bg-white rounded-xl overflow-hidden shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-slate-300">
+      <Link
+        href={href}
+        scroll={true}
+        className="block w-full cursor-pointer"
+      >
         {/* Image Section */}
         <div className="relative h-52 sm:h-56 w-full bg-gray-100">
           {mainImage ? (
@@ -173,5 +175,13 @@ export default function PropertyCard({ property }) {
           </div>
         </div>
       </Link>
+
+      <div className="px-3.5 pb-3">
+        <RequestInfoModal
+          propertyTitle={fullAddress}
+          propertyMls={mls}
+        />
+      </div>
+    </div>
   );
 }
