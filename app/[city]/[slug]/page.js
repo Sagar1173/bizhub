@@ -19,6 +19,8 @@ import CityComponent from "@/components/CityComponent";
 import CategorySeoContent from "@/components/CategorySeoContent";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 import { pickPropertyMainImage } from "@/lib/media";
+import RegisterNowModal from "@/components/RegisterNowModal";
+import RequestInfoModal from "@/components/RequestInfoModal";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -308,6 +310,7 @@ export default async function SlugPage({ params, searchParams }) {
             pluralizeBusinessType(filter.businessType)
           }
         />
+        <RegisterNowModal />
       </>
     );
   }
@@ -663,9 +666,18 @@ export default async function SlugPage({ params, searchParams }) {
           </div>
 
           <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Property Details
-            </h2>
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold">
+                Property Details
+              </h2>
+              <RequestInfoModal
+                variant="pill"
+                label="Request More Info"
+                propertyTitle={shareTitle}
+                propertyMls={data.ListingKey}
+                propertyUrl={canonicalUrl}
+              />
+            </div>
             <div className="text-base md:text-lg text-gray-700 leading-7 md:leading-8 space-y-4">
               {descriptionSections.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
@@ -684,9 +696,18 @@ export default async function SlugPage({ params, searchParams }) {
           </section>
 
           <section className="bg-white mb-20">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">
-              Business Details
-            </h2>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold">
+                Business Details
+              </h2>
+              <RequestInfoModal
+                variant="pill"
+                label="Request More Info"
+                propertyTitle={shareTitle}
+                propertyMls={data.ListingKey}
+                propertyUrl={canonicalUrl}
+              />
+            </div>
             <HomeDetailsTabs
               overview={overview}
               financial={financial}
@@ -699,9 +720,18 @@ export default async function SlugPage({ params, searchParams }) {
 
           {nearbyProperties.length > 0 ? (
             <div className="mt-10">
-              <h2 className=" text-xl font-bold md:text-3xl">
-                Browse Similar {pluralizeBusinessType(businessType)} Nearby
-              </h2>
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <h2 className="text-xl font-bold md:text-3xl">
+                  Browse Similar {pluralizeBusinessType(businessType)} Nearby
+                </h2>
+                <RequestInfoModal
+                  variant="pill"
+                  label="Request More Info"
+                  propertyTitle={shareTitle}
+                  propertyMls={data.ListingKey}
+                  propertyUrl={canonicalUrl}
+                />
+              </div>
               <FeaturedPropertiesSection
                 cityName={data.City || slugToCity(city)}
                 citySlug={city}

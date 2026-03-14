@@ -11,7 +11,6 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { BUSINESS_TYPES, BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 import { toCategorySlug } from "@/lib/slug";
-import NotifyMeModal from "./NotifyMeModal";
 
 // Beds and Baths removed for business listings focus
 
@@ -21,8 +20,6 @@ const SORT_MAP = {
   price_asc: "Lowest Price",
   price_desc: "Highest Price",
 };
-
-
 
 const LISTING_TYPE_MAP = {
   sale: "Sale",
@@ -101,7 +98,8 @@ function useUrlFilters(onNavigate, city, pathFilter) {
     // Otherwise use query params on base city page
     const params = new URLSearchParams();
     if (next.sortKey !== "newest") params.set("sort", next.sortKey);
-    if (next.listingType !== "sale") params.set("listingType", next.listingType);
+    if (next.listingType !== "sale")
+      params.set("listingType", next.listingType);
     if (next.businessType) params.set("businessType", next.businessType);
     if (next.minPrice) params.set("minPrice", next.minPrice);
     if (next.maxPrice) params.set("maxPrice", next.maxPrice);
@@ -236,16 +234,11 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                   }`}
                 >
                   {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
-                  {businessType === type && <X size={14} className="text-blue-500" />}
+                  {businessType === type && (
+                    <X size={14} className="text-blue-500" />
+                  )}
                 </button>
               ))}
-
-              <NotifyMeModal
-                cityName={city}
-                listingLabel={notifyListingLabel}
-                businessLabel={notifyBusinessLabel}
-              />
-
               {hasActiveFilters && (
                 <button
                   onClick={clearAll}
@@ -266,12 +259,6 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                 Filters
               </button>
 
-              <NotifyMeModal
-                cityName={city}
-                listingLabel={notifyListingLabel}
-                businessLabel={notifyBusinessLabel}
-              />
-
               {BUSINESS_TYPES.map((type) => (
                 <button
                   key={type}
@@ -285,7 +272,9 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                   }`}
                 >
                   {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
-                  {businessType === type && <X size={14} className="text-blue-500" />}
+                  {businessType === type && (
+                    <X size={14} className="text-blue-500" />
+                  )}
                 </button>
               ))}
             </div>
@@ -324,9 +313,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
             )}
           </div>
         </div>
-
       </div>
-
 
       {/* Mobile Slide-over */}
       <div
@@ -382,7 +369,6 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
             maxPrice={maxPrice}
             onCommit={setPriceRange}
           />
-
 
           {hasActiveFilters && (
             <div className="mt-6">

@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { cityToSlug, slugToCity } from "@/lib/slug";
 import { usePathname, useRouter } from "next/navigation";
 import nProgress from "nprogress";
-import { cities as MAIN_CITIES, ALL_ONTARIO_CITIES } from "@/constants/cities";
+import { ALL_ONTARIO_CITIES, TOP_ONTARIO_CITIES } from "@/constants/cities";
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -49,7 +49,7 @@ const Header = () => {
   const [isMobileSellersOpen, setIsMobileSellersOpen] = useState(false);
   const [isMobileFranchiseOpen, setIsMobileFranchiseOpen] = useState(false);
 
-  const communities = MAIN_CITIES.map(c => c.name);
+  const topCities = TOP_ONTARIO_CITIES;
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -310,21 +310,20 @@ const Header = () => {
                   Home
                 </Link>
 
-                {/* CITIES DROPDOWN */}
+                {/* CITIES DROPDOWN — Top 15 Ontario cities, 2 columns */}
                 <div className="relative group py-2">
                   <button className="flex items-center gap-1 text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
                     Cities{" "}
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                   </button>
 
-                  {/* Dropdown Menu */}
-                  <div className="absolute top-full left-0 w-40 bg-white shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-100">
-                    <div className="flex flex-col py-2">
-                      {communities.map((city) => (
+                  <div className="absolute top-full left-0 w-88 bg-white shadow-xl border border-gray-100 rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-100 overflow-hidden">
+                    <div className="grid grid-cols-2 gap-1 py-2 px-2">
+                      {topCities.map((city) => (
                         <Link
                           key={city}
                           href={`/${cityToSlug(city)}`}
-                          className="px-6 py-3 text-[15px] font-medium text-gray-800 hover:bg-gray-50 hover:text-blue-600 transition-colors border-b last:border-0 border-gray-50"
+                          className="px-4 py-2.5 text-[14px] font-medium text-gray-800 hover:bg-gray-50 hover:text-blue-600 transition-colors rounded-lg"
                         >
                           {city}
                         </Link>
@@ -447,17 +446,19 @@ const Header = () => {
               />
             </button>
             {isMobileCommunitiesOpen && (
-              <div className="flex flex-col pl-4 mt-2 gap-3 border-l-2 text-gray-700 border-gray-100">
-                {communities?.map((city, index) => (
-                  <Link
-                    key={index}
-                    href={`/${cityToSlug(city)}`}
-                    onClick={closeMenu}
-                    className="text-sm text-gray-700 py-1"
-                  >
-                    {city}
-                  </Link>
-                ))}
+              <div className="pl-4 mt-2 border-l-2 border-gray-100">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                  {topCities.map((city) => (
+                    <Link
+                      key={city}
+                      href={`/${cityToSlug(city)}`}
+                      onClick={closeMenu}
+                      className="text-sm font-medium text-gray-700 py-1.5 hover:text-blue-600 transition-colors"
+                    >
+                      {city}
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
           </div>

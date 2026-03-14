@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import nProgress from "nprogress";
 import { cityToSlug } from "@/lib/slug";
 import { cn } from "@/lib/utils";
-import { ALL_ONTARIO_CITIES } from "@/constants/cities";
+import { ALL_ONTARIO_CITIES, TOP_ONTARIO_CITIES } from "@/constants/cities";
 
 const Hero = () => {
   const router = useRouter();
@@ -105,8 +105,6 @@ const Hero = () => {
     }
   };
 
-  const quickCities = ["Toronto", "Brampton", "Mississauga", "Markham"];
-
   return (
     <section className="relative isolate w-full overflow-hidden bg-white pb-10 sm:pb-16 md:pb-20 min-h-[500px]">
       {/* Sweeping curve background from top-left to bottom-right, bulging outwards */}
@@ -193,17 +191,21 @@ const Hero = () => {
                 )}
               </div>
 
-              {/* QUICK CITY BUTTONS */}
-              <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 sm:gap-3 sm:pt-2">
-                {quickCities.map((city) => (
-                  <button
-                    key={city}
-                    onClick={() => handleSelect(city)}
-                    className="cursor-pointer rounded-full border border-slate-200 bg-white/70 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm backdrop-blur transition-all hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-50 active:translate-y-0 sm:px-3.5 sm:text-sm"
-                  >
-                    {city}
-                  </button>
-                ))}
+              {/* Quick city links — single-word cities only, compact */}
+              <div className="w-full max-w-xl mx-auto pt-3 sm:pt-4">
+                <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+                  {TOP_ONTARIO_CITIES.filter((city) => !city.includes(" ")).map(
+                    (city) => (
+                      <button
+                        key={city}
+                        onClick={() => handleSelect(city)}
+                        className="rounded-full hover:cursor-pointer border border-slate-200/90 bg-white/90 px-2.5 py-1 text-xs font-normal text-slate-700 transition-all duration-200 hover:border-black hover:bg-white hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2  active:translate-y-0 sm:px-3 sm:py-1.5 sm:text-sm"
+                      >
+                        {city}
+                      </button>
+                    ),
+                  )}
+                </div>
               </div>
             </div>
           </div>

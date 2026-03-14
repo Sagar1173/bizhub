@@ -10,6 +10,8 @@ export default function RequestInfoModal({
   propertyTitle = "Property",
   propertyMls = "",
   propertyUrl = "",
+  variant = "default",
+  label = "Request Info",
 }) {
   const defaultMessage = propertyTitle
     ? `Hi, I’m interested in ${propertyTitle} and would like more information. Please contact me at your earliest convenience.`
@@ -20,6 +22,7 @@ export default function RequestInfoModal({
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: defaultMessage,
   });
 
@@ -42,6 +45,7 @@ export default function RequestInfoModal({
         content: {
           name: formData.name,
           email: formData.email,
+          ...(formData.phone ? { phone: formData.phone } : {}),
           message: formData.message,
           Listing: propertyTitle,
           ...(propertyMls ? { "MLS®": propertyMls } : {}),
@@ -59,6 +63,7 @@ export default function RequestInfoModal({
         setFormData({
           name: "",
           email: "",
+          phone: "",
           message: defaultMessage,
         });
         setIsOpen(false);
@@ -73,14 +78,19 @@ export default function RequestInfoModal({
     }
   };
 
+  const isPill = variant === "pill";
+  const buttonClass = isPill
+    ? "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full border border-teal-600 bg-white px-3 py-1.5 text-xs font-semibold text-teal-700 transition-colors hover:bg-teal-50 active:bg-teal-100"
+    : "inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-gray-200 active:bg-gray-300";
+
   return (
     <>
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-blue-200 bg-blue-50/60 px-4 py-2.5 text-sm font-semibold text-blue-700 transition-colors hover:border-blue-700 hover:bg-blue-700 hover:text-white active:bg-blue-800"
+        className={buttonClass}
       >
-        Request Info
+        {label}
       </button>
 
       {isOpen &&
@@ -145,6 +155,17 @@ export default function RequestInfoModal({
                   />
                 </div>
                 <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    autoComplete="tel"
+                  />
+                </div>
+                <div>
                   <textarea
                     name="message"
                     required
@@ -172,4 +193,3 @@ export default function RequestInfoModal({
     </>
   );
 }
-

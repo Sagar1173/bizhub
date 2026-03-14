@@ -25,6 +25,25 @@ export const BUSINESS_TYPE_REVERSE_MAP = {
   "Convenience": "Convenience/Variety",
 };
 
+/** Top 15 Ontario cities for navbar dropdown and hero quick links (population/business relevance) */
+export const TOP_ONTARIO_CITIES = [
+  "Toronto",
+  "Ottawa",
+  "Mississauga",
+  "Brampton",
+  "Hamilton",
+  "London",
+  "Markham",
+  "Vaughan",
+  "Kitchener",
+  "Windsor",
+  "Richmond Hill",
+  "Oakville",
+  "Burlington",
+  "Greater Sudbury",
+  "Barrie",
+];
+
 export const ALL_ONTARIO_CITIES = [
   "Toronto", "Ajax", "Pickering", "Oshawa", "Whitby", "Clarington", "Brock", "Scugog", "Uxbridge", 
   "Burlington", "Oakville", "Milton", "Halton Hills", "Mississauga", "Brampton", "Caledon", 
@@ -33,6 +52,6 @@ export const ALL_ONTARIO_CITIES = [
   "Windsor", "St. Catharines", "Sudbury", "Kingston", "Thunder Bay", "Guelph", "Cambridge", 
   "Barrie", "Brantford", "Peterborough", "Sault Ste. Marie", "North Bay", "Belleville", 
   "Cornwall", "Orillia", "Stratford", "Woodstock", "Timmins", "Owen Sound", "Pembroke", 
-  "Kenora", "Dryden", "Elliot Lake", "Temiskaming Shores"
+  "Kenora", "Dryden", "Elliot Lake", "Temiskaming Shores", "Greater Sudbury"
 ];
 
