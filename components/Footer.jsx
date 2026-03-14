@@ -142,6 +142,17 @@ const AgentFooter = () => {
             <p className="text-sm text-slate-700">
               &copy; 2026 Bizmonk. All rights reserved.
             </p>
+            <p className="text-[11px] text-slate-500 mt-2">
+              Website Designed by{" "}
+              <Link
+                href="https://sixdesign.ca"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-slate-900 transition-colors underline-offset-4 hover:underline"
+              >
+                SixDesign
+              </Link>
+            </p>
           </div>
         </div>
       </div>
