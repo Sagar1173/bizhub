@@ -150,12 +150,28 @@ export async function generateMetadata({ params }) {
       filter.listingType === "lease" ? "for lease" : "for sale";
     const businessLabel = BUSINESS_TYPE_DISPLAY_MAP[typeLabel] || typeLabel;
 
+    let ogImageUrl = null;
+    const first = data.items?.[0];
+    if (first?.ListingKey) {
+      const media = await fetchMedia(first.ListingKey, 1);
+      ogImageUrl = media?.[0]?.MediaURL || null;
+    }
+    const fallbackImage = "/office.jpeg";
+    const finalOgImage = ogImageUrl || fallbackImage;
+
     return {
       title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
       description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
       openGraph: {
         title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
         description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
+        images: finalOgImage ? [{ url: finalOgImage }] : undefined,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
+        images: finalOgImage ? [finalOgImage] : undefined,
       },
     };
   }
@@ -172,12 +188,26 @@ export async function generateMetadata({ params }) {
   const price = data.ListPrice
     ? `$${Number(data.ListPrice).toLocaleString()}`
     : "Property";
+
+  let ogImageUrl = null;
+  const media = await fetchMedia(extractedSlug, 1);
+  ogImageUrl = media?.[0]?.MediaURL || null;
+  const fallbackImage = "/office.jpeg";
+  const finalOgImage = ogImageUrl || fallbackImage;
+
   return {
     title: `${address} · ${price}  | Bizmonk`,
     description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
     openGraph: {
       title: `${price} · ${address} | Bizmonk`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
+      images: finalOgImage ? [{ url: finalOgImage }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${price} · ${address} | Bizmonk`,
+      description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
+      images: finalOgImage ? [finalOgImage] : undefined,
     },
   };
 }
