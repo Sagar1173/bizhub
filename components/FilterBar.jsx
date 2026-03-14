@@ -460,6 +460,7 @@ function PriceRangeSlider({ minPrice, maxPrice, onCommit }) {
   const [minDraft, setMinDraft] = useState(toPriceValue(minPrice, PRICE_MIN));
   const [maxDraft, setMaxDraft] = useState(toPriceValue(maxPrice, PRICE_MAX));
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     setMinDraft(toPriceValue(minPrice, PRICE_MIN));
     setMaxDraft(toPriceValue(maxPrice, PRICE_MAX));

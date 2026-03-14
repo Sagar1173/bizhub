@@ -27,15 +27,6 @@ export default function PropertyMediaGallery({ images = [] }) {
   const dragStartRef = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
   const pinchStartRef = useRef({ distance: 0, zoom: 1 });
 
-  if (total === 0) {
-    return (
-      <div className="w-full h-[300px] md:h-[500px] bg-gray-50 flex flex-col items-center justify-center text-gray-400 rounded-xl border border-dashed border-gray-300">
-        <Home size={48} strokeWidth={1} />
-        <p className="mt-2 font-medium">No Photos Available</p>
-      </div>
-    );
-  }
-
   const gridImages = validImages.slice(0, 5);
   const colTwoImages = gridImages.slice(1, 3);
   const colThreeImages = gridImages.slice(3, 5);
@@ -256,10 +247,49 @@ export default function PropertyMediaGallery({ images = [] }) {
         ]
       : [];
 
+  if (total === 0) {
+    return (
+      <div className="w-full h-[300px] md:h-[500px] bg-gray-50 flex flex-col items-center justify-center text-gray-400 rounded-xl border border-dashed border-gray-300">
+        <Home size={48} strokeWidth={1} />
+        <p className="mt-2 font-medium">No Photos Available</p>
+      </div>
+    );
+  }
+
   return (
     <div className="relative">
+      {/* Mobile Scrollable Gallery */}
+      <div className="flex sm:hidden overflow-x-auto snap-x snap-mandatory gap-2 h-[340px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] pb-2">
+        {validImages.map((src, i) => (
+          <button
+            key={`mob-${i}`}
+            type="button"
+            onClick={() => openModal(i)}
+            className="relative w-[90%] flex-shrink-0 snap-center rounded-lg overflow-hidden bg-gray-100 first:ml-0"
+            aria-label={`Open image ${i + 1}`}
+          >
+            {src && !brokenIndices.has(i) ? (
+              <img
+                src={src}
+                alt={`Property ${i + 1}`}
+                onError={() => markBroken(i)}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-gray-300 gap-2">
+                <Home size={36} />
+                <p className="text-[10px] uppercase font-semibold tracking-wider">
+                  Image not found
+                </p>
+              </div>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Desktop Grid Gallery */}
       <div
-        className={`grid grid-cols-1 ${gridColsClass} gap-1.5 h-[340px] sm:h-[420px] md:h-[520px]`}
+        className={`hidden sm:grid ${gridColsClass} gap-1.5 h-[420px] md:h-[520px]`}
       >
         <button
           type="button"
@@ -349,7 +379,7 @@ export default function PropertyMediaGallery({ images = [] }) {
         <button
           type="button"
           onClick={() => openModal(0)}
-          className="absolute bottom-3 right-3 bg-white text-gray-800 text-xs sm:text-sm px-4 py-2 rounded-full backdrop-blur-md hover:bg-gray-200 transition-colors flex items-center justify-between cursor-pointer gap-2 border border-gray-400"
+          className="hidden sm:flex absolute bottom-3 right-3 bg-white text-gray-800 text-xs sm:text-sm px-4 py-2 rounded-full backdrop-blur-md hover:bg-gray-200 transition-colors items-center justify-between cursor-pointer gap-2 border border-gray-400"
         >
           <Grid className="w-4 h-4" />
           View all images
