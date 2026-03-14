@@ -5,14 +5,6 @@ import Link from "next/link";
 import { Star, ArrowRight } from "lucide-react";
 import { franchiseLocations } from "@/constants/franchise-data";
 
-function formatDate(dateStr) {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("en-CA", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
 
 function franchiseToSlug(name) {
   if (!name) return "";
@@ -23,24 +15,38 @@ function franchiseToSlug(name) {
 }
 
 const TestimonialsSection = () => {
-  const testimonials = [
+    const testimonials = [
     {
-      name: "Michael Chen",
-      date: "2024-10-09",
-      text: "Outstanding guidance through our franchise purchase. The team helped us evaluate multiple opportunities and find the right fit for our investment goals. Professional, knowledgeable, and genuinely invested in our success.",
-      initial: "M",
+      name: "Ali Pirzada",
+      location: "Hamilton, ON",
+      service: "Sold Store (March 2026)",
+      text: "Grateful for support during a complex, 9-month franchise deal for a Mary Brown’s store.",
+      initial: "A",
+      bgColor: "bg-blue-100 text-blue-700",
     },
     {
-      name: "Sarah Miller",
-      date: "2024-10-08",
-      text: "We were exploring business ownership for months. The market knowledge and connections here made all the difference. They matched us with the perfect franchise opportunity and supported us every step of the way.",
+      name: "Saravdeep Sethi",
+      location: "North York, ON",
+      service: "Rent Commercial (Feb 2026)",
+      text: "Excellent experience securing the right commercial space; noted Ravi was patient and knowledgeable.",
       initial: "S",
+      bgColor: "bg-rose-100 text-rose-700",
     },
     {
-      name: "Priya Roy",
-      date: "2024-09-28",
-      text: "From initial consultation to closing, the experience was seamless. They understood our budget, timeline, and vision. We're now proud franchise owners thanks to their expertise and dedication.",
-      initial: "P",
+      name: "Asha Patel",
+      location: "Lindsay, ON",
+      service: "Buy Home (May 2025)",
+      text: "Very familiar and helpful in finding a \"dream home\" and assisting with upgrades.",
+      initial: "A",
+      bgColor: "bg-amber-100 text-amber-700",
+    },
+    {
+      name: "Mahmed Vazifdar",
+      location: "Scarborough, ON",
+      service: "Buy Home (July 2025)",
+      text: "Highly rated service (5 stars).",
+      initial: "M",
+      bgColor: "bg-emerald-100 text-emerald-700",
     },
   ];
 
@@ -58,40 +64,45 @@ const TestimonialsSection = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
             {testimonials.map((t, i) => (
               <article
                 key={i}
-                className="flex h-full flex-col rounded-xl border border-slate-100 bg-slate-50/60 p-4 shadow-sm backdrop-blur sm:rounded-2xl sm:p-6 md:p-8"
+                className="flex h-full flex-col rounded-xl border border-slate-100 bg-slate-50/60 p-4 shadow-sm backdrop-blur sm:rounded-2xl sm:p-6"
               >
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-700 text-sm font-bold text-white">
+                <div className="mb-4">
+                  <div className="flex items-center gap-3.5 mb-3.5">
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${t.bgColor} text-base font-bold shadow-sm transition-transform hover:scale-105`}
+                    >
                       {t.initial}
                     </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-slate-900">
+                    <div className="flex flex-col">
+                      <h4 className="text-[15px] font-bold text-slate-900 leading-none mb-1.5">
                         {t.name}
                       </h4>
-                      <time
-                        dateTime={t.date}
-                        className="text-xs text-slate-500"
-                      >
-                        {formatDate(t.date)}
-                      </time>
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
+                        {t.location}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex shrink-0 gap-0.5" aria-hidden>
+                  <div className="flex gap-0.5" aria-hidden>
                     {[...Array(5)].map((_, j) => (
                       <Star
                         key={j}
-                        className="h-4 w-4 fill-slate-400 text-slate-400"
+                        className="h-3.5 w-3.5 fill-amber-400 text-amber-400"
                       />
                     ))}
                   </div>
                 </div>
 
-                <blockquote className="flex-1 text-sm leading-relaxed text-slate-600">
+                <div className="mb-3">
+                  <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">
+                    {t.service}
+                  </p>
+                </div>
+
+                <blockquote className="flex-1 text-sm leading-relaxed text-slate-600 italic">
                   &ldquo;{t.text}&rdquo;
                 </blockquote>
               </article>
