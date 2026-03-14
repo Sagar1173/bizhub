@@ -4,20 +4,36 @@ import { useState } from "react";
 import { sendEmail } from "@/actions/email";
 import swal from "sweetalert";
 
-const dates = [
-  { label: "TUE", day: 27, month: "JAN" },
-  { label: "WED", day: 28, month: "JAN" },
-  { label: "THU", day: 29, month: "JAN" },
-];
-
 const times = [
   { label: "Morning", time: "8am-12pm" },
   { label: "Afternoon", time: "12pm-4pm" },
   { label: "Evening", time: "4pm-8pm" },
 ];
 
+// Generate today + next 7 days dynamically
+function generateDates() {
+  const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const months = [
+    "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+  ];
+
+  return Array.from({ length: 8 }, (_, i) => {
+    const date = new Date();
+    date.setDate(date.getDate() + i);
+    return {
+      label: i === 0 ? "TODAY" : days[date.getDay()],
+      day: date.getDate(),
+      month: months[date.getMonth()],
+      fullDate: date,
+    };
+  });
+}
+
 export default function ScheduleViewing({ property }) {
-  const [selectedDate, setSelectedDate] = useState(dates[1]);
+  const dates = generateDates();
+
+  const [selectedDate, setSelectedDate] = useState(dates[0]);
   const [selectedTime, setSelectedTime] = useState(times[0]);
   const [formData, setFormData] = useState({
     name: "",
@@ -75,6 +91,7 @@ export default function ScheduleViewing({ property }) {
 
   return (
     <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto rounded-2xl overflow-hidden bg-[#f4f3f1] border border-gray-200">
+      {/* Left: Property Image */}
       <div className="w-full md:w-1/2">
         {previewImage ? (
           <img
@@ -87,39 +104,42 @@ export default function ScheduleViewing({ property }) {
         )}
       </div>
 
+      {/* Right: Form */}
       <div className="w-full md:w-1/2 p-3 sm:p-4 md:p-10 flex flex-col justify-center">
         <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 leading-tight">
           Schedule a viewing
         </h2>
 
-        <div className="grid grid-cols-3 gap-2 mb-4 sm:mb-6">
+        {/* Date Picker — horizontally scrollable */}
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-4 sm:mb-6 scrollbar-hide">
           {dates.map((date) => {
-            const active = selectedDate.day === date.day;
-
+            const active = selectedDate.day === date.day && selectedDate.month === date.month;
             return (
               <button
-                key={date.day}
+                key={`${date.day}-${date.month}`}
                 onClick={() => setSelectedDate(date)}
-                className={`w-full h-24 sm:h-28 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${
+                className={`flex-shrink-0 w-16 sm:w-20 h-24 sm:h-28 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${
                   active
                     ? "border-black bg-white"
                     : "border-gray-300 hover:border-gray-500 bg-transparent"
                 }`}
               >
-                <span className="text-xs sm:text-sm">{date.label}</span>
-                <span className="text-xl sm:text-2xl font-semibold">
-                  {date.day}
+                <span className={`text-xs font-medium ${active ? "text-black" : "text-gray-500"}`}>
+                  {date.label}
                 </span>
-                <span className="text-xs sm:text-sm">{date.month}</span>
+                <span className="text-xl sm:text-2xl font-semibold mt-0.5">{date.day}</span>
+                <span className={`text-xs ${active ? "text-black" : "text-gray-500"}`}>
+                  {date.month}
+                </span>
               </button>
             );
           })}
         </div>
 
+        {/* Time Slots */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4 sm:mb-6">
           {times.map((slot) => {
             const active = selectedTime.label === slot.label;
-
             return (
               <button
                 key={slot.label}
