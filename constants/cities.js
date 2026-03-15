@@ -19,6 +19,9 @@ export const BUSINESS_TYPES = [
 
 export const BUSINESS_TYPE_DISPLAY_MAP = {
   "Convenience/Variety": "Convenience Stores",
+  "Professional Office": "Offices",
+  Retail: "Retail Units",
+  "Medical/Dental": "Medical/Dental Practices",
 };
 
 export const BUSINESS_TYPE_REVERSE_MAP = {
