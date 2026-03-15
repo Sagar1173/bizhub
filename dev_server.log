@@ -1,0 +1,33 @@
+
+> fe_houseful@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+
+✓ Starting...
+✓ Ready in 796ms
+○ Compiling / ...
+⨯ TypeError: fetch failed
+    at async fetchProperties (lib/api.js:191:15)
+    at async (app/page.js:58:20)
+    at async Home (app/page.js:56:28)
+  189 |   const url = `${MLS_BASE_URL}/Property?${params.join("&")}`;
+  190 |
+> 191 |   const res = await fetch(url, {
+      |               ^
+  192 |     headers: {
+  193 |       Authorization: `Bearer ${MLS_TOKEN}`,
+  194 |       Accept: "application/json", {
+  digest: '1630612072',
+  [cause]: Error: getaddrinfo ENOTFOUND api.example.com
+      at ignore-listed frames {
+    errno: -3007,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'api.example.com'
+  }
+}
+ GET / 200 in 6.0s (compile: 4.9s, render: 1133ms)
+ GET /about 200 in 1313ms (compile: 885ms, render: 428ms)

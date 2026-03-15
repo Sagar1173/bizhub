@@ -3,14 +3,36 @@ import {
   Phone,
   Mail,
   Globe,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Youtube,
 } from "lucide-react";
 import Link from "next/link";
+import { cityToSlug, toCategorySlug } from "@/lib/slug";
+import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
 const AgentFooter = () => {
+  const getSlug = (type, lType) => {
+    const businessTypeSlugMap = {
+      "Convenience/Variety": "convenience-store",
+      "Professional Office": "office",
+    };
+    const baseSlug = businessTypeSlugMap[type] || toCategorySlug(type);
+    return `${baseSlug}-for-${lType}`;
+  };
+
+  const footerCities = [
+    "Toronto",
+    "Brampton",
+    "Mississauga",
+    "Markham",
+    "Vaughan",
+  ];
+  const footerBusinessTypes = [
+    "Restaurant",
+    "Convenience/Variety",
+    "Professional Office",
+    "Retail",
+    "Medical/Dental",
+  ];
+
   return (
     <footer className="bg-white pt-20 pb-10 px-6">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
@@ -72,6 +94,34 @@ const AgentFooter = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Business Interlinks Section */}
+        <div className="w-full pt-16 border-t border-slate-200 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
+            {footerBusinessTypes.map((type) => (
+              <div key={type} className="flex flex-col gap-3 text-center md:text-left">
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-1">
+                  {BUSINESS_TYPE_DISPLAY_MAP[type] ||
+                    (type === "Restaurant" ? "Restaurants" : type)}
+                </h3>
+                <div className="flex flex-col gap-2">
+                  {footerCities.map((city) => (
+                    <Link
+                      key={`${type}-${city}`}
+                      href={`/${cityToSlug(city)}/${getSlug(type, "sale")}`}
+                      className="text-[13px] text-slate-600 hover:text-amber-700 transition-colors"
+                    >
+                      {type === "Restaurant"
+                        ? "Restaurants"
+                        : BUSINESS_TYPE_DISPLAY_MAP[type] || type}{" "}
+                      for sale in {city}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
