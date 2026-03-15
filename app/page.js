@@ -22,32 +22,34 @@ export const metadata = {
 export default async function Home() {
   const sectionsToFetch = [
     {
-      title: "Restaurants for Sale",
+      title: "Restaurants for Sale in GTA",
       businessType: "Restaurant",
-      href: "/toronto/restaurant-for-sale",
+      cityToPass: "GTA",
+      href: "/gta/restaurant-for-sale",
     },
     {
-      title: "Convenience Stores for Sale",
+      title: "Convenience Stores for Sale in GTA",
       businessType: "Convenience/Variety",
-      href: "/toronto/convenience-store-for-sale",
+      cityToPass: "GTA",
+      href: "/gta/convenience-store-for-sale",
     },
     {
-      title: "Businesses for Sale in Toronto",
+      title: "Offices for Sale in GTA",
+      businessType: "Office",
+      cityToPass: "GTA",
+      href: "/gta/office-for-sale",
+    },
+    {
+      title: "Retail Units for Sale in GTA",
+      businessType: "Retail",
+      cityToPass: "GTA",
+      href: "/gta/retail-for-sale",
+    },
+    {
+      title: "Businesses for Sale in GTA",
       businessType: undefined,
-      cityToPass: "Toronto",
-      href: "/toronto",
-    },
-    {
-      title: "Restaurants in Brampton",
-      businessType: "Restaurant",
-      cityToPass: "Brampton",
-      href: "/brampton/restaurant-for-sale",
-    },
-    {
-      title: "Businesses for Sale in Ajax",
-      businessType: undefined,
-      cityToPass: "Ajax",
-      href: "/ajax",
+      cityToPass: "GTA",
+      href: "/gta",
     },
   ];
 
