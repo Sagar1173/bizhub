@@ -30,7 +30,6 @@ const AgentFooter = () => {
     "Convenience/Variety",
     "Professional Office",
     "Retail",
-    "Medical/Dental",
   ];
 
   return (
@@ -99,7 +98,7 @@ const AgentFooter = () => {
 
         {/* Business Interlinks Section */}
         <div className="w-full pt-16 border-t border-slate-200 mb-16">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-8 gap-y-10">
             {footerBusinessTypes.map((type) => (
               <div key={type} className="flex flex-col gap-3 text-center md:text-left">
                 <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-1">
