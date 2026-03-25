@@ -234,14 +234,18 @@ const Header = () => {
       <header
         className={cn(
           "overflow-x-clip overflow-y-visible w-full z-50",
-          pathname === "/" ? "absolute top-0 left-0 bg-transparent text-slate-900" : "relative bg-white text-black"
+          pathname === "/"
+            ? "absolute top-0 left-0 bg-transparent text-slate-900"
+            : "relative bg-white text-black",
         )}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4">
           <div className="flex items-center justify-between">
             <div className="flex-1 min-w-0 flex items-center justify-start gap-2 sm:gap-4 md:gap-6">
               <Link href="/" className="flex shrink-0">
-                <span className="text-2xl md:text-3xl font-bold text-blue-950">bizmonk.</span>
+                <span className="text-2xl md:text-3xl font-bold text-blue-950">
+                  bizmonk.
+                </span>
               </Link>
 
               {showHeaderSearch && (
@@ -294,7 +298,9 @@ const Header = () => {
                           className="w-full px-3 md:px-4 py-2 md:py-2.5 text-left text-gray-900 hover:bg-gray-50 transition flex items-center gap-2 border-b border-gray-100 last:border-0"
                         >
                           <MapPin className="w-3 h-3 md:w-4 md:h-4 text-[#38003c]" />
-                          <span className="text-xs md:text-sm font-medium">{city}</span>
+                          <span className="text-xs md:text-sm font-medium">
+                            {city}
+                          </span>
                         </button>
                       ))}
                     </div>
@@ -385,16 +391,6 @@ const Header = () => {
                   </Link>
                 ))}
               </nav>
-
-              <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-                <Link
-                  href="tel:905-226-7284"
-                  className="flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-blue-600 transition-colors"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span className="hidden xl:inline">905-226-7284</span>
-                </Link>
-              </div>
             </div>
 
             <button
@@ -534,15 +530,6 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
-
-          <div className="mt-auto pt-6 flex flex-col gap-4">
-            <Link
-              href="tel:905-226-7284"
-              className="text-md font-bold text-blue-600"
-            >
-              905-226-7284
-            </Link>
-          </div>
         </nav>
       </aside>
 
