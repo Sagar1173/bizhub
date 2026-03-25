@@ -27,6 +27,7 @@ const CityComponent = ({
   basePath,
   searchParams,
   showHeader = true,
+  showFilters = true,
 }) => {
   const { currentPage, totalPages, totalCount } = pagination;
 
@@ -76,7 +77,7 @@ const CityComponent = ({
         </div>
       )}
 
-      <FilterBar city={city} pathFilter={filter} />
+      {showFilters && <FilterBar city={city} pathFilter={filter} />}
 
       <main className="w-full px-4 sm:px-6 lg:px-8 pb-20 pt-4 sm:pt-6">
         <>

@@ -122,6 +122,13 @@ export default function PropertyCard({ property }) {
             </div>
           )}
 
+          {/* Featured Badge */}
+          {agency === "EXP REALTY" && (
+            <div className="absolute top-3 left-3 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full shadow-sm z-10">
+              Featured
+            </div>
+          )}
+
           {/* Status Badges */}
           <div className="absolute bottom-3 left-3 flex items-center gap-2">
             <div className="bg-blue-700 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-sm">

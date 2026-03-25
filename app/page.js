@@ -22,6 +22,14 @@ export const metadata = {
 export default async function Home() {
   const sectionsToFetch = [
     {
+      title: "Featured Listings",
+      businessType: undefined,
+      cityToPass: undefined,
+      officeName: "EXP REALTY",
+      href: "/featured-listings",
+      top: 10,
+    },
+    {
       title: "Restaurants for Sale in GTA",
       businessType: "Restaurant",
       cityToPass: "GTA",
@@ -59,7 +67,8 @@ export default async function Home() {
         listingType: "sale",
         businessType: sectionData.businessType,
         cityToPass: sectionData.cityToPass,
-        top: 8,
+        officeName: sectionData.officeName,
+        top: sectionData.top || 8,
         skip: 0,
       });
 

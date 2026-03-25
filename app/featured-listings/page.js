@@ -1,9 +1,9 @@
 import CityComponent from "@/components/CityComponent";
 import { fetchProperties, fetchMedia } from "@/lib/api";
-import { slugToCity, generatePropertySlug } from "@/lib/slug";
-import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
+import { generatePropertySlug } from "@/lib/slug";
 import RegisterNowModal from "@/components/RegisterNowModal";
 import { getPropertyImageCandidates, pickPropertyMainImage } from "@/lib/media";
+import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
@@ -12,30 +12,16 @@ const SITE_URL =
 
 const toOgImage = (url, alt) => {
   if (!url) return null;
-  return { url, alt: alt || "Bizmonk listing" };
+  return { url, alt: alt || "Bizmonk featured listing" };
 };
 
-export async function generateMetadata({ params, searchParams }) {
-  const { city } = await params;
+export async function generateMetadata({ searchParams }) {
   const sParams = await searchParams;
-  const cityName = slugToCity(city);
-
   const businessType = sParams.businessType || undefined;
   const listingType = sParams.listingType || "sale";
 
-  const hasNonCanonicalParams =
-    Boolean(businessType) ||
-    listingType !== "sale" ||
-    (Number(sParams.page) || 1) > 1 ||
-    (sParams.sort && sParams.sort !== "newest") ||
-    Boolean(sParams.minPrice) ||
-    Boolean(sParams.maxPrice) ||
-    Boolean(sParams.priceMax) ||
-    Boolean(sParams.beds) ||
-    Boolean(sParams.baths);
-
   const data = await fetchProperties({
-    cityToPass: cityName,
+    officeName: "EXP REALTY",
     businessType,
     listingType,
     top: 1,
@@ -48,16 +34,11 @@ export async function generateMetadata({ params, searchParams }) {
     ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
     : "Business Opportunities";
 
-  const canonicalPath = `/${city}`;
+  const canonicalPath = `/featured-listings`;
   const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
 
-  const title = businessType
-    ? `${businessLabel} ${listingLabel} in ${cityName} | Bizmonk`
-    : `Business Opportunities in ${cityName} | Bizmonk`;
-
-  const description = businessType
-    ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`
-    : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`;
+  const title = `Featured ${businessLabel} ${listingLabel} | Bizmonk`;
+  const description = `${countStr}Featured ${businessLabel} ${listingLabel} presented by EXP REALTY. Browse updated daily listings on Bizmonk.`;
 
   let ogImageUrl = null;
   const first = data.items?.[0];
@@ -75,23 +56,11 @@ export async function generateMetadata({ params, searchParams }) {
     alternates: {
       canonical: canonicalPath,
     },
-    robots: hasNonCanonicalParams
-      ? {
-          index: false,
-          follow: true,
-          googleBot: {
-            index: false,
-            follow: true,
-          },
-        }
-      : {
-          index: true,
-          follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-          },
-        },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
+    },
     openGraph: {
       title,
       description,
@@ -110,9 +79,7 @@ export async function generateMetadata({ params, searchParams }) {
   };
 }
 
-export default async function CityPage({ params, searchParams }) {
-  const { city } = await params;
-
+export default async function FeaturedListingsPage({ searchParams }) {
   const sParams = await searchParams;
 
   const currentPage = Number(sParams.page) || 1;
@@ -130,51 +97,20 @@ export default async function CityPage({ params, searchParams }) {
       : undefined;
   const listingType = sParams.listingType || "sale";
   const sort = sParams.sort || "newest";
-  const cityToPass = slugToCity(city);
 
-  const featuredMeta = await fetchProperties({
-    cityToPass, top: 1, skip: 0, businessType, listingType, sort, beds, baths, minPrice, maxPrice, officeName: "EXP REALTY",
+  const data = await fetchProperties({
+    officeName: "EXP REALTY",
+    top: limit,
+    skip,
+    beds,
+    baths,
+    businessType,
+    minPrice,
+    maxPrice,
+    listingType,
+    sort,
   });
-  const featuredTotal = featuredMeta.totalCount || 0;
 
-  const globalSkip = (currentPage - 1) * limit;
-  let combinedItems = [];
-
-  if (globalSkip < featuredTotal) {
-    const fetchTop = Math.min(limit, featuredTotal - globalSkip);
-    const featuredData = await fetchProperties({
-      cityToPass, top: fetchTop, skip: globalSkip, officeName: "EXP REALTY",
-      businessType, listingType, sort, beds, baths, minPrice, maxPrice
-    });
-    combinedItems.push(...featuredData.items);
-  }
-
-  const remainingSlots = limit - combinedItems.length;
-  let standardTotal = 0;
-
-  if (remainingSlots > 0) {
-    const standardSkip = Math.max(0, globalSkip - featuredTotal);
-    const standardData = await fetchProperties({
-      cityToPass, top: remainingSlots, skip: standardSkip, excludeOfficeName: "EXP REALTY",
-      businessType, listingType, sort, beds, baths, minPrice, maxPrice
-    });
-    combinedItems.push(...standardData.items);
-    standardTotal = standardData.totalCount;
-  } else {
-    const standardData = await fetchProperties({
-      cityToPass, top: 1, skip: 0, excludeOfficeName: "EXP REALTY",
-      businessType, listingType, sort, beds, baths, minPrice, maxPrice
-    });
-    standardTotal = standardData.totalCount;
-  }
-
-  const combinedTotalCount = featuredTotal + (standardTotal || 0);
-  const data = {
-    items: combinedItems,
-    totalCount: combinedTotalCount,
-    totalPages: Math.ceil(combinedTotalCount / limit),
-    currentPage,
-  };
   const itemsWithMedia = await Promise.all(
     (data.items || []).map(async (property) => {
       const media = await fetchMedia(property.ListingKey, 5);
@@ -185,7 +121,6 @@ export default async function CityPage({ params, searchParams }) {
       let mainImage = pickPropertyMainImage(withMedia);
       if (!mainImage) return { ...withMedia, mainImage: null };
 
-      // Keep the old safety check, but fall back to another candidate if the first breaks.
       try {
         const res = await fetch(mainImage, { method: "HEAD" });
         if (!res.ok) {
@@ -199,29 +134,27 @@ export default async function CityPage({ params, searchParams }) {
     }),
   );
 
-  const baseListUrl = new URL(`/${city}`, SITE_URL).toString();
+  const baseListUrl = new URL(`/featured-listings`, SITE_URL).toString();
 
-  const cityName = slugToCity(city);
   const listingLabel = listingType === "lease" ? "for Lease" : "for Sale";
   const businessLabel = businessType
     ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
     : "Business Opportunities";
   const countStr = data.totalCount > 0 ? `${data.totalCount}+ ` : "";
-  const headingTitle = businessType
-    ? `${businessLabel} ${listingLabel} in ${cityName}`
-    : `Business Opportunities ${listingLabel} in ${cityName}`;
-  const headingDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on bizmonk.`;
+  const headingTitle = `${businessLabel} ${listingLabel} by EXP REALTY`;
+  const headingDescription = `${countStr}Featured ${businessLabel} ${listingLabel}. Browse updated daily listings on bizmonk.`;
 
   const products = itemsWithMedia.map((property) => {
-    const href = `/${city}/${generatePropertySlug(property)}`;
+    const citySlug = property.City ? property.City.toLowerCase().replace(/[^a-z0-9]+/g, "-") : "gta";
+    const href = `/${citySlug}/${generatePropertySlug(property)}`;
     const url = new URL(href, SITE_URL).toString();
     const thumbnail = property.mainImage || pickPropertyMainImage(property);
-    const businessType = Array.isArray(property.BusinessType)
+    const businessTypeStr = Array.isArray(property.BusinessType)
       ? property.BusinessType[0]
       : property.BusinessType;
-    const propertyType =
-      BUSINESS_TYPE_DISPLAY_MAP[businessType] ||
-      businessType ||
+    const propertyTypeStr =
+      BUSINESS_TYPE_DISPLAY_MAP[businessTypeStr] ||
+      businessTypeStr ||
       property.PropertySubType ||
       "Property";
     const fullAddress =
@@ -229,34 +162,24 @@ export default async function CityPage({ params, searchParams }) {
       [property.StreetNumber, property.StreetName, property.City]
         .filter(Boolean)
         .join(" ");
-    const agency = property.ListOfficeName || "Real Estate Professionals Inc.";
+    const agency = property.ListOfficeName || "EXP REALTY";
 
     return {
       "@type": "Product",
       "@id": url,
-      name: fullAddress || `${propertyType} in ${slugToCity(city)}`,
-      description:
-        property.PublicRemarks ||
-        `${propertyType || "Business opportunity"} in ${slugToCity(city)}`,
+      name: fullAddress || `${propertyTypeStr} in Ontario`,
+      description: property.PublicRemarks || `${propertyTypeStr || "Business opportunity"} in Ontario`,
       image: thumbnail ? [thumbnail] : undefined,
       sku: property.ListingKey,
       category: "BusinessProperty",
-      brand: agency
-        ? {
-            "@type": "Organization",
-            name: agency,
-          }
-        : undefined,
+      brand: agency ? { "@type": "Organization", name: agency } : undefined,
       offers: {
         "@type": "Offer",
         url,
         priceCurrency: "CAD",
         price: property.ListPrice || 0,
         availability: "https://schema.org/InStock",
-        seller: {
-          "@type": "Organization",
-          name: agency,
-        },
+        seller: { "@type": "Organization", name: agency },
       },
     };
   });
@@ -297,8 +220,8 @@ export default async function CityPage({ params, searchParams }) {
           </div>
         </div>
         <CityComponent
-          city={city}
-          basePath={`/${city}`}
+          city="gta"
+          basePath={`/featured-listings`}
           searchParams={sParams}
           filter={{ businessType, listingType }}
           properties={itemsWithMedia}
@@ -308,6 +231,7 @@ export default async function CityPage({ params, searchParams }) {
             totalCount: data.totalCount,
           }}
           showHeader={false}
+          showFilters={false}
         />
       </main>
       <RegisterNowModal />
