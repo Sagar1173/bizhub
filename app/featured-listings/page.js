@@ -21,7 +21,7 @@ export async function generateMetadata({ searchParams }) {
   const listingType = sParams.listingType || "sale";
 
   const data = await fetchProperties({
-    officeName: "EXP REALTY",
+    officeName: "ELIXIR REAL ESTATE INC.",
     businessType,
     listingType,
     top: 1,
@@ -38,7 +38,7 @@ export async function generateMetadata({ searchParams }) {
   const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
 
   const title = `Featured ${businessLabel} ${listingLabel} | Bizmonk`;
-  const description = `${countStr}Featured ${businessLabel} ${listingLabel} presented by EXP REALTY. Browse updated daily listings on Bizmonk.`;
+  const description = `${countStr}Featured ${businessLabel} ${listingLabel} presented by ELIXIR REAL ESTATE INC.. Browse updated daily listings on Bizmonk.`;
 
   let ogImageUrl = null;
   const first = data.items?.[0];
@@ -99,7 +99,7 @@ export default async function FeaturedListingsPage({ searchParams }) {
   const sort = sParams.sort || "newest";
 
   const data = await fetchProperties({
-    officeName: "EXP REALTY",
+    officeName: "ELIXIR REAL ESTATE INC.",
     top: limit,
     skip,
     beds,
@@ -141,7 +141,7 @@ export default async function FeaturedListingsPage({ searchParams }) {
     ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
     : "Business Opportunities";
   const countStr = data.totalCount > 0 ? `${data.totalCount}+ ` : "";
-  const headingTitle = `${businessLabel} ${listingLabel} by EXP REALTY`;
+  const headingTitle = `${businessLabel} ${listingLabel} by ELIXIR REAL ESTATE INC.`;
   const headingDescription = `${countStr}Featured ${businessLabel} ${listingLabel}. Browse updated daily listings on bizmonk.`;
 
   const products = itemsWithMedia.map((property) => {
@@ -162,7 +162,7 @@ export default async function FeaturedListingsPage({ searchParams }) {
       [property.StreetNumber, property.StreetName, property.City]
         .filter(Boolean)
         .join(" ");
-    const agency = property.ListOfficeName || "EXP REALTY";
+    const agency = property.ListOfficeName || "ELIXIR REAL ESTATE INC.";
 
     return {
       "@type": "Product",

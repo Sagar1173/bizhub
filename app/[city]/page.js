@@ -133,7 +133,7 @@ export default async function CityPage({ params, searchParams }) {
   const cityToPass = slugToCity(city);
 
   const featuredMeta = await fetchProperties({
-    cityToPass, top: 1, skip: 0, businessType, listingType, sort, beds, baths, minPrice, maxPrice, officeName: "EXP REALTY",
+    cityToPass, top: 1, skip: 0, businessType, listingType, sort, beds, baths, minPrice, maxPrice, officeName: "ELIXIR REAL ESTATE INC.",
   });
   const featuredTotal = featuredMeta.totalCount || 0;
 
@@ -143,7 +143,7 @@ export default async function CityPage({ params, searchParams }) {
   if (globalSkip < featuredTotal) {
     const fetchTop = Math.min(limit, featuredTotal - globalSkip);
     const featuredData = await fetchProperties({
-      cityToPass, top: fetchTop, skip: globalSkip, officeName: "EXP REALTY",
+      cityToPass, top: fetchTop, skip: globalSkip, officeName: "ELIXIR REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     combinedItems.push(...featuredData.items);
@@ -155,14 +155,14 @@ export default async function CityPage({ params, searchParams }) {
   if (remainingSlots > 0) {
     const standardSkip = Math.max(0, globalSkip - featuredTotal);
     const standardData = await fetchProperties({
-      cityToPass, top: remainingSlots, skip: standardSkip, excludeOfficeName: "EXP REALTY",
+      cityToPass, top: remainingSlots, skip: standardSkip, excludeOfficeName: "ELIXIR REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     combinedItems.push(...standardData.items);
     standardTotal = standardData.totalCount;
   } else {
     const standardData = await fetchProperties({
-      cityToPass, top: 1, skip: 0, excludeOfficeName: "EXP REALTY",
+      cityToPass, top: 1, skip: 0, excludeOfficeName: "ELIXIR REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     standardTotal = standardData.totalCount;

@@ -25,7 +25,7 @@ export default async function Home() {
       title: "Featured Listings",
       businessType: undefined,
       cityToPass: undefined,
-      officeName: "EXP REALTY",
+      officeName: "ELIXIR REAL ESTATE INC.",
       href: "/featured-listings",
       top: 10,
     },
