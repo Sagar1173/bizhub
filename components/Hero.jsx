@@ -3,6 +3,7 @@
 import { Search, MapPin } from "lucide-react";
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import nProgress from "nprogress";
 import { cityToSlug } from "@/lib/slug";
 import { cn } from "@/lib/utils";
@@ -19,7 +20,7 @@ const Hero = () => {
 
   const suggestions =
     query.trim() === ""
-      ? []
+      ? ["Oakville", "Milton", "Burlington", "Mississauga"]
       : cities.filter((city) =>
           city.toLowerCase().includes(query.toLowerCase()),
         );
@@ -106,107 +107,125 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative isolate w-full overflow-hidden bg-white pb-10 sm:pb-16 md:pb-20 min-h-[500px]">
-      {/* Sweeping curve background from top-left to bottom-right, bulging outwards */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden mix-blend-multiply">
-        <svg
-          viewBox="200 0 1240 800"
-          className="w-full h-full text-sky-100 fill-current"
-          preserveAspectRatio="none"
-        >
-          {/* Perfect elliptical arc from top-left to bottom-right, bulging out towards bottom-left */}
-          <path d="M0,0 A1440,600 0 0,0 1440,600 L1440,0 Z"></path>
-        </svg>
+    <section className="relative isolate z-40 w-full pb-20 pt-20 sm:pb-40 sm:pt-20 min-h-[450px] flex items-center">
+      {/* Background Image with Overlay and Clip Path */}
+      <div
+        className="absolute inset-0 -z-10 overflow-hidden bg-slate-900"
+        style={{
+          clipPath: "url(#heroCurve)",
+        }}
+      >
+        <img
+          src="/hero.jpg"
+          alt="Ontario Real Estate"
+          className="h-full w-full object-cover object-center brightness-[0.85]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/40 to-transparent" />
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-16 md:mt-20">
-        <div className="flex flex-col items-center justify-center">
-          {/* COPY + SEARCH */}
-          <div className="w-full max-w-3xl text-center mt-40 sm:mt-10">
-            <div className="space-y-3">
-              <h1 className="font-serif text-2xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl">
-                Find your next business here
-              </h1>
-              <p className="mx-auto text-base leading-relaxed text-slate-900 sm:text-3xl font-medium">
-                <span className="text-black font-semibold text-lg sm:text-4xl">
-                  100+
-                </span>{" "}
-                Restaurants, Convenience Stores & Hotels for sale
-              </p>
-            </div>
+      {/* Defined SVG Clip Path */}
+      <svg width="0" height="0" className="absolute pointer-events-none">
+        <defs>
+          <clipPath id="heroCurve" clipPathUnits="objectBoundingBox">
+            <path d="M0,0 H1 V0.9 C0.7,1 0.3,0.7 0,0.8 Z" />
+          </clipPath>
+        </defs>
+      </svg>
 
-            <div className="mt-8 flex max-w-xl mx-auto flex-col items-center gap-6">
-              {/* SEARCH BAR */}
-              <div ref={containerRef} className="relative w-full">
-                <div
-                  className={cn(
-                    "relative flex items-center rounded-full border border-slate-200 bg-white/80 px-2 shadow-[0_18px_55px_rgba(15,23,42,0.10)] backdrop-blur transition-all duration-200 hover:border-slate-300 hover:bg-white hover:shadow-[0_22px_70px_rgba(15,23,42,0.15)] hover:-translate-y-0.5 focus-within:border-sky-500/80 focus-within:ring-2 focus-within:ring-sky-500/15",
-                  )}
-                >
-                  <Search className="pointer-events-none absolute left-4 h-4 w-4 text-slate-400 sm:left-5 sm:h-5 sm:w-5" />
-                  <input
-                    type="text"
-                    placeholder="Search by MLS® Number or Address"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    onFocus={() => setIsExpanded(true)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        handleSearch();
-                      }
-                    }}
-                    className="h-12 w-full bg-transparent pl-11 pr-12 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none sm:h-14 sm:pl-14 sm:pr-16 sm:text-base"
-                  />
-                  <button
-                    onClick={handleSearch}
-                    disabled={isSearching}
-                    aria-label="Search"
-                    className="absolute right-1.5 flex h-9 w-9 items-center justify-center rounded-full bg-linear-to-b from-sky-600 to-blue-700 text-white shadow-md transition-transform duration-200 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70 sm:right-2 sm:h-10 sm:w-10"
-                  >
-                    {isSearching ? (
-                      <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white" />
-                    ) : (
-                      <Search className="h-4 w-4 sm:h-5 sm:w-5" />
-                    )}
-                  </button>
-                </div>
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-3xl text-left">
+          <div className="space-y-4">
+            <h1
+              className="font-sans text-[clamp(2.5rem,7vw,4.5rem)] font-extrabold tracking-tight text-white leading-[1.1]"
+              style={{
+                textShadow:
+                  "2px 2px 4px rgba(0,0,0,0.5), 0px 0px 20px rgba(0,0,0,0.3)",
+              }}
+            >
+              Find your next business in Ontario
+            </h1>
+            <h2
+              className="text-lg sm:text-xl md:text-2xl font-medium text-white/90 leading-relaxed"
+              style={{ textShadow: "1px 1px 3px rgba(0,0,0,0.5)" }}
+            >
+              100+{" "}
+              <Link
+                href="/gta/restaurant-for-sale"
+                className="text-white border-b-2 border-white/30 hover:border-white transition-colors"
+              >
+                Restaurants
+              </Link>
+              ,{" "}
+              <Link
+                href="/gta/convenience-store-for-sale"
+                className="text-white border-b-2 border-white/30 hover:border-white transition-colors"
+              >
+                Convenience Stores
+              </Link>{" "}
+              &{" "}
+              <Link
+                href="/gta/hotel-for-sale"
+                className="text-white border-b-2 border-white/30 hover:border-white transition-colors"
+              >
+                Hotels
+              </Link>{" "}
+              for sale
+            </h2>
+          </div>
 
-                {/* AUTOCOMPLETE SUGGESTIONS */}
-                {isExpanded && suggestions.length > 0 && (
-                  <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-72 overflow-auto rounded-2xl border border-slate-200 bg-white shadow-[0_25px_70px_rgba(15,23,42,0.18)]">
-                    {suggestions.map((city) => (
-                      <button
-                        key={city}
-                        onClick={() => handleSelect(city)}
-                        className="flex w-full items-center gap-3 border-b border-slate-100 px-4 py-2.5 text-left text-slate-900 transition hover:bg-slate-50 last:border-0 sm:px-6 sm:py-3.5"
-                      >
-                        <MapPin className="h-4 w-4 text-slate-400" />
-                        <span className="text-sm font-medium sm:text-base">
-                          {city}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
+          <div className="mt-10 flex w-full flex-col items-start gap-4">
+            {/* SEARCH BAR */}
+            <div ref={containerRef} className="relative w-full max-w-xl group">
+              <div
+                className={cn(
+                  "relative flex items-center rounded-xl border border-slate-200 bg-white px-2 shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] focus-within:shadow-[0_20px_50px_rgba(0,0,0,0.15)] focus-within:-translate-y-1 focus-within:ring-4 focus-within:ring-white/10",
+                  isExpanded &&
+                    "rounded-b-none translate-y-0 shadow-xl focus-within:translate-y-0 focus-within:shadow-xl hover:translate-y-0 hover:shadow-xl",
                 )}
+              >
+                <input
+                  type="text"
+                  placeholder="Search by MLS®, address or city"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onFocus={() => setIsExpanded(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleSearch();
+                    }
+                  }}
+                  className="h-14 w-full bg-transparent pl-4 pr-14 text-base text-slate-900 placeholder:text-slate-500 focus:outline-none sm:h-16 sm:text-lg sm:pr-16"
+                />
+                <button
+                  onClick={handleSearch}
+                  disabled={isSearching}
+                  aria-label="Search"
+                  className="absolute right-2 flex h-10 w-10 items-center justify-center rounded-full text-white transition-all duration-300 hover:scale-110 disabled:cursor-not-allowed disabled:opacity-70 sm:h-12 sm:w-12 bg-primary"
+                >
+                  {isSearching ? (
+                    <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/35 border-t-white" />
+                  ) : (
+                    <Search className="h-5 w-5 stroke-[2.5px] transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6" />
+                  )}
+                </button>
               </div>
 
-              {/* Quick city links — single-word cities only, compact */}
-              <div className="w-full max-w-xl mx-auto pt-3 sm:pt-4">
-                <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-                  {TOP_ONTARIO_CITIES.filter((city) => !city.includes(" ")).map(
-                    (city) => (
-                      <button
-                        key={city}
-                        onClick={() => handleSelect(city)}
-                        className="rounded-full hover:cursor-pointer border border-slate-200/90 bg-white/90 px-2.5 py-1 text-xs font-normal text-slate-700 transition-all duration-200 hover:border-black hover:bg-white hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2  active:translate-y-0 sm:px-3 sm:py-1.5 sm:text-sm"
-                      >
-                        {city}
-                      </button>
-                    ),
-                  )}
+              {/* AUTOCOMPLETE SUGGESTIONS */}
+              {isExpanded && suggestions.length > 0 && (
+                <div className="absolute left-0 right-0 top-full z-[100] max-h-72 overflow-auto rounded-b-xl border border-t-0 border-slate-200 bg-white text-left shadow-2xl">
+                  {suggestions.map((city) => (
+                    <button
+                      key={city}
+                      onClick={() => handleSelect(city)}
+                      className="flex w-full items-center gap-3 border-b border-slate-100 px-4 py-3 text-left text-slate-900 transition hover:bg-slate-50 last:border-0"
+                    >
+                      <MapPin className="h-4 w-4 text-slate-400" />
+                      <span className="text-base font-medium">{city}</span>
+                    </button>
+                  ))}
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
