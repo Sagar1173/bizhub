@@ -107,7 +107,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative isolate z-40 w-full pb-20 pt-20 sm:pb-40 sm:pt-20 min-h-[450px] flex items-center">
+    <section className="relative isolate z-40 w-full pb-20 pt-20 sm:pb-32 sm:pt-10 min-h-[450px] flex items-center">
       {/* Background Image with Overlay and Clip Path */}
       <div
         className="absolute inset-0 -z-10 overflow-hidden bg-slate-900"
@@ -118,7 +118,7 @@ const Hero = () => {
         <img
           src="/hero.jpg"
           alt="Ontario Real Estate"
-          className="h-full w-full object-cover object-center brightness-[0.85]"
+          className="h-full w-full object-cover object-top brightness-[0.85]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/40 to-transparent" />
       </div>

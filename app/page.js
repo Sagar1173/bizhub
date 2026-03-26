@@ -124,7 +124,6 @@ export default async function Home() {
           }}
         />
         <Hero />
-        <div className="py-5"></div>
         {activeSections.map((section, index) => (
           <FeaturedPropertiesSection
             key={section.title}
