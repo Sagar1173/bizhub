@@ -5,17 +5,13 @@ import Link from "next/link";
 import { Star, ArrowRight } from "lucide-react";
 import { franchiseLocations } from "@/constants/franchise-data";
 
-
 function franchiseToSlug(name) {
   if (!name) return "";
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  return name.toLowerCase().replaceAll("'", "").replaceAll(" ", "-");
 }
 
 const TestimonialsSection = () => {
-    const testimonials = [
+  const testimonials = [
     {
       name: "Ali Pirzada",
       location: "Hamilton, ON",
@@ -36,7 +32,7 @@ const TestimonialsSection = () => {
       name: "Asha Patel",
       location: "Lindsay, ON",
       service: "Buy Home (May 2025)",
-      text: "Very familiar and helpful in finding a \"dream home\" and assisting with upgrades.",
+      text: 'Very familiar and helpful in finding a "dream home" and assisting with upgrades.',
       initial: "A",
       bgColor: "bg-amber-100 text-amber-700",
     },
@@ -50,8 +46,7 @@ const TestimonialsSection = () => {
     },
   ];
 
-  const franchises =
-    franchiseLocations?.ontario?.franchises?.slice(0, 9) ?? [];
+  const franchises = franchiseLocations?.ontario?.franchises?.slice(0, 9) ?? [];
 
   return (
     <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">

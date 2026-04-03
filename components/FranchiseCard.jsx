@@ -6,10 +6,7 @@ import Link from "next/link";
 
 function franchiseToSlug(name) {
   if (!name) return "";
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  return name.toLowerCase().replaceAll("'", "").replaceAll(" ", "-");
 }
 
 export default function FranchiseCard({ franchise, locationSlug = "ontario" }) {
@@ -76,7 +73,7 @@ export default function FranchiseCard({ franchise, locationSlug = "ontario" }) {
       {/* Content Section */}
       <div className="px-3.5 pt-2 pb-4 space-y-1">
         <div>
-          <h3 
+          <h3
             className="text-xl sm:text-2xl font-bold"
             style={{ color: "lab(13 29.78 -57.75)" }}
           >
