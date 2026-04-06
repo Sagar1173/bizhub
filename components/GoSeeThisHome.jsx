@@ -8,7 +8,8 @@ export default function GoSeeThisHome() {
     name: "",
     email: "",
     phone: "",
-    message: "Please send me additional information about this business. Thank you",
+    message:
+      "Please send me additional information about this business. Thank you",
     marketing: true,
   });
   const [loading, setLoading] = useState(false);
@@ -42,13 +43,14 @@ export default function GoSeeThisHome() {
         swal(
           `Thank You, ${formData.name}`,
           "Please expect an email or call from us shortly",
-          "success"
+          "success",
         );
         setFormData({
           name: "",
           email: "",
           phone: "",
-          message: "Please send me additional information about this business. Thank you",
+          message:
+            "Please send me additional information about this business. Thank you",
           marketing: true,
         });
       } else {
@@ -68,7 +70,7 @@ export default function GoSeeThisHome() {
       <div className="flex items-center gap-3 mb-3 p-2 bg-transparent rounded-xl">
         <div className="h-14 w-14 rounded-full overflow-hidden shrink-0 border border-gray-200">
           <img
-            src="/profile2.jpg"
+            src="/profile2.jpeg"
             alt="Ravi Singh Godara"
             className="h-full w-full object-cover object-top"
           />

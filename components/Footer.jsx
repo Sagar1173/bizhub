@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Phone,
-  Mail,
-  Globe,
-} from "lucide-react";
+import { Phone, Mail, Globe } from "lucide-react";
 import Link from "next/link";
 import { cityToSlug, toCategorySlug } from "@/lib/slug";
 import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
@@ -41,7 +37,7 @@ const AgentFooter = () => {
           <div className="w-full md:w-1/3 flex justify-center  md:justify-start">
             <div className="relative w-full max-w-[24rem] aspect-square rounded-full overflow-hidden grayscale-[0.2] border border-gray-200">
               <img
-                src="/profile2.jpg"
+                src="/profile2.jpeg"
                 alt="Ravi Singh Godara - Real Estate Sales Person"
                 className="block w-full h-full rounded-full object-cover object-top"
               />
@@ -51,8 +47,7 @@ const AgentFooter = () => {
           {/* Right Side: Identity & Contact */}
           <div className="w-full md:w-2/3 flex flex-col items-center md:items-start text-center md:text-left">
             {/* Social Icons - Simple & Clean */}
-            <div className="flex gap-6 mb-2 text-slate-900">
-            </div>
+            <div className="flex gap-6 mb-2 text-slate-900"></div>
 
             {/* Brokerage Identity */}
             <div className="mb-2">
@@ -79,10 +74,10 @@ const AgentFooter = () => {
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <Mail size={14} className="text-slate-900" />
                 <a
-                  href="mailto:info@ravigodara.com"
+                  href="mailto:info@bizmonk.ca"
                   className="hover:text-amber-700 transition-colors"
                 >
-                  info@ravigodara.com
+                  info@bizmonk.ca
                 </a>
               </div>
               <div className="flex gap-3 justify-center md:justify-start">
@@ -100,7 +95,10 @@ const AgentFooter = () => {
         <div className="w-full pt-16 border-t border-slate-200 mb-16">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-8 gap-y-10">
             {footerBusinessTypes.map((type) => (
-              <div key={type} className="flex flex-col gap-3 text-center md:text-left">
+              <div
+                key={type}
+                className="flex flex-col gap-3 text-center md:text-left"
+              >
                 <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-1">
                   {BUSINESS_TYPE_DISPLAY_MAP[type] ||
                     (type === "Restaurant" ? "Restaurants" : type)}
@@ -141,15 +139,16 @@ const AgentFooter = () => {
                 typographical errors, misinformation, misprints and shall be
                 held totally harmless. Listing(s) information is provided for
                 consumer&apos;s personal, non-commercial use and may not be used
-                for any purpose other than to identify prospective business 
-                listings consumers may be interested in purchasing. The data relating to
-                real estate for sale on this website comes in part from the
-                Internet Data Exchange program of the Multiple Listing Service.
-                Real estate listings held by brokerage firms other than Team
-                Ravi - Elixir Real Estate Inc. Brokerage, may be marked with the
-                Internet Data Exchange logo and detailed information about those
-                properties will include the name of the listing broker(s) when
-                required by the MLS. Copyright &copy;2026 All rights reserved.
+                for any purpose other than to identify prospective business
+                listings consumers may be interested in purchasing. The data
+                relating to real estate for sale on this website comes in part
+                from the Internet Data Exchange program of the Multiple Listing
+                Service. Real estate listings held by brokerage firms other than
+                Team Ravi - Elixir Real Estate Inc. Brokerage, may be marked
+                with the Internet Data Exchange logo and detailed information
+                about those properties will include the name of the listing
+                broker(s) when required by the MLS. Copyright &copy;2026 All
+                rights reserved.
               </p>
             </div>
             <div className="text-[12px] leading-[1.35]">

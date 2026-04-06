@@ -118,7 +118,7 @@ export default async function Home() {
                 postalCode: "L4W 0C2",
                 addressCountry: "CA",
               },
-              email: "mailto:info@ravigodara.com",
+              email: "mailto:info@bizmonk.ca",
               telephone: ["+1-905-226-7284"],
             }),
           }}

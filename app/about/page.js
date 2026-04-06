@@ -68,7 +68,7 @@ const AboutPage = () => {
           <div className="mt-12 lg:mt-0 flex justify-center lg:justify-end">
             <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl border-8 border-white/50">
               <img
-                src="/profile2.jpg"
+                src="/profile2.jpeg"
                 alt="Ravi Singh Godara - BizMonk"
                 className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
               />
