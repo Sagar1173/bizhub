@@ -25,9 +25,15 @@ const AgentFooter = () => {
     "Restaurant",
     "Convenience/Variety",
     "Professional Office",
-    "Retail",
+  
   ];
 
+  const footerHomeSales = [
+  { city: "Milton", url: "https://thehalton.ca/homes-for-sale/milton" },
+  { city: "Oakville", url: "https://thehalton.ca/homes-for-sale/oakville" },
+  { city: "Burlington", url: "https://thehalton.ca/homes-for-sale/burlington" },
+  { city: "Mississauga", url: "https://thehalton.ca/homes-for-sale/mississauga" },
+  ];
   return (
     <footer className="bg-white pt-20 pb-10 px-6">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
@@ -119,6 +125,26 @@ const AgentFooter = () => {
                 </div>
               </div>
             ))}
+            {/* Resale Homes Column */}
+<div className="flex flex-col gap-3 text-center md:text-left">
+  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-1">
+    Resale Homes
+  </h3>
+
+  <div className="flex flex-col gap-2">
+    {footerHomeSales.map((home) => (
+      <Link
+        key={home.city}
+        href={home.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[13px] text-slate-600 hover:text-amber-700 transition-colors"
+      >
+        Homes for sale in {home.city}
+      </Link>
+    ))}
+  </div>
+</div>
           </div>
         </div>
 
