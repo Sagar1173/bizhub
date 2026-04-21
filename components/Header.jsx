@@ -68,6 +68,17 @@ const Header = () => {
 
   const franchiseLinks = [
     {
+      name: "Boardwalk Burgers",
+      href: "/franchise-opportunity/ontario/boardwalk-burgers",
+
+    },
+    {
+      name: "Shawarma Lab",
+      href: "/franchise-opportunity/ontario/shawarma-lab",
+
+    },
+
+    {
       name: "Mary Brown's Chicken",
       href: "/franchise-opportunity/ontario/mary-browns-chicken",
     },
