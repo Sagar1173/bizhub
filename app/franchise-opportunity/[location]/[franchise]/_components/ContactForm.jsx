@@ -131,8 +131,8 @@ const ContactForm = ({ contactImage, pageName }) => {
         {/* Form Section */}
         <div className="p-6">
           {/* Header */}
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-1">
+          <div className=" mb-6">
+            <h2 className="text-xl  font-bold text-gray-900 mb-1">
               {pageName || "Get Information"}
             </h2>
             <p className="text-gray-600 text-xs leading-relaxed">

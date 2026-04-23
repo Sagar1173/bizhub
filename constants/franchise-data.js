@@ -5,28 +5,28 @@ const baseFranchises = [
   {
     name: "Boardwalk Burgers",
     type: "Fast Casual Restaurant",
-    investment: "$400,000 - $500,000",
+    investment: "$500,000+",
     locations: "High traffic retail locations preferred",
     image: "/boardwalky.jpg",
     description: 
-      "Boardwalk Fries Burgers Shakes is a fast-casual restaurant brand inspired by the classic boardwalk dining experience. Known for its fresh-cut fries, made-to-order burgers, and creamy milkshakes made with quality dairy, the brand focuses on simple ingredients and bold flavors.",
+      "Boardwalk Fries Burgers Shakes brings a taste synonymous with summer and joy. It prepares fries in its signature style and serves fresh, hand-made burgers along with creamy shakes made from premium Canadian dairy.",
 
    // brochure: "/brochures/boardwalk.pdf",
 
     financing: {
       "Restaurant Model": "Typical restaurant location",
-      "startUp Costs": "$400,000 - $500,000",
+      "startUp Costs": "$500,000+",
       "liquid Capital": "$150,000",
-      "franchisee Fee": "$30,000",
-      royalties: "6%",
-      marketing: "3%"
+      "franchisee Fee": "not disclosed",
+      royalties: "not disclosed",
+      marketing: "not disclosed"
     },
+   
 
     stats: [
-      { value: "1981", label: "FOUNDED" },
-      { value: "FRESH CUT", label: "SIGNATURE BOARDWALK FRIES" },
-      { value: "MADE TO ORDER", label: "BURGERS PREPARED FRESH" },
-      { value: "CANADIAN DAIRY", label: "MILKSHAKES" }
+      { value: "25+", label: "STORES" },
+      { value: "40+", label: "YEARS IN BUSINESS" },
+  
     ],
 
     contactImage: null,
@@ -52,10 +52,10 @@ const baseFranchises = [
     name: "Shawarma Lab",
     type: "Mediterranean Fast Casual Restaurant",
     investment: "$500,000+",
-    locations: "Operating across multiple cities in Canada with franchise opportunities available",
+    locations: "Premium locations available",
     image: "/shawarmalab.png",
 
-    description: "Shawarma Lab is a modern fast-casual Mediterranean restaurant serving fresh, made-to-order shawarma wraps, bowls, and plates. Focused on premium ingredients and bold flavors, it delivers a contemporary dining experience.",
+    description: "Shawarma Lab brings the experience of sun-kissed Mediterranean coast to Canada. It’s a place where each meal is not just food, but an experience steeped in generational tradition.",
 
     brochure: null,
 
@@ -65,16 +65,16 @@ const baseFranchises = [
       "liquid Capital": "$150,000 minimum",
       "net Worth": "$500,000 minimum",
       "franchisee Fee": "Not publicly disclosed",
-      royalties: "Not publicly disclosed",
-      marketing: "Franchise marketing support provided"
+     " royalties": "Not publicly disclosed",
+     " marketing": "Franchise marketing support provided"
     },
 
-    stats: [
-      { value: "2020", label: "FOUNDED" },
-      { value: "3+", label: "CURRENT LOCATIONS (EXPANDING)" },
-      { value: "FAST", label: "GROWING FAST CASUAL BRAND" },
-      { value: "CANADA", label: "MULTI-CITY PRESENCE" }
-    ],
+    // stats: [
+    //   { value: "2020", label: "FOUNDED" },
+    //   { value: "3+", label: "CURRENT LOCATIONS (EXPANDING)" },
+    //   { value: "FAST", label: "GROWING FAST CASUAL BRAND" },
+    //   { value: "CANADA", label: "MULTI-CITY PRESENCE" }
+    // ],
 
     contactImage: null,
 

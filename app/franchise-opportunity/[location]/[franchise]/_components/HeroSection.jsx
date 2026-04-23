@@ -183,7 +183,7 @@ const HeroSection = ({ franchiseData, location }) => {
                     ([key, value]) => (
                       <div
                         key={key}
-                        className="flex flex-col items-center min-w-[120px] py-3 px-4 rounded-lg bg-slate-50 border border-slate-100"
+                        className="flex flex-col items-start min-w-[120px] py-3 px-4 rounded-lg bg-slate-50 border border-slate-100"
                       >
                         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 text-left">
                           {key}
