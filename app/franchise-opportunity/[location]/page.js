@@ -1,3 +1,4 @@
+////franchise-opportunity > [location]  > page.js
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import RegisterNowModal from "@/components/RegisterNowModal";
@@ -60,7 +61,7 @@ export default async function FranchiseOpportunityPage({ params }) {
             </div>
 
             {/* Franchise Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 md:gap-3 gap-2 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
               {locationData?.franchises.map((franchise) => (
                 <Link
                   key={franchise.name}
@@ -68,14 +69,16 @@ export default async function FranchiseOpportunityPage({ params }) {
                     .toLowerCase()
                     .replace(/\s+/g, "-")
                     .replace(/'/g, "")}`}
-                  className="px-3 py-2  text-white rounded-full font-medium text-xs"
+                  className="block h-full"
                 >
+
+                  {/* ------------------------------------------------- */}
                   <div
                     key={franchise?.name}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group  h-full flex flex-col"
                   >
                     {/* Image Section */}
-                    <div className="relative h-64">
+                    <div className="relative h-56 flex-shrink-0">
                       <img
                         src={franchise?.image}
                         alt={franchise?.name}
@@ -85,8 +88,8 @@ export default async function FranchiseOpportunityPage({ params }) {
                     </div>
 
                     {/* Content Section */}
-                    <div className="p-4 text-left">
-                      <div className=" text-left">
+                    <div className="p-4 text-left flex flex-col flex-1">
+                      {/* <div className=" text-left">
                         <h3 className="text-2xl font-bold mb-1 text-black">
                           {franchise?.name}
                         </h3>
@@ -96,19 +99,63 @@ export default async function FranchiseOpportunityPage({ params }) {
                       </div>
                       <p className="text-gray-600 mb-6 leading-relaxed text-xs ">
                         {franchise?.description}
-                      </p>
+                      </p> */}
 
                       {/* Action Buttons */}
-                      <div className="flex gap-3 justify-start">
+                      {/* <div className="flex gap-3 justify-start">
                         <button className="px-3 py-2 bg-black text-white rounded-full hover:bg-black/90 transition-colors font-medium text-xs">
                           Learn More
                         </button>
                         <button className="px-3 py-1 border-2 border-black text-black rounded-full hover:bg-black/5 transition-colors font-medium text-xs">
                           Contact
                         </button>
+                      </div> */}
+
+                      {/* Content Section */}
+                      <div className="p-4 text-left  flex flex-col flex-1">
+                        <div className="text-left">
+                          <h3 className="text-2xl font-bold mb-1 text-black " style={{ minHeight: "3.5rem" }}>
+                            {franchise?.name}
+                          </h3>
+                          <p className="text-sm text-black inline-block mb-3">
+                            {franchise?.type}
+                          </p>
+                        </div>
+                        <p
+                          className="text-gray-600 mb-4 leading-relaxed text-xs "
+                          style={{
+                            display: "-webkit-box",
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            minHeight: "4.5em", 
+                          }}
+                        >
+                          {franchise?.description}
+                        </p>
+
+                        {/* Action Buttons */}
+                        <div className="flex flex-row gap-2 items-center mt-auto">
+                          <button className="px-3 py-2 bg-black text-white rounded-full hover:bg-black/90 transition-colors font-medium text-xs  whitespace-nowrap">
+                            Learn More
+                          </button>
+                          <button className="px-3 py-2 border-2 border-black text-black rounded-full hover:bg-black/5 transition-colors font-medium text-xs whitespace-nowrap">
+                            Contact
+                          </button>
+                        </div>
                       </div>
+
+
                     </div>
+
+
+
                   </div>
+
+
+
+                  {/* ----------------------------------- */}
                 </Link>
               ))}
             </div>
@@ -142,12 +189,11 @@ export default async function FranchiseOpportunityPage({ params }) {
                     href={`/franchise-opportunity/${city
                       .toLowerCase()
                       .replaceAll(" ", "-")}`}
-                    className={`${
-                      location.toLowerCase() ===
-                      city.toLowerCase().replaceAll(" ", "-")
+                    className={`${location.toLowerCase() ===
+                        city.toLowerCase().replaceAll(" ", "-")
                         ? "bg-primary text-white"
                         : "bg-white text-gray-600 hover:bg-primary/5"
-                    } px-4 py-3 rounded-lg text-center transition-colors duration-300`}
+                      } px-4 py-3 rounded-lg text-center transition-colors duration-300`}
                   >
                     <span className="text-sm font-medium">{city}</span>
                   </Link>

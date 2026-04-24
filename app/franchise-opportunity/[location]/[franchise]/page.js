@@ -1,3 +1,4 @@
+//franchise-opportunity > [location] > [franchise] > page.js
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
