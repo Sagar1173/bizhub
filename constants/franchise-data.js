@@ -10,8 +10,7 @@ const baseFranchises = [
     image: "/boardwalky.jpg",
     description: 
       "Boardwalk Fries Burgers Shakes brings a taste synonymous with summer and joy. It prepares fries in its signature style and serves fresh, hand-made burgers along with creamy shakes made from premium Canadian dairy.",
-
-   // brochure: "/brochures/boardwalk.pdf",
+   brochure: "/brochures/boardwalk.pdf",
 
     financing: {
       "Restaurant Model": "Typical restaurant location",
@@ -24,19 +23,20 @@ const baseFranchises = [
    
 
     stats: [
-      { value: "25+", label: "STORES" },
+      { value: "25+", label: "Locations" },
       { value: "40+", label: "YEARS IN BUSINESS" },
+      { value : "23+" , label :"Cities"}
   
     ],
 
     contactImage: null,
 
     specialities: [
-      "Signature boardwalk-style fresh cut fries",
-      "Made-to-order burgers prepared fresh",
-      "Milkshakes made with Canadian dairy",
-      "Simple fast-casual menu focused on quality ingredients",
-      "Boardwalk-inspired restaurant concept"
+      "Signature boardwalk-style fresh cut fries.",
+      "Made-to-order burgers prepared fresh.",
+      "Milkshakes made with Canadian dairy.",
+      "Simple fast-casual menu focused on quality ingredients.",
+      "A family-friendly dining experience with a beachside promotion."
     ],
 
     storeModels: [
@@ -57,7 +57,7 @@ const baseFranchises = [
 
     description: "Shawarma Lab brings the experience of sun-kissed Mediterranean coast to Canada. It’s a place where each meal is not just food, but an experience steeped in generational tradition.",
 
-    brochure: null,
+    brochure: "/brochures/shawarmalab.pdf",
 
     financing: {
       "Restaurant Model": "Fast casual restaurant",
@@ -66,7 +66,6 @@ const baseFranchises = [
       "net Worth": "$500,000 minimum",
       "franchisee Fee": "Not publicly disclosed",
      " royalties": "Not publicly disclosed",
-     " marketing": "Franchise marketing support provided"
     },
 
     // stats: [

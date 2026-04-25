@@ -79,7 +79,7 @@ const HeroSection = ({ franchiseData, location }) => {
           <div className="flex flex-col md:flex-row md:min-h-[340px]">
             <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center order-2 md:order-1">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 open-sans leading-tight">
-                {franchiseData.name} — Franchise in {locationText}
+                {franchiseData.name} Franchise in {locationText}
               </h2>
               <div className="relative h-48 rounded-xl overflow-hidden block md:hidden mb-4">
                 {franchiseData.image && (
