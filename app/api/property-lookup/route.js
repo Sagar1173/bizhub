@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-const MLS_BASE_URL = process.env.MLS_BASE_URL;
-const MLS_TOKEN = process.env.MLS_TOKEN;
+// Environment variables are read inside functions (not at module scope) to
+// match the pattern in lib/api.js and avoid stale values during Vercel builds.
 
 const escapeODataString = (value) => value.replace(/'/g, "''");
 
@@ -13,14 +13,14 @@ const readJsonSafe = async (res) => {
   }
 };
 
-async function lookupByListingKey(input) {
+async function lookupByListingKey(input, baseUrl, token) {
   const url =
-    `${MLS_BASE_URL}/Property('${encodeURIComponent(input)}')` +
+    `${baseUrl}/Property('${encodeURIComponent(input)}')` +
     `?$select=${encodeURIComponent("ListingKey,City")}`;
 
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${MLS_TOKEN}`,
+      Authorization: `Bearer ${token}`,
       Accept: "application/json",
     },
     cache: "no-store",
@@ -34,7 +34,7 @@ async function lookupByListingKey(input) {
   return { listingKey: data.ListingKey, city: data.City };
 }
 
-async function lookupByField(fieldName, input) {
+async function lookupByField(fieldName, input, baseUrl, token) {
   const filter = `${fieldName} eq '${escapeODataString(input)}'`;
   const params = [
     "$top=1",
@@ -42,10 +42,10 @@ async function lookupByField(fieldName, input) {
     `$filter=${encodeURIComponent(filter)}`,
   ];
 
-  const url = `${MLS_BASE_URL}/Property?${params.join("&")}`;
+  const url = `${baseUrl}/Property?${params.join("&")}`;
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${MLS_TOKEN}`,
+      Authorization: `Bearer ${token}`,
       Accept: "application/json",
     },
     cache: "no-store",
@@ -67,14 +67,17 @@ export async function GET(request) {
     return NextResponse.json({ found: false }, { status: 200 });
   }
 
-  if (!MLS_BASE_URL || !MLS_TOKEN) {
+  const baseUrl = process.env.MLS_BASE_URL;
+  const token = process.env.MLS_TOKEN;
+
+  if (!baseUrl || !token) {
     return NextResponse.json(
       { found: false, error: "MLS environment is not configured" },
       { status: 500 },
     );
   }
 
-  const byKey = await lookupByListingKey(q);
+  const byKey = await lookupByListingKey(q, baseUrl, token);
   if (byKey) {
     return NextResponse.json({ found: true, ...byKey }, { status: 200 });
   }
@@ -82,7 +85,7 @@ export async function GET(request) {
   // Try common MLS id fields when user enters MLS number instead of ListingKey.
   const fieldCandidates = ["ListingId", "ListingNumber", "MlsNumber"];
   for (const fieldName of fieldCandidates) {
-    const byField = await lookupByField(fieldName, q);
+    const byField = await lookupByField(fieldName, q, baseUrl, token);
     if (byField) {
       return NextResponse.json({ found: true, ...byField }, { status: 200 });
     }

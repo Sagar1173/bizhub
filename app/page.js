@@ -6,6 +6,14 @@ import { fetchMedia, fetchProperties } from "@/lib/api";
 import RegisterNowModal from "@/components/RegisterNowModal";
 import { pickPropertyMainImage } from "@/lib/media";
 
+// Force server-side rendering on every request.
+// The homepage fetches live MLS listings — prerendering at build time is
+// incorrect (data would be stale) and causes Vercel build failures if
+// MLS_BASE_URL / MLS_TOKEN are not available during the build phase.
+// Individual fetch() calls in lib/api.js use { next: { revalidate: 60 } }
+// which still caches responses at the CDN/data-cache layer.
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
   description:
