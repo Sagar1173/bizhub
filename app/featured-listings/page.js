@@ -8,11 +8,11 @@ import { BUSINESS_TYPE_DISPLAY_MAP } from "@/constants/cities";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
-  "https://bizmonk.ca";
+  "https://bizhub.ca";
 
 const toOgImage = (url, alt) => {
   if (!url) return null;
-  return { url, alt: alt || "Bizmonk featured listing" };
+  return { url, alt: alt || "Bizhub featured listing" };
 };
 
 export async function generateMetadata({ searchParams }) {
@@ -21,7 +21,7 @@ export async function generateMetadata({ searchParams }) {
   const listingType = sParams.listingType || "sale";
 
   const data = await fetchProperties({
-    officeName: "ELIXIR REAL ESTATE INC.",
+    officeName: "BIZHUB REAL ESTATE INC.",
     businessType,
     listingType,
     top: 1,
@@ -37,8 +37,8 @@ export async function generateMetadata({ searchParams }) {
   const canonicalPath = `/featured-listings`;
   const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
 
-  const title = `Featured ${businessLabel} ${listingLabel} | Bizmonk`;
-  const description = `${countStr}Featured ${businessLabel} ${listingLabel} presented by ELIXIR REAL ESTATE INC.. Browse updated daily listings on Bizmonk.`;
+  const title = `Featured ${businessLabel} ${listingLabel} | Bizhub`;
+  const description = `${countStr}Featured ${businessLabel} ${listingLabel} presented by BIZHUB REAL ESTATE INC.. Browse updated daily listings on BizHub.`;
 
   let ogImageUrl = null;
   const first = data.items?.[0];
@@ -65,7 +65,7 @@ export async function generateMetadata({ searchParams }) {
       title,
       description,
       url: canonicalUrl,
-      siteName: "Bizmonk",
+      siteName: "Bizhub",
       type: "website",
       locale: "en_CA",
       images: ogImage ? [ogImage] : undefined,
@@ -99,7 +99,7 @@ export default async function FeaturedListingsPage({ searchParams }) {
   const sort = sParams.sort || "newest";
 
   const data = await fetchProperties({
-    officeName: "ELIXIR REAL ESTATE INC.",
+    officeName: "BIZHUB REAL ESTATE INC.",
     top: limit,
     skip,
     beds,
@@ -141,8 +141,8 @@ export default async function FeaturedListingsPage({ searchParams }) {
     ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
     : "Business Opportunities";
   const countStr = data.totalCount > 0 ? `${data.totalCount}+ ` : "";
-  const headingTitle = `${businessLabel} ${listingLabel} by ELIXIR REAL ESTATE INC.`;
-  const headingDescription = `${countStr}Featured ${businessLabel} ${listingLabel}. Browse updated daily listings on bizmonk.`;
+  const headingTitle = `${businessLabel} ${listingLabel} by BIZHUB REAL ESTATE INC.`;
+  const headingDescription = `${countStr}Featured ${businessLabel} ${listingLabel}. Browse updated daily listings on bizhub.`;
 
   const products = itemsWithMedia.map((property) => {
     const citySlug = property.City ? property.City.toLowerCase().replace(/[^a-z0-9]+/g, "-") : "gta";
@@ -162,7 +162,7 @@ export default async function FeaturedListingsPage({ searchParams }) {
       [property.StreetNumber, property.StreetName, property.City]
         .filter(Boolean)
         .join(" ");
-    const agency = property.ListOfficeName || "ELIXIR REAL ESTATE INC.";
+    const agency = property.ListOfficeName || "BIZHUB REAL ESTATE INC.";
 
     return {
       "@type": "Product",

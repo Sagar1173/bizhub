@@ -21,11 +21,11 @@ export async function generateMetadata({ params }) {
   const locationData = getLocationContent(location);
 
   const title = locationData?.title
-    ? `Franchise Opportunities in ${locationData.title} | Bizmonk`
-    : `Franchise Opportunities in ${location} | Bizmonk`;
+    ? `Franchise Opportunities in ${locationData.title} | Bizhub`
+    : `Franchise Opportunities in ${location} | Bizhub`;
   const description = locationData?.title
-    ? `Explore franchise opportunities and business listings available in ${locationData.title}. Start your business journey today with Bizmonk.`
-    : `Explore franchise opportunities and business listings available in ${location}. Start your business journey today with Bizmonk.`;
+    ? `Explore franchise opportunities and business listings available in ${locationData.title}. Start your business journey today with Bizhub.`
+    : `Explore franchise opportunities and business listings available in ${location}. Start your business journey today with Bizhub.`;
 
   return {
     title,

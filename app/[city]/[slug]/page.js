@@ -25,7 +25,7 @@ import RequestInfoModal from "@/components/RequestInfoModal";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
-  "https://bizmonk.ca";
+  "https://bizhub.ca";
 
 const formatMoney = (value) => {
   if (value === null || value === undefined || value === "") return "-";
@@ -160,17 +160,17 @@ export async function generateMetadata({ params }) {
     const finalOgImage = ogImageUrl || fallbackImage;
 
     return {
-      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
-      description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
+      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
+      description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
       openGraph: {
-        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
-        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
         images: finalOgImage ? [{ url: finalOgImage }] : undefined,
       },
       twitter: {
         card: "summary_large_image",
-        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizmonk`,
-        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`,
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
         images: finalOgImage ? [finalOgImage] : undefined,
       },
     };
@@ -180,7 +180,7 @@ export async function generateMetadata({ params }) {
   const data = await fetchProperty(extractedSlug);
   if (!data) {
     return {
-      title: "Property Not Found | Bizmonk",
+      title: "Property Not Found | Bizhub",
       description: "The property you are looking for is no longer available.",
     };
   }
@@ -196,16 +196,16 @@ export async function generateMetadata({ params }) {
   const finalOgImage = ogImageUrl || fallbackImage;
 
   return {
-    title: `${address} · ${price}  | Bizmonk`,
+    title: `${address} · ${price}  | Bizhub`,
     description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
     openGraph: {
-      title: `${price} · ${address} | Bizmonk`,
+      title: `${price} · ${address} | Bizhub`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
       images: finalOgImage ? [{ url: finalOgImage }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${price} · ${address} | Bizmonk`,
+      title: `${price} · ${address} | Bizhub`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
       images: finalOgImage ? [finalOgImage] : undefined,
     },
@@ -552,7 +552,7 @@ export default async function SlugPage({ params, searchParams }) {
       availability: "https://schema.org/InStock",
       seller: {
         "@type": "Organization",
-        name: data.ListOfficeName || "Bizmonk",
+        name: data.ListOfficeName || "Bizhub",
       },
     },
   };

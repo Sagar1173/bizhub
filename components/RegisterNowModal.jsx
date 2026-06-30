@@ -67,7 +67,7 @@ export default function RegisterNowModal() {
       <div className="md:hidden fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex justify-center px-4">
         <button
           onClick={() => setIsOpen(true)}
-          className="inline-flex w-fit max-w-xs items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-base font-semibold text-white shadow-2xl transition-transform duration-150 hover:bg-blue-800 hover:scale-[1.02] active:scale-95"
+          className="cursor-pointer inline-flex w-fit max-w-xs items-center justify-center rounded-full bg-black-700 px-6 py-3 text-base font-semibold text-white shadow-2xl transition-transform duration-150  hover:scale-[1.02] active:scale-95"
         >
           Notify me of new listings
         </button>
@@ -77,7 +77,7 @@ export default function RegisterNowModal() {
       <div className="hidden md:flex fixed right-6 bottom-6 z-40">
         <button
           onClick={() => setIsOpen(true)}
-          className="inline-flex items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-2xl shadow-blue-500/40 transition-transform duration-150 hover:bg-blue-800 hover:scale-[1.02] active:scale-95"
+          className="cursor-pointer inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-sm font-semibold text-white shadow-2xl shadow-blue-500/40 transition-transform duration-150  hover:scale-[1.02] active:scale-95"
         >
           Notify me of new listings
         </button>

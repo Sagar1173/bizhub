@@ -31,7 +31,7 @@ const ContactForm = ({ contactImage, pageName }) => {
           phone,
           "Page URL": window.location.href,
         },
-        title: "Info from Bizmonk",
+        title: "Info from Bizhub",
       });
 
       // Check if the response indicates success
@@ -260,7 +260,7 @@ const ContactForm = ({ contactImage, pageName }) => {
 
             {/* Privacy Note */}
             <p className="text-xs text-gray-500 text-center mt-4 leading-relaxed px-1">
-              By submitting this form, I agree to be contacted by Elixir Real Estate Inc., Brokerage* via email, phone, and text about real estate services.
+              By submitting this form, I agree to be contacted by BIZHUB Real Estate Inc., Brokerage* via email, phone, and text about real estate services.
             </p>
           </form>
         </div>

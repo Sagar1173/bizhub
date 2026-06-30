@@ -2,9 +2,9 @@ import ContactSection from "@/components/ContactSection";
 import RegisterNowModal from "@/components/RegisterNowModal";
 
 export const metadata = {
-  title: "Contact Bizmonk",
+  title: "Contact Bizhub",
   description:
-    "Get in touch with Bizmonk for buying, selling, and commercial real estate guidance across the GTA.",
+    "Get in touch with Bizhub for buying, selling, and commercial real estate guidance across the GTA.",
 };
 
 export default function ContactPage() {

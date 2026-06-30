@@ -19,20 +19,20 @@ const playfair = Playfair_Display({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bizmonk.ca";
+  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://bizhub.ca";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
   description:
-    "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+    "Looking for a business in Greater Toronto Area? Bizhub is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
   keywords: "Restaurants, Convenience Stores, Businesses for Sale, Ontario",
   openGraph: {
     title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
     description:
-      "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+      "Looking for a business in Greater Toronto Area? Bizhub is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
     url: "/",
-    siteName: "Bizmonk",
+    siteName: "Bizhub",
     type: "website",
     images: [{ url: "/office.jpeg" }],
   },
@@ -40,7 +40,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
     description:
-      "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+      "Looking for a business in Greater Toronto Area? Bizhub is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
     images: ["/office.jpeg"],
   },
 };

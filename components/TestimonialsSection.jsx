@@ -105,70 +105,27 @@ const TestimonialsSection = () => {
           </div>
         </div>
 
+        
+
         {/* Franchise List - Image-on-top Cards */}
-        <div>
-          <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-end sm:justify-between md:mb-8">
-            <h2 className="text-xl font-serif text-slate-900 tracking-tight sm:text-2xl md:text-3xl">
-              Featured franchise opportunities
-            </h2>
-            <Link
-              href="/franchise-opportunity/ontario"
-              className="inline-flex items-center gap-2 self-start text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900 sm:self-auto"
-            >
-              See all
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+       
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
-            {franchises.map((franchise) => {
-              const slug = franchiseToSlug(franchise.name);
-              const href = `/franchise-opportunity/ontario/${slug}`;
 
-              return (
-                <Link
-                  key={franchise.name}
-                  href={href}
-                  className="group block overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm transition-all duration-300 sm:rounded-2xl active:scale-[0.99] hover:-translate-y-0.5 hover:shadow-xl hover:border-slate-200 md:hover:-translate-y-1"
-                >
-                  {/* Image - Bigger */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
-                    {franchise.image ? (
-                      <img
-                        src={franchise.image}
-                        alt={franchise.name}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-slate-400">
-                        <span className="text-4xl font-bold">
-                          {franchise.name.charAt(0)}
-                        </span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                  </div>
 
-                  {/* Text below image */}
-                  <div className="p-4 sm:p-5">
-                    <h3 className="font-semibold text-slate-900 transition-colors group-hover:text-slate-700 line-clamp-2 text-base sm:text-lg">
-                      {franchise.name}
-                    </h3>
-                    <p className="mt-1 text-xs text-slate-500 sm:text-sm">
-                      {franchise.type}
-                    </p>
-                    {franchise.investment && (
-                      <p className="mt-2 text-xs font-medium text-slate-700 sm:text-sm">
-                        {franchise.investment}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
     </section>
   );

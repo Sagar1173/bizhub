@@ -45,7 +45,7 @@ const CityComponent = ({
   const businessLabel = businessType
     ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
     : "Business Opportunities";
-  const pageDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on bizmonk.`;
+  const pageDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`;
 
   const buildPageHref = (page) => {
     const params = new URLSearchParams();

@@ -253,7 +253,7 @@ const Header = () => {
             <div className="flex-1 min-w-0 flex items-center justify-start gap-2 sm:gap-4 md:gap-6">
               <Link href="/" className="flex shrink-0">
                 <span className="text-2xl md:text-3xl font-bold text-blue-950">
-                  bizmonk.
+                  bizhub.
                 </span>
               </Link>
 
@@ -370,7 +370,7 @@ const Header = () => {
                 </div> */}
 
                 {/* FRANCHISE DROPDOWN */}
-                <div className="relative group py-2">
+                {/* <div className="relative group py-2">
                   <button className="flex items-center gap-1 text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
                     Franchise{" "}
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
@@ -388,7 +388,7 @@ const Header = () => {
                       ))}
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {navLinks.slice(1).map((link) => (
                   <Link
@@ -500,7 +500,7 @@ const Header = () => {
           </div> */}
 
           {/* Mobile Franchise Accordion */}
-          <div>
+          {/* <div>
             <button
               onClick={() => setIsMobileFranchiseOpen(!isMobileFranchiseOpen)}
               className="flex items-center justify-between w-full text-sm font-bold py-2"
@@ -527,7 +527,7 @@ const Header = () => {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
 
           {navLinks.slice(1).map((link) => (
             <Link

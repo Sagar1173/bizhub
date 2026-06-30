@@ -9,9 +9,9 @@ import {
 import RegisterNowModal from "@/components/RegisterNowModal";
 
 export const metadata = {
-  title: "About BizMonk | Your Premier Commercial Real Estate Destination",
+  title: "About BizHub | Your Premier Commercial Real Estate Destination",
   description:
-    "Learn more about BizMonk, your premier destination for finding the perfect commercial space in the Greater Toronto Area. We specialize in restaurant, retail, and franchise locations across Ontario.",
+    "Learn more about BizHub, your premier destination for finding the perfect commercial space in the Greater Toronto Area. We specialize in restaurant, retail, and franchise locations across Ontario.",
 };
 
 const AboutPage = () => {
@@ -53,10 +53,10 @@ const AboutPage = () => {
         <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
           <div className="text-center lg:text-left">
             <h1 className="font-serif text-4xl font-bold sm:text-6xl text-slate-900 leading-tight">
-              About BizMonk
+              About BizHub
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Welcome to BizMonk, your premier destination for finding the
+              Welcome to BizHub, your premier destination for finding the
               perfect commercial space in the Greater Toronto Area. We
               specialize in connecting business owners with ideal locations for
               restaurants, convenience stores, franchises, and various
@@ -68,8 +68,8 @@ const AboutPage = () => {
           <div className="mt-12 lg:mt-0 flex justify-center lg:justify-end">
             <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl border-8 border-white/50">
               <img
-                src="/profile2.jpeg"
-                alt="Ravi Singh Godara - BizMonk"
+                src="/person.jpg"
+                alt="Ravi Singh Godara - BizHub"
                 className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
               />
             </div>
@@ -113,7 +113,7 @@ const AboutPage = () => {
         <section className="py-12 border-y border-slate-100">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-serif text-3xl font-bold text-slate-900 text-center mb-10">
-              Why Choose BizMonk?
+              Why Choose BizHub?
             </h2>
             <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
               {whyChooseUs.map((text, index) => (

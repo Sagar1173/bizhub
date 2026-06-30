@@ -9,12 +9,12 @@ import { pickPropertyMainImage } from "@/lib/media";
 export const metadata = {
   title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
   description:
-    "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+    "Looking for a business in Greater Toronto Area? Bizhub is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
   keywords: "Restaurants, Convenience Stores, Businesses for Sale, Ontario",
   openGraph: {
     title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
     description:
-      "Looking for a business in Greater Toronto Area? Bizmonk is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+      "Looking for a business in Greater Toronto Area? Bizhub is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
     images: "/office.jpeg",
   },
 };
@@ -25,7 +25,7 @@ export default async function Home() {
       title: "Featured Listings",
       businessType: undefined,
       cityToPass: undefined,
-      officeName: "ELIXIR REAL ESTATE INC.",
+      officeName: "BIZHUB REAL ESTATE INC.",
       href: "/featured-listings",
       top: 10,
     },
@@ -105,11 +105,11 @@ export default async function Home() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Bizmonk",
-              url: "https://www.bizmonk.ca",
-              logo: "https://www.bizmonk.ca/office.jpeg",
+              name: "Bizhub",
+              url: "https://www.bizhub.ca",
+              logo: "https://www.bizhub.ca/office.jpeg",
               description:
-                "Bizmonk connects buyers and sellers of restaurants, convenience stores, and other businesses for sale across Ontario.",
+                "Bizhub connects buyers and sellers of restaurants, convenience stores, and other businesses for sale across Ontario.",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "1065 Canadian Place #207",
@@ -118,7 +118,7 @@ export default async function Home() {
                 postalCode: "L4W 0C2",
                 addressCountry: "CA",
               },
-              email: "mailto:info@bizmonk.ca",
+              email: "mailto:info@bizhub.ca",
               telephone: ["+1-905-226-7284"],
             }),
           }}

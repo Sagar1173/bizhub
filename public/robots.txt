@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Point to sitemap
-Sitemap: https://bizmonk.ca/sitemap.xml 
+Sitemap: https://bizhub.ca/sitemap.xml 

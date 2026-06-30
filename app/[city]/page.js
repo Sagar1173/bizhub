@@ -8,11 +8,11 @@ import { getPropertyImageCandidates, pickPropertyMainImage } from "@/lib/media";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
-  "https://bizmonk.ca";
+  "https://bizhub.ca";
 
 const toOgImage = (url, alt) => {
   if (!url) return null;
-  return { url, alt: alt || "Bizmonk listing" };
+  return { url, alt: alt || "bizhub listing" };
 };
 
 export async function generateMetadata({ params, searchParams }) {
@@ -52,11 +52,11 @@ export async function generateMetadata({ params, searchParams }) {
   const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
 
   const title = businessType
-    ? `${businessLabel} ${listingLabel} in ${cityName} | Bizmonk`
-    : `Business Opportunities in ${cityName} | Bizmonk`;
+    ? `${businessLabel} ${listingLabel} in ${cityName} | Bizhub`
+    : `Business Opportunities in ${cityName} | Bizhub`;
 
   const description = businessType
-    ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizmonk.`
+    ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`
     : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`;
 
   let ogImageUrl = null;
@@ -96,7 +96,7 @@ export async function generateMetadata({ params, searchParams }) {
       title,
       description,
       url: canonicalUrl,
-      siteName: "Bizmonk",
+      siteName: "Bizhub",
       type: "website",
       locale: "en_CA",
       images: ogImage ? [ogImage] : undefined,
@@ -133,7 +133,7 @@ export default async function CityPage({ params, searchParams }) {
   const cityToPass = slugToCity(city);
 
   const featuredMeta = await fetchProperties({
-    cityToPass, top: 1, skip: 0, businessType, listingType, sort, beds, baths, minPrice, maxPrice, officeName: "ELIXIR REAL ESTATE INC.",
+    cityToPass, top: 1, skip: 0, businessType, listingType, sort, beds, baths, minPrice, maxPrice, officeName: "BIZHUB REAL ESTATE INC.",
   });
   const featuredTotal = featuredMeta.totalCount || 0;
 
@@ -143,7 +143,7 @@ export default async function CityPage({ params, searchParams }) {
   if (globalSkip < featuredTotal) {
     const fetchTop = Math.min(limit, featuredTotal - globalSkip);
     const featuredData = await fetchProperties({
-      cityToPass, top: fetchTop, skip: globalSkip, officeName: "ELIXIR REAL ESTATE INC.",
+      cityToPass, top: fetchTop, skip: globalSkip, officeName: "BIZHUB REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     combinedItems.push(...featuredData.items);
@@ -155,14 +155,14 @@ export default async function CityPage({ params, searchParams }) {
   if (remainingSlots > 0) {
     const standardSkip = Math.max(0, globalSkip - featuredTotal);
     const standardData = await fetchProperties({
-      cityToPass, top: remainingSlots, skip: standardSkip, excludeOfficeName: "ELIXIR REAL ESTATE INC.",
+      cityToPass, top: remainingSlots, skip: standardSkip, excludeOfficeName: "BIZHUB REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     combinedItems.push(...standardData.items);
     standardTotal = standardData.totalCount;
   } else {
     const standardData = await fetchProperties({
-      cityToPass, top: 1, skip: 0, excludeOfficeName: "ELIXIR REAL ESTATE INC.",
+      cityToPass, top: 1, skip: 0, excludeOfficeName: "BIZHUB REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     standardTotal = standardData.totalCount;
@@ -210,7 +210,7 @@ export default async function CityPage({ params, searchParams }) {
   const headingTitle = businessType
     ? `${businessLabel} ${listingLabel} in ${cityName}`
     : `Business Opportunities ${listingLabel} in ${cityName}`;
-  const headingDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on bizmonk.`;
+  const headingDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`;
 
   const products = itemsWithMedia.map((property) => {
     const href = `/${city}/${generatePropertySlug(property)}`;

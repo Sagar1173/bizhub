@@ -15,11 +15,12 @@ const AgentFooter = () => {
   };
 
   const footerCities = [
-    "Toronto",
-    "Brampton",
-    "Mississauga",
-    "Markham",
-    "Vaughan",
+     "Toronto",
+  "Mississauga",
+  "Brampton",
+  "Oakville",
+  "Burlington",
+  "Milton"
   ];
   const footerBusinessTypes = [
     "Restaurant",
@@ -43,8 +44,8 @@ const AgentFooter = () => {
           <div className="w-full md:w-1/3 flex justify-center  md:justify-start">
             <div className="relative w-full max-w-[24rem] aspect-square rounded-full overflow-hidden grayscale-[0.2] border border-gray-200">
               <img
-                src="/profile2.jpeg"
-                alt="Ravi Singh Godara - Real Estate Sales Person"
+                src="/person.jpg"
+                alt=" Real Estate Sales Person"
                 className="block w-full h-full rounded-full object-cover object-top"
               />
             </div>
@@ -58,7 +59,7 @@ const AgentFooter = () => {
             {/* Brokerage Identity */}
             <div className="mb-2">
               <h2 className="text-2xl font-serif tracking-tight text-slate-900 uppercase ">
-                Ravi Singh Godara
+                Jason Statham
               </h2>
               <p className="text-slate-900 font-bold text-xs tracking-[0.2em] uppercase mb-0.5">
                 Real Estate Sales Person
@@ -66,7 +67,7 @@ const AgentFooter = () => {
               <div className="h-px w-12 bg-slate-200 mx-auto md:mx-0 mb-2" />
 
               <p className="text-slate-900 font-bold text-sm tracking-wide uppercase">
-                ELIXIR Real Estate INC. Brokerage
+                BizHub Real Estate INC. Brokerage
               </p>
               <p className="text-slate-900 text-sm ">Brokerage</p>
             </div>
@@ -80,10 +81,10 @@ const AgentFooter = () => {
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <Mail size={14} className="text-slate-900" />
                 <a
-                  href="mailto:info@bizmonk.ca"
+                  href="mailto:info@bizhub.ca"
                   className="hover:text-amber-700 transition-colors"
                 >
-                  info@bizmonk.ca
+                  info@bizhub.ca
                 </a>
               </div>
               <div className="flex gap-3 justify-center md:justify-start">
@@ -170,7 +171,7 @@ const AgentFooter = () => {
                 relating to real estate for sale on this website comes in part
                 from the Internet Data Exchange program of the Multiple Listing
                 Service. Real estate listings held by brokerage firms other than
-                Team Ravi - Elixir Real Estate Inc. Brokerage, may be marked
+                Team Ravi - BIZHUB Real Estate Inc. Brokerage, may be marked
                 with the Internet Data Exchange logo and detailed information
                 about those properties will include the name of the listing
                 broker(s) when required by the MLS. Copyright &copy;2026 All
@@ -214,7 +215,7 @@ const AgentFooter = () => {
               className="h-7 w-auto mx-auto mt-5 mb-3"
             />
             <p className="text-sm text-slate-700">
-              &copy; 2026 Bizmonk. All rights reserved.
+              &copy; 2026 Bizhub. All rights reserved.
             </p>
             <p className="text-[11px] text-slate-500 mt-2">
               Website Designed by{" "}
