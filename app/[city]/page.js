@@ -8,11 +8,11 @@ import { getPropertyImageCandidates, pickPropertyMainImage } from "@/lib/media";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
-  "https://bizhub.ca";
+  "https://c21.ca";
 
 const toOgImage = (url, alt) => {
   if (!url) return null;
-  return { url, alt: alt || "bizhub listing" };
+  return { url, alt: alt || "Century 21 Canada listing" };
 };
 
 export async function generateMetadata({ params, searchParams }) {
@@ -52,11 +52,11 @@ export async function generateMetadata({ params, searchParams }) {
   const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
 
   const title = businessType
-    ? `${businessLabel} ${listingLabel} in ${cityName} | Bizhub`
-    : `Business Opportunities in ${cityName} | Bizhub`;
+    ? `${businessLabel} ${listingLabel} in ${cityName} | Century 21 Canada`
+    : `Business Opportunities in ${cityName} | Century 21 Canada`;
 
   const description = businessType
-    ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`
+    ? `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Century 21 Canada.`
     : `${cityName} businesses for sale. Book a showing for gas stations, restaurants, motels, convenience stores and lands. Prices from $1 to $5,000,000. Open houses available.`;
 
   let ogImageUrl = null;
@@ -96,7 +96,7 @@ export async function generateMetadata({ params, searchParams }) {
       title,
       description,
       url: canonicalUrl,
-      siteName: "Bizhub",
+      siteName: "Century 21 Canada",
       type: "website",
       locale: "en_CA",
       images: ogImage ? [ogImage] : undefined,
@@ -133,7 +133,7 @@ export default async function CityPage({ params, searchParams }) {
   const cityToPass = slugToCity(city);
 
   const featuredMeta = await fetchProperties({
-    cityToPass, top: 1, skip: 0, businessType, listingType, sort, beds, baths, minPrice, maxPrice, officeName: "BIZHUB REAL ESTATE INC.",
+    cityToPass, top: 1, skip: 0, businessType, listingType, sort, beds, baths, minPrice, maxPrice, officeName: "Century 21 Canada REAL ESTATE INC.",
   });
   const featuredTotal = featuredMeta.totalCount || 0;
 
@@ -143,7 +143,7 @@ export default async function CityPage({ params, searchParams }) {
   if (globalSkip < featuredTotal) {
     const fetchTop = Math.min(limit, featuredTotal - globalSkip);
     const featuredData = await fetchProperties({
-      cityToPass, top: fetchTop, skip: globalSkip, officeName: "BIZHUB REAL ESTATE INC.",
+      cityToPass, top: fetchTop, skip: globalSkip, officeName: "Century 21 Canada REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     combinedItems.push(...featuredData.items);
@@ -155,14 +155,14 @@ export default async function CityPage({ params, searchParams }) {
   if (remainingSlots > 0) {
     const standardSkip = Math.max(0, globalSkip - featuredTotal);
     const standardData = await fetchProperties({
-      cityToPass, top: remainingSlots, skip: standardSkip, excludeOfficeName: "BIZHUB REAL ESTATE INC.",
+      cityToPass, top: remainingSlots, skip: standardSkip, excludeOfficeName: "Century 21 Canada REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     combinedItems.push(...standardData.items);
     standardTotal = standardData.totalCount;
   } else {
     const standardData = await fetchProperties({
-      cityToPass, top: 1, skip: 0, excludeOfficeName: "BIZHUB REAL ESTATE INC.",
+      cityToPass, top: 1, skip: 0, excludeOfficeName: "Century 21 Canada REAL ESTATE INC.",
       businessType, listingType, sort, beds, baths, minPrice, maxPrice
     });
     standardTotal = standardData.totalCount;
@@ -210,7 +210,7 @@ export default async function CityPage({ params, searchParams }) {
   const headingTitle = businessType
     ? `${businessLabel} ${listingLabel} in ${cityName}`
     : `Business Opportunities ${listingLabel} in ${cityName}`;
-  const headingDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`;
+  const headingDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Century 21 Canada.`;
 
   const products = itemsWithMedia.map((property) => {
     const href = `/${city}/${generatePropertySlug(property)}`;
@@ -229,7 +229,7 @@ export default async function CityPage({ params, searchParams }) {
       [property.StreetNumber, property.StreetName, property.City]
         .filter(Boolean)
         .join(" ");
-    const agency = property.ListOfficeName || "Real Estate Professionals Inc.";
+    const agency = property.ListOfficeName || "Century 21 Canada REAL ESTATE INC.";
 
     return {
       "@type": "Product",
@@ -288,10 +288,10 @@ export default async function CityPage({ params, searchParams }) {
       <main>
         <div className="w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
           <div className="mb-3 sm:mb-4">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 capitalize leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold capitalize ">
               {headingTitle}
             </h1>
-            <p className="text-gray-600 text-sm sm:text-base mt-2 leading-relaxed">
+            <p className="text-sm sm:text-base mt-2 ">
               {headingDescription}
             </p>
           </div>

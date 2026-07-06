@@ -98,7 +98,7 @@ export default function PropertyCard({ property }) {
   const href = `/${cityToSlug(city)}/${generatePropertySlug(property)}`;
 
   return (
-    <div className="group w-full bg-white rounded-xl overflow-hidden shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-slate-300">
+    <div className="group w-full bg-white rounded-xl overflow-hidden  transition-all duration-300 hover:-translate-y-1 ">
       <Link
         href={href}
         scroll={true}
@@ -123,7 +123,7 @@ export default function PropertyCard({ property }) {
           )}
 
           {/* Featured Badge */}
-          {agency === "BIZHUB REAL ESTATE INC." && (
+          {agency === "Century 21 Canada REAL ESTATE INC." && (
             <div className="absolute top-3 left-3 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full shadow-sm z-10">
               Featured
             </div>
@@ -148,13 +148,19 @@ export default function PropertyCard({ property }) {
         </div>
 
         {/* Content Section */}
-        <div className="px-3.5 pt-2 pb-4 space-y-1">
+        <div className=" pt-2 pb-4 space-y-1">
           <div>
             <h3
-              className="text-xl sm:text-2xl font-bold"
-              style={{ color: "lab(13 29.78 -57.75)" }}
+              className="flex text-xl sm:text-2xl font-bold"
+              // style={{ color: "lab(13 29.78 -57.75)" }}
             >
               {formattedPrice}
+              {property.TransactionType && (
+                  <div className="flex items-center text-xs text-gray-700 font-medium uppercase tracking-tighter">
+                    <span className="mx-2 h-1 w-1 rounded-full bg-emerald-500 shadow-sm"></span>
+                    <span>{property.TransactionType.replace("For ", "")}</span>
+                  </div>
+                )}
             </h3>
             <p className="text-sm text-gray-700 truncate font-medium">
               {fullAddress}
@@ -163,27 +169,23 @@ export default function PropertyCard({ property }) {
 
           {/* Property Specs */}
           <div className="space-y-1.5 text-gray-700 mt-2">
+            <p className="text-xs text-gray-700 truncate font-medium">
+              Listing Brokerage : {agency}
+            </p>
             {/* Area and MLS Line */}
             <div className="flex items-center justify-start gap-3">
               <p className="flex items-center text-xs text-gray-700 font-medium uppercase tracking-tighter">
                 <span>MLS® {mls}</span>
-                {property.TransactionType && (
-                  <>
-                    <span className="mx-2 h-1 w-1 rounded-full bg-emerald-500 shadow-sm"></span>
-                    <span>{property.TransactionType.replace("For ", "")}</span>
-                  </>
-                )}
+                
               </p>
             </div>
 
-            <p className="text-xs text-gray-700 truncate font-medium">
-              Listing Brokerage : {agency}
-            </p>
+            
           </div>
         </div>
       </Link>
 
-      <div className="px-3.5 pb-3">
+      <div className=" pb-3">
         <RequestInfoModal
           propertyTitle={fullAddress}
           propertyMls={mls}

@@ -9,9 +9,9 @@ import {
 import RegisterNowModal from "@/components/RegisterNowModal";
 
 export const metadata = {
-  title: "About BizHub | Your Premier Commercial Real Estate Destination",
+  title: "About Century 21 Canada | Your Premier Commercial Real Estate Destination",
   description:
-    "Learn more about BizHub, your premier destination for finding the perfect commercial space in the Greater Toronto Area. We specialize in restaurant, retail, and franchise locations across Ontario.",
+    "Learn more about Century 21 Canada, your premier destination for finding the perfect commercial space in the Greater Toronto Area. We specialize in restaurant, retail, and franchise locations across Ontario.",
 };
 
 const AboutPage = () => {
@@ -20,23 +20,23 @@ const AboutPage = () => {
       title: "Restaurant Spaces",
       description:
         "Prime locations for restaurants, cafes, and food service businesses",
-      icon: <Utensils className="h-6 w-6 text-blue-600" />,
+      icon: <Utensils className="h-6 w-6 text-[#E35335]" />,
     },
     {
       title: "Retail Solutions",
       description: "Ideal spaces for convenience stores and retail businesses",
-      icon: <Store className="h-6 w-6 text-blue-600" />,
+      icon: <Store className="h-6 w-6 text-[#E35335]" />,
     },
     {
       title: "Franchise Opportunities",
       description: "Strategic locations for franchise expansion and growth",
-      icon: <Building2 className="h-6 w-6 text-blue-600" />,
+      icon: <Building2 className="h-6 w-6 text-[#E35335]" />,
     },
     {
       title: "Market Analysis",
       description:
         "Comprehensive insights into Ontario's commercial real estate market",
-      icon: <LineChart className="h-6 w-6 text-blue-600" />,
+      icon: <LineChart className="h-6 w-6 text-[#E35335]" />,
     },
   ];
 
@@ -53,10 +53,10 @@ const AboutPage = () => {
         <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
           <div className="text-center lg:text-left">
             <h1 className="font-serif text-4xl font-bold sm:text-6xl text-slate-900 leading-tight">
-              About BizHub
+              Century 21 Canada
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Welcome to BizHub, your premier destination for finding the
+              Welcome to Century 21 Canada, your premier destination for finding the
               perfect commercial space in the Greater Toronto Area. We
               specialize in connecting business owners with ideal locations for
               restaurants, convenience stores, franchises, and various
@@ -68,8 +68,8 @@ const AboutPage = () => {
           <div className="mt-12 lg:mt-0 flex justify-center lg:justify-end">
             <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl border-8 border-white/50">
               <img
-                src="/person.jpg"
-                alt="Ravi Singh Godara - BizHub"
+                src="/sha-century.jpg"
+                alt="Shahzad Anjum - Century 21 Canada"
                 className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
               />
             </div>
@@ -85,7 +85,7 @@ const AboutPage = () => {
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
                 Our Vision
               </h2>
-              <div className="h-1 w-12 bg-blue-600 mt-4 mb-6 rounded-full" />
+              <div className="h-1 w-12 bg-[#E35335] mt-4 mb-6 rounded-full" />
               <p className="text-slate-600 leading-relaxed text-lg">
                 Our vision is to become Ontario's most trusted platform for
                 commercial real estate and business space solutions. We are
@@ -98,7 +98,7 @@ const AboutPage = () => {
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
                 Our Mission
               </h2>
-              <div className="h-1 w-12 bg-blue-600 mt-4 mb-6 rounded-full" />
+              <div className="h-1 w-12 bg-[#E35335] mt-4 mb-6 rounded-full" />
               <p className="text-slate-600 leading-relaxed text-lg">
                 Our mission is to simplify the process of finding and securing
                 the perfect business location in the GTA and beyond. We aim to
@@ -110,19 +110,19 @@ const AboutPage = () => {
         </section>
 
         {/* Why Choose Us */}
-        <section className="py-12 border-y border-slate-100">
+        <section className="py-12 ">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-serif text-3xl font-bold text-slate-900 text-center mb-10">
-              Why Choose BizHub?
+              Why Choose Century 21 Canada?
             </h2>
             <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
               {whyChooseUs.map((text, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center text-center p-6 bg-slate-50 rounded-2xl border border-slate-100"
+                  className="flex flex-col items-center text-center p-6 bg-slate-50 rounded-2xl "
                 >
-                  <div className="bg-blue-600/10 p-3 rounded-full mb-4">
-                    <CheckCircle2 className="h-6 w-6 text-blue-600" />
+                  <div className="bg-[#E35335]/10 p-3 rounded-full mb-4">
+                    <CheckCircle2 className="h-6 w-6 text-[#E35335]" />
                   </div>
                   <span className="font-semibold text-slate-800 leading-snug">
                     {text}
@@ -139,7 +139,7 @@ const AboutPage = () => {
             <h2 className="font-serif text-3xl font-bold sm:text-4xl text-slate-900">
               What We Do
             </h2>
-            <p className="mt-4 text-slate-600 text-lg">
+            <p className="mt-4 text-lg">
               Specialized solutions for every business need
             </p>
           </div>
@@ -149,13 +149,13 @@ const AboutPage = () => {
                 key={index}
                 className="p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 group"
               >
-                <div className="bg-slate-50 p-4 rounded-2xl w-fit group-hover:bg-blue-50 transition-colors mb-6">
+                <div className="bg-slate-50 p-4 rounded-2xl w-fit group-hover:bg-[#E35335]/30 transition-colors mb-6">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-xl text-slate-900 mb-3">
+                <h3 className="font-bold text-xl mb-3">
                   {item.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="">
                   {item.description}
                 </p>
               </div>

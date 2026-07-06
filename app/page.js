@@ -17,12 +17,12 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
   description:
-    "Looking for a business in Greater Toronto Area? Bizhub is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+    "Looking for a business in Greater Toronto Area? Century 21 Canada is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
   keywords: "Restaurants, Convenience Stores, Businesses for Sale, Ontario",
   openGraph: {
     title: "Restaurants, Convenience Stores and Businesses for Sale in Ontario",
     description:
-      "Looking for a business in Greater Toronto Area? Bizhub is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
+      "Looking for a business in Greater Toronto Area? Century 21 Canada is the best place to find your business. We have a wide range of businesses for sale in Ontario.",
     images: "/office.jpeg",
   },
 };
@@ -33,7 +33,7 @@ export default async function Home() {
       title: "Featured Listings",
       businessType: undefined,
       cityToPass: undefined,
-      officeName: "BIZHUB REAL ESTATE INC.",
+      officeName: "Century 21 Canada REAL ESTATE INC.",
       href: "/featured-listings",
       top: 10,
     },
@@ -113,11 +113,11 @@ export default async function Home() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Bizhub",
-              url: "https://www.bizhub.ca",
-              logo: "https://www.bizhub.ca/office.jpeg",
+              name: "Century 21 Canada",
+              url: "https://www.c21.ca",
+              logo: "https://www.c21.ca/office.jpeg",
               description:
-                "Bizhub connects buyers and sellers of restaurants, convenience stores, and other businesses for sale across Ontario.",
+                "Century 21 Canada connects buyers and sellers of restaurants, convenience stores, and other businesses for sale across Ontario.",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "1065 Canadian Place #207",
@@ -126,8 +126,8 @@ export default async function Home() {
                 postalCode: "L4W 0C2",
                 addressCountry: "CA",
               },
-              email: "mailto:info@bizhub.ca",
-              telephone: ["+1-905-226-7284"],
+              email: "mailto:shahzad.anjum@century21.ca",
+              telephone: ["+1-905-111-1111"],
             }),
           }}
         />
@@ -145,7 +145,7 @@ export default async function Home() {
 
         {/* <InstagramFeed /> */}
         <TestimonialsSection />
-        <ContactSection header="Couldn't find what you are looking for?" />
+        <ContactSection header="Get In Touch" />
         <RegisterNowModal />
       </main>
     </div>

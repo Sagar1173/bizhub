@@ -44,7 +44,7 @@ const AgentFooter = () => {
           <div className="w-full md:w-1/3 flex justify-center  md:justify-start">
             <div className="relative w-full max-w-[24rem] aspect-square rounded-full overflow-hidden grayscale-[0.2] border border-gray-200">
               <img
-                src="/person.jpg"
+                src="/sha-century.jpg"
                 alt=" Real Estate Sales Person"
                 className="block w-full h-full rounded-full object-cover object-top"
               />
@@ -59,7 +59,7 @@ const AgentFooter = () => {
             {/* Brokerage Identity */}
             <div className="mb-2">
               <h2 className="text-2xl font-serif tracking-tight text-slate-900 uppercase ">
-                Jason Statham
+                Shahzad Anjum
               </h2>
               <p className="text-slate-900 font-bold text-xs tracking-[0.2em] uppercase mb-0.5">
                 Real Estate Sales Person
@@ -67,7 +67,7 @@ const AgentFooter = () => {
               <div className="h-px w-12 bg-slate-200 mx-auto md:mx-0 mb-2" />
 
               <p className="text-slate-900 font-bold text-sm tracking-wide uppercase">
-                BizHub Real Estate INC. Brokerage
+                Century 21 Canada
               </p>
               <p className="text-slate-900 text-sm ">Brokerage</p>
             </div>
@@ -76,15 +76,15 @@ const AgentFooter = () => {
             <div className="w-full text-base text-slate-800">
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <Phone size={14} className="text-slate-900" />
-                <span>905-226-7284</span>
+                <span>905-111-1111</span>
               </div>
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <Mail size={14} className="text-slate-900" />
                 <a
-                  href="mailto:info@bizhub.ca"
+                  href="mailto:shahzad.anjum@century21.ca"
                   className="hover:text-amber-700 transition-colors"
                 >
-                  info@bizhub.ca
+                  shahzad.anjum@century21.ca
                 </a>
               </div>
               <div className="flex gap-3 justify-center md:justify-start">
@@ -171,7 +171,7 @@ const AgentFooter = () => {
                 relating to real estate for sale on this website comes in part
                 from the Internet Data Exchange program of the Multiple Listing
                 Service. Real estate listings held by brokerage firms other than
-                Team Ravi - BIZHUB Real Estate Inc. Brokerage, may be marked
+                Century 21 Canada, may be marked
                 with the Internet Data Exchange logo and detailed information
                 about those properties will include the name of the listing
                 broker(s) when required by the MLS. Copyright &copy;2026 All
@@ -215,7 +215,7 @@ const AgentFooter = () => {
               className="h-7 w-auto mx-auto mt-5 mb-3"
             />
             <p className="text-sm text-slate-700">
-              &copy; 2026 Bizhub. All rights reserved.
+              &copy; 2026 Century 21 Canada. All rights reserved.
             </p>
             <p className="text-[11px] text-slate-500 mt-2">
               Website Designed by{" "}

@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Point to sitemap
-Sitemap: https://bizhub.ca/sitemap.xml 
+Sitemap: https://c21.ca/sitemap.xml 

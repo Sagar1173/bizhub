@@ -45,7 +45,7 @@ const CityComponent = ({
   const businessLabel = businessType
     ? BUSINESS_TYPE_DISPLAY_MAP[businessType] || businessType
     : "Business Opportunities";
-  const pageDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`;
+  const pageDescription = `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Century 21 Canada.`;
 
   const buildPageHref = (page) => {
     const params = new URLSearchParams();

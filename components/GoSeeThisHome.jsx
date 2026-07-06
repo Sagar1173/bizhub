@@ -70,17 +70,17 @@ export default function GoSeeThisHome() {
       <div className="flex items-center gap-3 mb-3 p-2 bg-transparent rounded-xl">
         <div className="h-14 w-14 rounded-full overflow-hidden shrink-0 border border-gray-200">
           <img
-            src="/profile2.jpeg"
-            alt="Ravi Singh Godara"
+            src="/sha-century.jpg"
+            alt="Shahzad Anjum"
             className="h-full w-full object-cover object-top"
           />
         </div>
         <div className="min-w-0">
           <h2 className="text-xl md:text-2xl font-serif font-semibold text-[#1a1a1a] leading-tight">
-            Ravi Singh Godara
+            Shahzad Anjum
           </h2>
           <p className="text-sm md:text-base text-gray-700 font-medium">
-            905-226-7284
+            905-111-1111
           </p>
         </div>
       </div>
@@ -146,7 +146,7 @@ export default function GoSeeThisHome() {
           >
             I would like to book a tour of this business. I consent to receive
             marketing and promotional messages by phone, text message, and email
-            from Ravi Singh Godara.
+            from Shahzad Anjum.
           </label>
         </div>
 
@@ -162,7 +162,7 @@ export default function GoSeeThisHome() {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-blue-700 cursor-pointer hover:bg-blue-600 text-white text-base font-bold py-3 rounded-full mt-2 transition-colors duration-200 ${
+          className={`w-full bg-black cursor-pointer hover:bg-black/85 text-white text-base font-bold py-3 rounded-full mt-2 ${
             loading ? "opacity-70 cursor-not-allowed" : ""
           }`}
         >

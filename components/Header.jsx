@@ -16,6 +16,7 @@ import { cityToSlug, slugToCity } from "@/lib/slug";
 import { usePathname, useRouter } from "next/navigation";
 import nProgress from "nprogress";
 import { ALL_ONTARIO_CITIES, TOP_ONTARIO_CITIES } from "@/constants/cities";
+import Image from "next/image";
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -52,7 +53,7 @@ const Header = () => {
   const topCities = TOP_ONTARIO_CITIES;
 
   const navLinks = [
-    { name: "Home", href: "/" },
+
     { name: "Featured", href: "/featured-listings" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
@@ -144,8 +145,8 @@ const Header = () => {
     query.trim() === ""
       ? []
       : ALL_ONTARIO_CITIES.filter((city) =>
-          city.toLowerCase().includes(query.toLowerCase()),
-        );
+        city.toLowerCase().includes(query.toLowerCase()),
+      );
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -245,22 +246,29 @@ const Header = () => {
       <header
         className={cn(
           "overflow-x-clip overflow-y-visible w-full z-50",
-          "relative bg-white text-black border-b border-gray-100",
+          "relative bg-white text-black",
         )}
       >
-        <div className="w-full px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4">
+        <div className="w-full px-4 sm:px-6 lg:px- ">
           <div className="flex items-center justify-between">
             <div className="flex-1 min-w-0 flex items-center justify-start gap-2 sm:gap-4 md:gap-6">
-              <Link href="/" className="flex shrink-0">
-                <span className="text-2xl md:text-3xl font-bold text-blue-950">
-                  bizhub.
-                </span>
+              <Link
+                href="/"
+                className="flex items-center shrink-0"
+              >
+                <Image
+                  src="/icons/logo.png"
+                  alt="Century 21 Canada"
+                  width={500}
+                  height={100}
+                  priority
+                  className="h-20 md:h-24 w-auto object-contain -ml-5"
+                />
               </Link>
-
               {showHeaderSearch && (
                 <div
                   ref={desktopSearchRef}
-                  className="relative flex-1 min-w-0 max-w-md ml-1 md:ml-2 mr-2 md:mr-3"
+                  className="relative flex-1 min-w-0 max-w-md mr-2 md:mr-3"
                 >
                   <div
                     className={cn(
@@ -321,25 +329,29 @@ const Header = () => {
               <nav className="flex items-center gap-4 xl:gap-6 flex-nowrap whitespace-nowrap">
                 <Link
                   href="/"
-                  className="text-sm font-semibold text-gray-800 hover:text-blue-600 transition-colors"
+                  className="text-sm font-semibold text-gray-800 hover:text-[#E35335] transition-colors"
                 >
                   Home
                 </Link>
 
                 {/* CITIES DROPDOWN — Top 15 Ontario cities, 2 columns */}
+                {/* CITIES DROPDOWN */}
                 <div className="relative group py-2">
-                  <button className="flex items-center gap-1 text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                  {/* No px-8 here, keeping text alignment consistent */}
+                  <button className="flex items-center gap-1 text-sm font-semibold text-gray-800 group-hover:text-[#E35335] transition-colors">
                     Cities{" "}
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                   </button>
 
-                  <div className="absolute top-full left-0 w-88 bg-white shadow-xl border border-gray-100 rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-100 overflow-hidden">
+                  {/* Changed left-0 to -left-4 or -left-12 to shift the massive menu box leftward smoothly */}
+                  {/* Changed left-0 to left-1/2 -translate-x-1/2 */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-88 bg-white shadow-xl border border-gray-100 rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-100 overflow-hidden">
                     <div className="grid grid-cols-2 gap-1 py-2 px-2">
                       {topCities.map((city) => (
                         <Link
                           key={city}
                           href={`/${cityToSlug(city)}`}
-                          className="px-4 py-2.5 text-[14px] font-medium text-gray-800 hover:bg-gray-50 hover:text-blue-600 transition-colors rounded-lg"
+                          className="px-4 py-2.5 text-[14px] font-medium text-gray-800 hover:bg-gray-50 hover:text-[#E35335] transition-colors rounded-lg"
                         >
                           {city}
                         </Link>
@@ -390,11 +402,11 @@ const Header = () => {
                   </div>
                 </div> */}
 
-                {navLinks.slice(1).map((link) => (
+                {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="text-sm font-semibold text-gray-800 hover:text-blue-600 transition-colors"
+                    className="text-sm font-semibold text-gray-800 hover:text-[#E35335] transition-colors"
                   >
                     {link.name}
                   </Link>

@@ -194,7 +194,7 @@ export default function ScheduleViewing({ property }) {
         <button
           onClick={handleSchedule}
           disabled={loading}
-          className={`bg-blue-700 cursor-pointer hover:bg-blue-600 text-white py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transition-all ${
+          className={`bg-black cursor-pointer hover:bg-black/85 text-white py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transition-all ${
             loading ? "opacity-70 cursor-not-allowed" : ""
           }`}
         >

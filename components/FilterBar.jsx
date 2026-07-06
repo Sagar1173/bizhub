@@ -187,7 +187,7 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
   return (
     <>
       {/* Top Bar */}
-      <div className="sticky top-0 z-40 -mt-px bg-white/90 backdrop-blur border-b border-gray-100 w-full py-2">
+      <div className="sticky top-0 z-40 -mt-px bg-white/90 backdrop-blur w-full py-2">
         <div className="w-full px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2">
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-3 w-full min-w-0">

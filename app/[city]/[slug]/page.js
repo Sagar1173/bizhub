@@ -25,7 +25,7 @@ import RequestInfoModal from "@/components/RequestInfoModal";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
-  "https://bizhub.ca";
+  "https://c21.ca";
 
 const formatMoney = (value) => {
   if (value === null || value === undefined || value === "") return "-";
@@ -160,17 +160,17 @@ export async function generateMetadata({ params }) {
     const finalOgImage = ogImageUrl || fallbackImage;
 
     return {
-      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
-      description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
+      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Century 21 Canada`,
+      description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on c21.ca`,
       openGraph: {
-        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
-        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Century 21 Canada`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Century 21 Canada.`,
         images: finalOgImage ? [{ url: finalOgImage }] : undefined,
       },
       twitter: {
         card: "summary_large_image",
-        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
-        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Century 21 Canada`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Century 21 Canada.`,
         images: finalOgImage ? [finalOgImage] : undefined,
       },
     };
@@ -180,7 +180,7 @@ export async function generateMetadata({ params }) {
   const data = await fetchProperty(extractedSlug);
   if (!data) {
     return {
-      title: "Property Not Found | Bizhub",
+      title: "Property Not Found | Century 21 Canada",
       description: "The property you are looking for is no longer available.",
     };
   }
@@ -196,16 +196,16 @@ export async function generateMetadata({ params }) {
   const finalOgImage = ogImageUrl || fallbackImage;
 
   return {
-    title: `${address} · ${price}  | Bizhub`,
+    title: `${address} · ${price}  | Century 21 Canada`,
     description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
     openGraph: {
-      title: `${price} · ${address} | Bizhub`,
+      title: `${price} · ${address} | Century 21 Canada`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
       images: finalOgImage ? [{ url: finalOgImage }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${price} · ${address} | Bizhub`,
+      title: `${price} · ${address} | Century 21 Canada`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
       images: finalOgImage ? [finalOgImage] : undefined,
     },
@@ -552,7 +552,7 @@ export default async function SlugPage({ params, searchParams }) {
       availability: "https://schema.org/InStock",
       seller: {
         "@type": "Organization",
-        name: data.ListOfficeName || "Bizhub",
+        name: data.ListOfficeName || "Century 21 Canada",
       },
     },
   };
@@ -637,7 +637,7 @@ export default async function SlugPage({ params, searchParams }) {
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
               <h1
                 className="text-3xl md:text-5xl font-bold tracking-tight"
-                style={{ color: "lab(13 29.78 -57.75)" }}
+                
               >
                 ${formatMoney(property.price)}
                 <span className="ml-2 text-sm md:text-base font-semibold text-teal-700">

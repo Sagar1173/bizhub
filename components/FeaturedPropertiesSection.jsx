@@ -75,7 +75,7 @@ const FeaturedPropertiesSection = ({
                 window.scrollTo({ top: 0, left: 0, behavior: "auto" })
               }
               href={finalHref}
-              className="text-xl font-serif text-slate-900 tracking-tight hover:underline sm:text-2xl md:text-3xl"
+              className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-foreground  hover:underline"
             >
               {title || `Businesses for sale in ${cityName}`}{" "}
               <span className="ml-1 text-sm font-medium text-slate-800 sm:text-base md:text-xl">

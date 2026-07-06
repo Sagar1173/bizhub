@@ -140,7 +140,7 @@ export default function RequestInfoModal({
                     placeholder="Full Name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-grey-600 focus:ring-1 focus:ring-grey-600"
                   />
                 </div>
                 <div>
@@ -151,7 +151,7 @@ export default function RequestInfoModal({
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-grey-600 focus:ring-1 focus:ring-grey-600"
                   />
                 </div>
                 <div>
@@ -161,7 +161,7 @@ export default function RequestInfoModal({
                     placeholder="Phone Number"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-grey-600 focus:ring-1 focus:ring-grey-600"
                     autoComplete="tel"
                   />
                 </div>
@@ -173,13 +173,13 @@ export default function RequestInfoModal({
                     placeholder="Message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-grey-600 focus:ring-1 focus:ring-grey-600"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full rounded-full bg-blue-700 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800 ${
+                  className={`w-full rounded-full bg-black py-3 text-sm font-bold text-white transition-colors hover:bg-black/85${
                     loading ? "cursor-not-allowed opacity-70" : ""
                   }`}
                 >

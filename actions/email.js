@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const CRM_LEAD_URL =
   process.env.CRM_LEAD_URL ||
   "https://api.workmonk.io/api/people-api/create-from-homebaba/";
-const CRM_SENDER_EMAIL = process.env.CRM_SENDER_EMAIL || "info@bizhub.ca";
+const CRM_SENDER_EMAIL = process.env.CRM_SENDER_EMAIL || "shahzad.anjum@century21.ca";
 
 function splitFullName(fullName) {
   if (!fullName || typeof fullName !== "string") {
@@ -100,11 +100,11 @@ export const sendEmail = async ({ content, title = null }) => {
 
   const crmPromise = sendLeadToCrm({ content, title, contentArray });
 
-  const emailTitle = "Bizhub inquiry";
+  const emailTitle = "Century 21 Canada inquiry";
 
   const { data, error } = await resend.emails.send({
     from: "info@homebaba.ca",
-    to: ["info@bizhub.ca"],
+    to: ["shahzad.anjum@century21.ca"],
     subject: emailTitle,
     html: `<h1>${emailTitle}</h1><br/><ul>${contentArray
       .map((val) => `<li>${val}</li>`)

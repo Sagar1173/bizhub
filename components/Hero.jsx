@@ -119,7 +119,7 @@ const Hero = () => {
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full container-curbsite px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-foreground mx-auto">
-          Find Your Next Home in the <span className="">GTA</span>.
+          Find Your Next Home in the <span className="text-[#E35335]">GTA.</span>
         </h1>
 
         <p className="mt-3 text-[16px] sm:text-[18px] text-muted-foreground max-w-3xl mx-auto">
@@ -128,6 +128,56 @@ const Hero = () => {
         </p>
 
         <div ref={containerRef} className="relative mt-10 mx-auto max-w-3xl">
+  <div className="bg-white rounded-full border border-border shadow-sm hover:shadow-md transition-shadow p-1.5 flex items-stretch gap-2">
+    <div className="flex items-center gap-3 flex-1 px-5">
+      <Search className="cursor-pointer h-5 w-5 text-muted-foreground shrink-0" />
+      <input
+        type="text"
+        placeholder="Search by MLS®, address or city"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onFocus={() => setIsExpanded(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleSearch();
+          }
+        }}
+        className="w-full bg-transparent outline-none text-sm sm:text-base py-3 placeholder:text-muted-foreground"
+      />
+    </div>
+    <button
+      onClick={handleSearch}
+      disabled={isSearching}
+      aria-label="Search"
+      className="inline-flex items-center justify-center gap-2 rounded-full bg-black text-white px-8 py-3 text-sm font-semibold hover:opacity-90 transition shrink-0 disabled:cursor-not-allowed disabled:opacity-70"
+    >
+      {isSearching ? (
+        <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/35 border-t-white" />
+      ) : (
+        "Search"
+      )}
+    </button>
+  </div>
+
+  {/* Autocomplete suggestions — separate floating card, gap below the pill */}
+  {isExpanded && suggestions.length > 0 && (
+    <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-[100] max-h-72 overflow-auto rounded-2xl border border-border bg-white text-left shadow-lg">
+      {suggestions.map((city) => (
+        <button
+          key={city}
+          onClick={() => handleSelect(city)}
+          className="flex w-full items-center gap-3 border-b border-border/60 px-5 py-3 text-left text-foreground transition hover:bg-muted/30 last:border-0"
+        >
+          <MapPin className="h-4 w-4 text-muted-foreground" />
+          <span className="text-[15px] font-medium">{city}</span>
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+        {/* <div ref={containerRef} className="relative mt-10 mx-auto max-w-3xl">
           <div
             className={cn(
               "bg-white rounded-full border border-border shadow-sm hover:shadow-md transition-shadow p-1.5 flex items-stretch gap-2",
@@ -163,10 +213,10 @@ const Hero = () => {
                 "Search"
               )}
             </button>
-          </div>
+          </div> */}
 
           {/* Autocomplete suggestions */}
-          {isExpanded && suggestions.length > 0 && (
+          {/* {isExpanded && suggestions.length > 0 && (
             <div className="absolute left-0 right-0 top-full z-[100] max-h-72 overflow-auto rounded-b-2xl border border-t-0 border-border bg-white text-left shadow-lg">
               {suggestions.map((city) => (
                 <button
@@ -180,7 +230,7 @@ const Hero = () => {
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
         <div className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3 max-w-xl mx-auto">
           {POPULAR_CATEGORIES.map((cat) => (
@@ -682,7 +732,7 @@ export default Hero;
 
 
 
-// // //bizhub hero
+// // //Century 21 Canada hero
 // // "use client";
 
 // // import { Search, MapPin } from "lucide-react";

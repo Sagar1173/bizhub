@@ -121,7 +121,7 @@ export async function generateMetadata({ params }, parent) {
         franchiseData?.name +
         " Franchise Opportunity in " +
         locationText +
-        " | Bizhub",
+        " | Century 21 Canada",
       description: `${franchiseData?.name} franchise opportunities now available in ${locationText}. Start your own successful business with expert guidance and a trusted brand.`,
     };
     return metadata;

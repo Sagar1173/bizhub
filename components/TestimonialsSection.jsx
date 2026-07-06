@@ -24,7 +24,7 @@ const TestimonialsSection = () => {
       name: "Saravdeep Sethi",
       location: "North York, ON",
       service: "Rent Commercial (Feb 2026)",
-      text: "Excellent experience securing the right commercial space; noted Ravi was patient and knowledgeable.",
+      text: "Excellent experience securing the right commercial space; noted Shahzad Anjum was patient and knowledgeable.",
       initial: "S",
       bgColor: "bg-rose-100 text-rose-700",
     },
@@ -54,7 +54,7 @@ const TestimonialsSection = () => {
         {/* Testimonials */}
         <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">
           <div className="mb-6 text-center sm:mb-10 md:mb-14">
-            <h2 className="text-2xl font-serif text-slate-900 uppercase tracking-tight sm:text-3xl md:text-4xl">
+            <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-foreground">
               What our clients are saying
             </h2>
           </div>

@@ -61,10 +61,10 @@ const ContactSection = ({ header }) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10">
-          <p className="mx-auto mb-2 inline-flex items-center rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-[11px] ">
+          {/* <p className="mx-auto mb-2 inline-flex items-center rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-[11px] ">
             Get in touch
-          </p>
-          <h2 className="font-serif text-2xl font-bold text-slate-900 sm:text-3xl">
+          </p> */}
+          <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-foreground ">
             {header}
           </h2>
         </div>
@@ -81,13 +81,13 @@ const ContactSection = ({ header }) => {
             <span className="text-xs font-medium">(905) 111-1111</span>
           </a>
           <a
-            href="mailto:info@bizhub.ca"
+            href="mailto:shahzad.anjum@century21.ca"
             className="group inline-flex items-center gap-2 rounded-full  px-4 py-2 text-slate-900 transition bg-slate-50"
           >
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-900 transition group-hover:bg-slate-200/70">
               <Mail className="h-4 w-4" />
             </span>
-            <span className="text-xs font-medium">info@bizhub.ca</span>
+            <span className="text-xs font-medium">shahzad.anjum@century21.ca</span>
           </a>
           <span className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-4 py-2 text-slate-900">
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-900">
@@ -161,7 +161,7 @@ const ContactSection = ({ header }) => {
                   size="lg"
                   type="submit"
                   disabled={loading}
-                  className="group h-11 rounded-full bg-[#0075d7] px-7 font-semibold text-white shadow-sm transition hover:bg-[#006ac2] focus-visible:ring-2 focus-visible:ring-[#0075d7]/25 focus-visible:ring-offset-0 disabled:opacity-70"
+                  className="group h-11 rounded-full bg-black p-7 px-12 font-semibold text-white shadow-sm transition hover:bg-black/85  disabled:opacity-70"
                 >
                   {loading ? "Sending..." : "Send Message"}
                   <Send className="h-4 w-4 transition group-hover:translate-x-0.5" />

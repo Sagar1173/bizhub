@@ -70,7 +70,7 @@ export default function HomeDetailsTabs({
                 onClick={() => setActiveTab(tab.key)}
                 className={`mb-2 cursor-pointer rounded-full px-3 py-1.5 text-base font-semibold transition-colors duration-300 md:text-lg ${
                   isActive
-                    ? "text-blue-700 bg-blue-50"
+                    ? "text-[#E35335] bg-[#E35335]/5"
                     : "text-slate-900 hover:bg-slate-100"
                 }`}
               >
@@ -79,7 +79,7 @@ export default function HomeDetailsTabs({
             );
           })}
           <span
-            className={`pointer-events-none absolute bottom-0 h-[3px] rounded-full bg-blue-600 transition-all duration-300 ease-out ${
+            className={`pointer-events-none absolute bottom-0 h-[3px] rounded-full bg-[#E35335] transition-all duration-300 ease-out ${
               indicator.ready ? "opacity-100" : "opacity-0"
             }`}
             style={{
