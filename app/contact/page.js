@@ -10,7 +10,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <main className="bg-white">
-      <ContactSection header="Couldn't find what you are looking for?" />
+      <ContactSection header="Get in Touch" />
       <RegisterNowModal />
     </main>
   );

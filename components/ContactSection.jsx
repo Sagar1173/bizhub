@@ -73,7 +73,7 @@ const ContactSection = ({ header }) => {
         <div className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:mb-10">
           <a
             href="tel:+19052267284"
-            className="group inline-flex items-center gap-2 rounded-full  px-4 py-2 text-slate-900 transition bg-slate-50"
+            className="group inline-flex items-center gap-2 rounded-full  px-4 py-2  transition bg-slate-50"
           >
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-900 transition group-hover:bg-slate-200/70">
               <Phone className="h-4 w-4" />
@@ -99,60 +99,60 @@ const ContactSection = ({ header }) => {
 
         {/* Form */}
         <div className="max-w-2xl mx-auto">
-          <div className="rounded-2xl border border-slate-200/70 bg-white/70 p-6 shadow-[0_16px_40px_-22px_rgba(2,6,23,0.35)] backdrop-blur-xl sm:p-8">
+          <div className="rounded-2xl  bg-white/70 p-6  backdrop-blur-xl sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-slate-900">
+                  {/* <label className="mb-1.5 block text-xs font-semibold text-slate-900">
                     Name
-                  </label>
+                  </label> */}
                   <Input
                     type="text"
-                    placeholder="John Smith"
+                    placeholder="Full Name*"
                     autoComplete="name"
                     value={formData.name}
                     onChange={handleChange("name")}
-                    className="h-11 border-0 bg-slate-100 text-sm shadow-none ring-1 ring-slate-200/60 transition placeholder:text-slate-500/70 focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
+                    className="h-11 border text-lg shadow-none ring-1 ring-slate-200/60 transition focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-slate-900">
+                  {/* <label className="mb-1.5 block text-xs font-semibold text-slate-900">
                     Email
-                  </label>
+                  </label> */}
                   <Input
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="Email*"
                     autoComplete="email"
                     value={formData.email}
                     onChange={handleChange("email")}
-                    className="h-11 border-0 bg-slate-100 text-sm shadow-none ring-1 ring-slate-200/60 transition placeholder:text-slate-500/70 focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
+                    className="h-11 border  text-sm shadow-none ring-1 ring-slate-200/60 transition focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold text-slate-900">
+                {/* <label className="mb-1.5 block text-xs font-semibold text-slate-900">
                   Phone
-                </label>
+                </label> */}
                 <Input
                   type="tel"
-                  placeholder="(647) 555-1234"
+                  placeholder="(905) 111-1111"
                   autoComplete="tel"
                   value={formData.phone}
                   onChange={handleChange("phone")}
-                  className="h-11 border-0 bg-slate-100 text-sm shadow-none ring-1 ring-slate-200/60 transition placeholder:text-slate-500/70 focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
+                  className="h-11 border text-sm shadow-none ring-1 ring-slate-200/60 transition  focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
                 />
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold text-slate-900">
+                {/* <label className="mb-1.5 block text-xs font-semibold text-slate-900">
                   Message
-                </label>
+                </label> */}
                 <Textarea
                   placeholder="Tell me about your needs..."
                   value={formData.message}
                   onChange={handleChange("message")}
-                  className="min-h-28 resize-none border-0 bg-slate-100 text-sm shadow-none ring-1 ring-slate-200/60 transition placeholder:text-slate-500/70 focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
+                  className="min-h-28 resize-none border text-sm shadow-none ring-1 ring-slate-200/60 transition placeholder:text-slate-500/70 focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0"
                 />
               </div>
 
@@ -161,7 +161,7 @@ const ContactSection = ({ header }) => {
                   size="lg"
                   type="submit"
                   disabled={loading}
-                  className="group h-11 rounded-full bg-black p-7 px-12 font-semibold text-white shadow-sm transition hover:bg-black/85  disabled:opacity-70"
+                  className="group h-11 rounded-full bg-black mt-6 p-7 px-12 font-semibold text-white shadow-sm transition hover:bg-black/85  disabled:opacity-70"
                 >
                   {loading ? "Sending..." : "Send Message"}
                   <Send className="h-4 w-4 transition group-hover:translate-x-0.5" />
