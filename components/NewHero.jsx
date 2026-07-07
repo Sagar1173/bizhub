@@ -120,9 +120,9 @@ const NewHero = () => {
       {/* Background Image & Overlay */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url("/hero.jpg")' }} // Generic background image placeholder
+        style={{ backgroundImage: 'url("/hero.jpg")' }} 
       />
-      <div className="absolute inset-0 z-0 bg-white/60" />
+      <div className="absolute inset-0 z-0 bg-white/80" />
 
       {/* Blurred Background Blobs */}
       <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#E35335] rounded-full mix-blend-multiply filter blur-[128px] opacity-[0.08] z-0 pointer-events-none" />
@@ -136,7 +136,7 @@ const NewHero = () => {
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-3 sm:mt-4 text-[16px] sm:text-[18px] text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-3 sm:mt-4 text-[16px] sm:text-[18px] max-w-2xl mx-auto">
           Browse verified businesses for sale across Ontario.
         </p>
 
