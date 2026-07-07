@@ -5,6 +5,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import { fetchMedia, fetchProperties } from "@/lib/api";
 import RegisterNowModal from "@/components/RegisterNowModal";
 import { pickPropertyMainImage } from "@/lib/media";
+import NewHero from "@/components/NewHero";
 
 // Force server-side rendering on every request.
 // The homepage fetches live MLS listings — prerendering at build time is
@@ -105,7 +106,7 @@ export default async function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-white md:mx-25">
+    <div >
       <main>
         <script
           type="application/ld+json"
@@ -131,8 +132,11 @@ export default async function Home() {
             }),
           }}
         />
-        <Hero />
-        {activeSections.map((section, index) => (
+        
+        <NewHero />
+        
+        <div className="min-h-screen bg-white md:mx-25">
+       {activeSections.map((section, index) => (
           <FeaturedPropertiesSection
             key={section.title}
             sectionId={index === 0 ? "listings" : undefined}
@@ -147,6 +151,10 @@ export default async function Home() {
         <TestimonialsSection />
         <ContactSection header="Get In Touch" />
         <RegisterNowModal />
+
+        </div>
+
+
       </main>
     </div>
   );

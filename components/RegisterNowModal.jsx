@@ -67,7 +67,7 @@ export default function RegisterNowModal() {
       <div className="md:hidden fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex justify-center px-4">
         <button
           onClick={() => setIsOpen(true)}
-          className="cursor-pointer inline-flex w-fit max-w-xs items-center justify-center rounded-full bg-black-700 px-6 py-3 text-base font-semibold text-white shadow-2xl transition-transform duration-150  hover:scale-[1.02] active:scale-95"
+          className="cursor-pointer inline-flex w-fit max-w-xs items-center justify-center rounded-full bg-black px-6 py-3 text-base font-semibold text-white shadow-2xl transition-transform duration-150  hover:scale-[1.02] active:scale-95"
         >
           Notify me of new listings
         </button>
@@ -112,7 +112,7 @@ export default function RegisterNowModal() {
                   placeholder="Full Name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all  focus:ring-1 focus:ring-slate-600"
                 />
               </div>
               <div>
@@ -124,7 +124,7 @@ export default function RegisterNowModal() {
                   placeholder="Email Address"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all  focus:ring-1 focus:ring-slate-600"
                 />
               </div>
               <div>
@@ -136,7 +136,7 @@ export default function RegisterNowModal() {
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all  focus:ring-1 focus:ring-slate-600"
                 />
               </div>
               <div>
@@ -147,13 +147,13 @@ export default function RegisterNowModal() {
                   placeholder="Tell us what kind of listings you&apos;re interested in"
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition-all  focus:ring-1 focus:ring-slate-600"
                 />
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full rounded-full bg-blue-700 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800 ${
+                className={`w-full rounded-full bg-black py-3 text-sm font-bold text-white transition-colors hover:bg-black/80 ${
                   loading ? "cursor-not-allowed opacity-70" : ""
                 }`}
               >

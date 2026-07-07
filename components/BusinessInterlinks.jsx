@@ -62,9 +62,9 @@ const BusinessInterlinks = ({ city, filter }) => {
   }
 
   return (
-    <section className="py-16 bg-white border-t border-gray-100 mt-12 overflow-hidden">
+    <section className="py-16 bg-white  border-gray-100 mt-12 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="md:text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-950 mb-3">
             {title}
           </h2>
