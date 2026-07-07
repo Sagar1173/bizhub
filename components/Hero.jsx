@@ -119,12 +119,11 @@ const Hero = () => {
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full container-curbsite px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-foreground mx-auto">
-          Find Your Next Home in the <span className="text-[#E35335]">GTA.</span>
+          Find Your Next Business in the <span className="text-[#E35335]">GTA.</span>
         </h1>
 
         <p className="mt-3 text-[16px] sm:text-[18px] text-muted-foreground max-w-3xl mx-auto">
-          Browse 100+ verified businesses for sale across Ontario, complete
-          with real financials and local expertise.
+          Browse 100+ verified businesses for sale across Ontario
         </p>
 
         <div ref={containerRef} className="relative mt-10 mx-auto max-w-3xl">

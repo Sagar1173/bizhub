@@ -80,7 +80,7 @@ export default function GoSeeThisHome() {
             Shahzad Anjum
           </h2>
           <p className="text-sm md:text-base text-gray-700 font-medium">
-            905-111-1111
+            (647) 781-1238
           </p>
         </div>
       </div>

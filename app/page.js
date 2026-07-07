@@ -127,7 +127,7 @@ export default async function Home() {
                 addressCountry: "CA",
               },
               email: "mailto:shahzad.anjum@century21.ca",
-              telephone: ["+1-905-111-1111"],
+              telephone: ["+1-(647) 781-1238"],
             }),
           }}
         />

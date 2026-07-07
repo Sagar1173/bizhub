@@ -76,7 +76,7 @@ const AgentFooter = () => {
             <div className="w-full text-base text-slate-800">
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <Phone size={14} className="text-slate-900" />
-                <span>905-111-1111</span>
+                <span>(647) 781-1238</span>
               </div>
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <Mail size={14} className="text-slate-900" />
