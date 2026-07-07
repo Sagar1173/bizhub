@@ -732,7 +732,7 @@ export default Hero;
 
 
 
-// // //Century 21 Canada hero
+// // //Bizhub hero
 // // "use client";
 
 // // import { Search, MapPin } from "lucide-react";

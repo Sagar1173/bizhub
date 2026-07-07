@@ -100,7 +100,7 @@ export const sendEmail = async ({ content, title = null }) => {
 
   const crmPromise = sendLeadToCrm({ content, title, contentArray });
 
-  const emailTitle = "Century 21 Canada inquiry";
+  const emailTitle = "Bizhub inquiry";
 
   const { data, error } = await resend.emails.send({
     from: "info@homebaba.ca",

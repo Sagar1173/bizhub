@@ -9,9 +9,9 @@ import {
 import RegisterNowModal from "@/components/RegisterNowModal";
 
 export const metadata = {
-  title: "About Century 21 Canada | Your Premier Commercial Real Estate Destination",
+  title: "About Bizhub | Your Premier Commercial Real Estate Destination",
   description:
-    "Learn more about Century 21 Canada, your premier destination for finding the perfect commercial space in the Greater Toronto Area. We specialize in restaurant, retail, and franchise locations across Ontario.",
+    "Learn more about Bizhub, your premier destination for finding the perfect commercial space in the Greater Toronto Area. We specialize in restaurant, retail, and franchise locations across Ontario.",
 };
 
 const AboutPage = () => {
@@ -53,23 +53,17 @@ const AboutPage = () => {
         <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
           <div className="text-center lg:text-left">
             <h1 className="font-serif text-4xl font-bold sm:text-6xl text-slate-900 leading-tight">
-              Century 21 Canada
+              Shahzad Anjum
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Welcome to Century 21 Canada, your premier destination for finding the
-              perfect commercial space in the Greater Toronto Area. We
-              specialize in connecting business owners with ideal locations for
-              restaurants, convenience stores, franchises, and various
-              commercial ventures across Ontario. Our platform makes it simple
-              to discover and secure the business space that matches your
-              vision.
+              I have a passion for assisting clients with various real estate needs. We are the trusted and well trained professionals who strives to provide you with the best solution. Clients are impressed by the dedication and effort I put into making sure that they receive top quality service and amazing results. Explore my website to find detailed listing information, buying & selling guides and other features that suit your real estate requirements.
             </p>
           </div>
           <div className="mt-12 lg:mt-0 flex justify-center lg:justify-end">
             <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] shadow-2xl border-8 border-white/50">
               <img
                 src="/sha-century.jpg"
-                alt="Shahzad Anjum - Century 21 Canada"
+                alt="Shahzad Anjum - Bizhub"
                 className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
               />
             </div>
@@ -113,7 +107,7 @@ const AboutPage = () => {
         <section className="py-12 ">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-serif text-3xl font-bold text-slate-900 text-center mb-10">
-              Why Choose Century 21 Canada?
+              Why Choose Bizhub?
             </h2>
             <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
               {whyChooseUs.map((text, index) => (

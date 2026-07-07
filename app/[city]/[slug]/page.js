@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Square, Car, ChevronRight, Home } from "lucide-react";
+import { Square, Car, ChevronRight, Home, MapPin, Building2, CalendarClock, Maximize } from "lucide-react";
 import GoSeeThisHome from "@/components/GoSeeThisHome";
 import ScheduleViewing from "@/components/ScheduleViewing";
 import FeaturedPropertiesSection from "@/components/FeaturedPropertiesSection";
@@ -160,17 +160,17 @@ export async function generateMetadata({ params }) {
     const finalOgImage = ogImageUrl || fallbackImage;
 
     return {
-      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Century 21 Canada`,
+      title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
       description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on c21.ca`,
       openGraph: {
-        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Century 21 Canada`,
-        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Century 21 Canada.`,
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
         images: finalOgImage ? [{ url: finalOgImage }] : undefined,
       },
       twitter: {
         card: "summary_large_image",
-        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Century 21 Canada`,
-        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Century 21 Canada.`,
+        title: `${pluralizeBusinessType(typeLabel)} ${listingLabel} in ${cityName} | Bizhub`,
+        description: `${countStr}${businessLabel} ${listingLabel} in ${cityName}. Browse updated daily listings on Bizhub.`,
         images: finalOgImage ? [finalOgImage] : undefined,
       },
     };
@@ -180,7 +180,7 @@ export async function generateMetadata({ params }) {
   const data = await fetchProperty(extractedSlug);
   if (!data) {
     return {
-      title: "Property Not Found | Century 21 Canada",
+      title: "Property Not Found | Bizhub",
       description: "The property you are looking for is no longer available.",
     };
   }
@@ -196,16 +196,16 @@ export async function generateMetadata({ params }) {
   const finalOgImage = ogImageUrl || fallbackImage;
 
   return {
-    title: `${address} · ${price}  | Century 21 Canada`,
+    title: `${address} · ${price}  | Bizhub`,
     description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
     openGraph: {
-      title: `${price} · ${address} | Century 21 Canada`,
+      title: `${price} · ${address} | Bizhub`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
       images: finalOgImage ? [{ url: finalOgImage }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${price} · ${address} | Century 21 Canada`,
+      title: `${price} · ${address} | Bizhub`,
       description: `View details, photos, and amenities for this ${data.PropertySubType || "business"} in ${cityName}.`,
       images: finalOgImage ? [finalOgImage] : undefined,
     },
@@ -276,9 +276,9 @@ export default async function SlugPage({ params, searchParams }) {
         category: "BusinessProperty",
         brand: agency
           ? {
-              "@type": "Organization",
-              name: agency,
-            }
+            "@type": "Organization",
+            name: agency,
+          }
           : undefined,
         offers: {
           "@type": "Offer",
@@ -297,15 +297,15 @@ export default async function SlugPage({ params, searchParams }) {
     const itemListSchema =
       products.length > 0
         ? {
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            url: baseListUrl,
-            itemListElement: products.map((product, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              item: product,
-            })),
-          }
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          url: baseListUrl,
+          itemListElement: products.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: product,
+          })),
+        }
         : null;
 
     return (
@@ -533,9 +533,9 @@ export default async function SlugPage({ params, searchParams }) {
     category: "BusinessProperty",
     brand: data.ListOfficeName
       ? {
-          "@type": "Organization",
-          name: data.ListOfficeName,
-        }
+        "@type": "Organization",
+        name: data.ListOfficeName,
+      }
       : undefined,
     aggregateRating: {
       "@type": "AggregateRating",
@@ -552,13 +552,13 @@ export default async function SlugPage({ params, searchParams }) {
       availability: "https://schema.org/InStock",
       seller: {
         "@type": "Organization",
-        name: data.ListOfficeName || "Century 21 Canada",
+        name: data.ListOfficeName || "Bizhub",
       },
     },
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white container">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -566,7 +566,7 @@ export default async function SlugPage({ params, searchParams }) {
         }}
       />
       <ScrollToTop />
-      <div className="w-full mx-auto px-4 md:px-8 py-4">
+      <div className="w-full mx-auto px-4 md:px-8 py-4 mt-4">
         <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm text-gray-600">
           <div className="flex items-center gap-2 flex-wrap">
             <Link
@@ -599,7 +599,7 @@ export default async function SlugPage({ params, searchParams }) {
                 };
                 const baseSlug = property.businessType
                   ? businessTypeSlugMap[property.businessType] ||
-                    toCategorySlug(property.businessType)
+                  toCategorySlug(property.businessType)
                   : null;
                 return baseSlug
                   ? `/${city}/${baseSlug}-for-${listingType}`
@@ -637,7 +637,7 @@ export default async function SlugPage({ params, searchParams }) {
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
               <h1
                 className="text-3xl md:text-5xl font-bold tracking-tight"
-                
+
               >
                 ${formatMoney(property.price)}
                 <span className="ml-2 text-sm md:text-base font-semibold text-teal-700">
@@ -665,10 +665,44 @@ export default async function SlugPage({ params, searchParams }) {
               </p>
             </div>
 
-            <div className="mt-5 grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-3">
-              <div className="flex min-h-[50px] items-center gap-1.5 rounded-lg bg-white px-2 py-2 sm:min-h-[56px] sm:gap-2.5 sm:px-4 sm:py-3 border border-slate-100 shadow-sm">
-                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-100 sm:h-9 sm:w-9">
-                  <Square className="text-emerald-600" size={16} />
+            <div className="my-5 flex flex-wrap  justify-between">
+              {/* Box 1 */}
+              <div className="flex min-h-[50px] items-center gap-1.5 rounded-lg bg-white py-2 sm:min-h-[56px] sm:gap-2.5 sm:py-3 ">
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-black/10 sm:h-9 sm:w-9">
+                  <Square className="" size={16} />
+                </span>
+                <span className="whitespace-nowrap text-[10px] font-semibold leading-tight text-slate-900 sm:text-sm">
+                  {fallbackText(property.sqft)}
+                  &nbsp;
+                  {data.LivingAreaUnits || "sq. ft."}
+                </span>
+              </div>
+
+              {/* Box 2 */}
+              <div className="flex min-h-[50px] items-center gap-1.5 rounded-lg bg-white px-2 py-2 sm:min-h-[56px] sm:gap-2.5 sm:py-3 ">
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-black/10 sm:h-9 sm:w-9">
+                  <Home className="" size={16} />
+                </span>
+                <span className="whitespace-nowrap text-[10px] font-semibold leading-tight text-slate-900 sm:text-sm">
+                  {property.businessType}
+                </span>
+              </div>
+
+              {/* Box 3 */}
+              <div className="flex min-h-[50px] items-center gap-1.5 rounded-lg bg-white px-2 py-2 sm:min-h-[56px] sm:gap-2.5 sm:px-4 sm:py-3 ">
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-black/10 sm:h-9 sm:w-9">
+                  <Car className="" size={16} />
+                </span>
+                <span className="whitespace-nowrap text-[10px] font-semibold leading-tight text-slate-900 sm:text-sm">
+                  {fallbackText(property.parking)} Parking
+                </span>
+              </div>
+            </div>
+
+            {/* <div className="mt-5 grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-3">
+              <div className="flex min-h-[50px] items-center gap-1.5 rounded-lg bg-white px-2 py-2 sm:min-h-[56px] sm:gap-2.5 sm:px-4 sm:py-3 ">
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-black/10 sm:h-9 sm:w-9">
+                  <Square className="" size={16} />
                 </span>
                 <span className="whitespace-nowrap text-[10px] font-semibold leading-tight text-slate-900 sm:text-sm">
                   {fallbackText(property.sqft)}
@@ -692,21 +726,21 @@ export default async function SlugPage({ params, searchParams }) {
                   {fallbackText(property.parking)} Parking
                 </span>
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <section className="mb-12">
+          <section className="mb-12 mt-8 md:mt-12 ">
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <h2 className="text-2xl md:text-3xl font-bold">
                 Property Details
               </h2>
-              <RequestInfoModal
+              {/* <RequestInfoModal
                 variant="pill"
                 label="Request More Info"
                 propertyTitle={shareTitle}
                 propertyMls={data.ListingKey}
                 propertyUrl={canonicalUrl}
-              />
+              /> */}
             </div>
             <div className="text-base md:text-lg text-gray-700 leading-7 md:leading-8 space-y-4">
               {descriptionSections.map((paragraph, i) => (
@@ -725,18 +759,18 @@ export default async function SlugPage({ params, searchParams }) {
             </div>
           </section>
 
-          <section className="bg-white mb-20">
+          <section className="bg-white mb-20 mt-8 md:mt-12">
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <h2 className="text-2xl md:text-3xl font-bold">
                 Business Details
               </h2>
-              <RequestInfoModal
+              {/* <RequestInfoModal
                 variant="pill"
                 label="Request More Info"
                 propertyTitle={shareTitle}
                 propertyMls={data.ListingKey}
                 propertyUrl={canonicalUrl}
-              />
+              /> */}
             </div>
             <HomeDetailsTabs
               overview={overview}
@@ -745,22 +779,25 @@ export default async function SlugPage({ params, searchParams }) {
               location={locationTab}
             />
           </section>
+              <div className="bg-white mb-20 mt-8 md:mt-12"> 
+                  <ScheduleViewing property={property} />
+              </div>
 
-          <ScheduleViewing property={property} />
+          
 
           {nearbyProperties.length > 0 ? (
-            <div className="mt-10">
+            <div className="bg-white mb-20 mt-8 md:mt-12">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <h2 className="text-xl font-bold md:text-3xl">
                   Browse Similar {pluralizeBusinessType(businessType)} Nearby
                 </h2>
-                <RequestInfoModal
+                {/* <RequestInfoModal
                   variant="pill"
                   label="Request More Info"
                   propertyTitle={shareTitle}
                   propertyMls={data.ListingKey}
                   propertyUrl={canonicalUrl}
-                />
+                /> */}
               </div>
               <FeaturedPropertiesSection
                 cityName={data.City || slugToCity(city)}
@@ -783,7 +820,7 @@ export default async function SlugPage({ params, searchParams }) {
         <div className="lg:hidden">
           <a
             href="#book-showing-form"
-            className="fixed inset-x-4 bottom-4 z-40 flex items-center justify-center rounded-full bg-teal-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-teal-500/40 hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+            className="fixed inset-x-4 bottom-4 z-40 flex items-center justify-center rounded-full bg-black px-6 py-3 text-base font-semibold text-white  hover:bg-black/10 focus-visible:outline-none focus-visible:ring-2 "
           >
             Schedule a viewing
           </a>

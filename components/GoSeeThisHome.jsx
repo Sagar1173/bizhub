@@ -65,7 +65,7 @@ export default function GoSeeThisHome() {
   };
 
   return (
-    <div className="w-full bg-[#f7f7f7] rounded-xl p-2 md:p-5 border border-gray-100 shadow-sm font-sans">
+    <div className="w-full bg-white rounded-xl p-2 md:p-5 font-sans">
       {/* Agent Row */}
       <div className="flex items-center gap-3 mb-3 p-2 bg-transparent rounded-xl">
         <div className="h-14 w-14 rounded-full overflow-hidden shrink-0 border border-gray-200">

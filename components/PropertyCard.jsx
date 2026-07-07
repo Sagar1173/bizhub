@@ -123,7 +123,7 @@ export default function PropertyCard({ property }) {
           )}
 
           {/* Featured Badge */}
-          {agency === "Century 21 Canada REAL ESTATE INC." && (
+          {agency === "Bizhub BIZHUB REAL ESTATE INC." && (
             <div className="absolute top-3 left-3 bg-yellow-400 text-black px-3 py-1 text-xs font-medium rounded-full shadow-sm z-10">
               Featured
             </div>

@@ -243,27 +243,29 @@ const Header = () => {
 
   return (
     <>
-      <header
+    <main className=" bg-white md:mx-25">
+         <header
         className={cn(
-          "overflow-x-clip overflow-y-visible w-full z-50",
-          "relative bg-white text-black",
+          "overflow-x-clip overflow-y-visible w-full z-50  ",
+          "relative bg-white text-black ",
         )}
       >
-        <div className="w-full px-4 sm:px-6 lg:px- ">
+        <div className="w-full px-4 sm:px-6 lg:px-8 mt-8  ">
           <div className="flex items-center justify-between">
-            <div className="flex-1 min-w-0 flex items-center justify-start gap-2 sm:gap-4 md:gap-6">
+            <div className="flex-1 min-w-0  flex items-center justify-start gap-2 sm:gap-4 md:gap-6">
               <Link
                 href="/"
-                className="flex items-center shrink-0"
+                className="flex items-center shrink-0 text-3xl font-bold"
               >
-                <Image
+                Bi <span className="text-[#E35335]"></span>zhub<span className="text-[#E35335]">.</span>
+                {/* <Image
                   src="/icons/logo.png"
-                  alt="Century 21 Canada"
+                  alt="Bizhub"
                   width={500}
                   height={100}
                   priority
                   className="h-20 md:h-24 w-auto object-contain -ml-5"
-                />
+                /> */}
               </Link>
               {showHeaderSearch && (
                 <div
@@ -425,6 +427,8 @@ const Header = () => {
         </div>
       </header>
 
+    </main>
+     
       {/* MOBILE SIDEBAR */}
       <aside
         className={cn(

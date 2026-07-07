@@ -15,25 +15,25 @@ const AgentFooter = () => {
   };
 
   const footerCities = [
-     "Toronto",
-  "Mississauga",
-  "Brampton",
-  "Oakville",
-  "Burlington",
-  "Milton"
+    "Toronto",
+    "Mississauga",
+    "Brampton",
+    "Oakville",
+    "Burlington",
+    "Milton"
   ];
   const footerBusinessTypes = [
     "Restaurant",
     "Convenience/Variety",
     "Professional Office",
-  
+
   ];
 
   const footerHomeSales = [
-  { city: "Milton", url: "https://thehalton.ca/homes-for-sale/milton" },
-  { city: "Oakville", url: "https://thehalton.ca/homes-for-sale/oakville" },
-  { city: "Burlington", url: "https://thehalton.ca/homes-for-sale/burlington" },
-  { city: "Mississauga", url: "https://thehalton.ca/homes-for-sale/mississauga" },
+    { city: "Milton", url: "https://thehalton.ca/homes-for-sale/milton" },
+    { city: "Oakville", url: "https://thehalton.ca/homes-for-sale/oakville" },
+    { city: "Burlington", url: "https://thehalton.ca/homes-for-sale/burlington" },
+    { city: "Mississauga", url: "https://thehalton.ca/homes-for-sale/mississauga" },
   ];
   return (
     <footer className="bg-white pt-20 pb-10 px-6">
@@ -67,7 +67,7 @@ const AgentFooter = () => {
               <div className="h-px w-12 bg-slate-200 mx-auto md:mx-0 mb-2" />
 
               <p className="text-slate-900 font-bold text-sm tracking-wide uppercase">
-                Century 21 Canada
+                Bizhub
               </p>
               <p className="text-slate-900 text-sm ">Brokerage</p>
             </div>
@@ -99,8 +99,8 @@ const AgentFooter = () => {
         </div>
 
         {/* Business Interlinks Section */}
-        <div className="w-full pt-16 border-t border-slate-200 mb-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-8 gap-y-10">
+        {/* <div className="w-full pt-16 border-t border-slate-200 mb-16"> */}
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-8 gap-y-10">
             {footerBusinessTypes.map((type) => (
               <div
                 key={type}
@@ -125,29 +125,29 @@ const AgentFooter = () => {
                   ))}
                 </div>
               </div>
-            ))}
+            ))} */}
             {/* Resale Homes Column */}
-<div className="flex flex-col gap-3 text-center md:text-left">
-  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-1">
-    Resale Homes
-  </h3>
+            {/* <div className="flex flex-col gap-3 text-center md:text-left">
+              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-1">
+                Resale Homes
+              </h3>
 
-  <div className="flex flex-col gap-2">
-    {footerHomeSales.map((home) => (
-      <Link
-        key={home.city}
-        href={home.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-[13px] text-slate-600 hover:text-amber-700 transition-colors"
-      >
-        Homes for sale in {home.city}
-      </Link>
-    ))}
-  </div>
-</div>
-          </div>
-        </div>
+              <div className="flex flex-col gap-2">
+                {footerHomeSales.map((home) => (
+                  <Link
+                    key={home.city}
+                    href={home.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[13px] text-slate-600 hover:text-amber-700 transition-colors"
+                  >
+                    Homes for sale in {home.city}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div> */}
+        {/* </div> */}
 
         {/* Legal Disclaimer Section */}
         <div className="w-full pt-16 border-t border-slate-200 text-slate-600 text-center">
@@ -171,7 +171,7 @@ const AgentFooter = () => {
                 relating to real estate for sale on this website comes in part
                 from the Internet Data Exchange program of the Multiple Listing
                 Service. Real estate listings held by brokerage firms other than
-                Century 21 Canada, may be marked
+                Bizhub, may be marked
                 with the Internet Data Exchange logo and detailed information
                 about those properties will include the name of the listing
                 broker(s) when required by the MLS. Copyright &copy;2026 All
@@ -215,7 +215,7 @@ const AgentFooter = () => {
               className="h-7 w-auto mx-auto mt-5 mb-3"
             />
             <p className="text-sm text-slate-700">
-              &copy; 2026 Century 21 Canada. All rights reserved.
+              &copy; 2026 Bizhub. All rights reserved.
             </p>
             <p className="text-[11px] text-slate-500 mt-2">
               Website Designed by{" "}
