@@ -122,8 +122,8 @@ const Hero = () => {
           Find Your Next Business in the <span className="text-[#E35335]">GTA.</span>
         </h1>
 
-        <p className="mt-3 text-[16px] sm:text-[18px] text-muted-foreground max-w-3xl mx-auto">
-          Browse 100+ verified businesses for sale across Ontario
+        <p className="mt-3 text-[16px] sm:text-[18px] text-muted-foreground max-w-4xl mx-auto">
+          Browse 100+ verified businesses for sale across Ontario.
         </p>
 
         <div ref={containerRef} className="relative mt-10 mx-auto max-w-3xl">
