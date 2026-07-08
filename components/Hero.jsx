@@ -115,66 +115,72 @@ const Hero = () => {
   return (
     <section
       id="top"
-      className="relative bg-white min-h-[calc(100vh-100px)] min-h-[calc(100dvh-100px)]"
+      className="relative w-full bg-white min-h-[calc(100vh-60px)] min-h-[calc(100dvh-100px)] flex items-center justify-center overflow-hidden py-16"
     >
+     <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("/bizhubherocompre.png")' }} 
+      />
+      {/* <div className="absolute inset-0 z-0 bg-gradient-to-r from-slate-950/70 via-slate-900/40 to-white/15" /> */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/65 via-black/70 to-black/10" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full container-curbsite px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-foreground mx-auto">
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white mx-auto">
           Find Your Next Business in the <span className="text-[#E35335]">GTA.</span>
         </h1>
 
-        <p className="mt-3 text-[16px] sm:text-[18px] text-muted-foreground max-w-4xl mx-auto">
+        <p className="mt-3 text-[18px] sm:text-[22px] text-white max-w-4xl mx-auto">
           Browse 100+ verified businesses for sale across Ontario.
         </p>
 
         <div ref={containerRef} className="relative mt-10 mx-auto max-w-3xl">
-  <div className="bg-white rounded-full border border-border shadow-sm hover:shadow-md transition-shadow p-1.5 flex items-stretch gap-2">
-    <div className="flex items-center gap-3 flex-1 px-5">
-      <Search className="cursor-pointer h-5 w-5 text-muted-foreground shrink-0" />
-      <input
-        type="text"
-        placeholder="Search by MLS®, address or city"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => setIsExpanded(true)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            handleSearch();
-          }
-        }}
-        className="w-full bg-transparent outline-none text-sm sm:text-base py-3 placeholder:text-muted-foreground"
-      />
-    </div>
-    <button
-      onClick={handleSearch}
-      disabled={isSearching}
-      aria-label="Search"
-      className="inline-flex items-center justify-center gap-2 rounded-full bg-black text-white px-8 py-3 text-sm font-semibold hover:opacity-90 transition shrink-0 disabled:cursor-not-allowed disabled:opacity-70"
-    >
-      {isSearching ? (
-        <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/35 border-t-white" />
-      ) : (
-        "Search"
-      )}
-    </button>
-  </div>
+          <div className="bg-white rounded-full border border-border shadow-sm hover:shadow-md transition-shadow p-1.5 flex items-stretch gap-2">
+            <div className="flex items-center gap-3 flex-1 px-5">
+              <Search className="cursor-pointer h-5 w-5 text-muted-foreground shrink-0" />
+              <input
+                type="text"
+                placeholder="Search by MLS®, address or city"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setIsExpanded(true)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleSearch();
+                  }
+                }}
+                className="w-full bg-transparent outline-none text-sm sm:text-base py-3 placeholder:text-muted-foreground"
+              />
+            </div>
+            <button
+              onClick={handleSearch}
+              disabled={isSearching}
+              aria-label="Search"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-black text-white px-8 py-3 text-sm font-semibold hover:opacity-90 transition shrink-0 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {isSearching ? (
+                <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/35 border-t-white" />
+              ) : (
+                "Search"
+              )}
+            </button>
+          </div>
 
-  {/* Autocomplete suggestions — separate floating card, gap below the pill */}
-  {isExpanded && suggestions.length > 0 && (
-    <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-[100] max-h-72 overflow-auto rounded-2xl border border-border bg-white text-left shadow-lg">
-      {suggestions.map((city) => (
-        <button
-          key={city}
-          onClick={() => handleSelect(city)}
-          className="flex w-full items-center gap-3 border-b border-border/60 px-5 py-3 text-left text-foreground transition hover:bg-muted/30 last:border-0"
-        >
-          <MapPin className="h-4 w-4 text-muted-foreground" />
-          <span className="text-[15px] font-medium">{city}</span>
-        </button>
-      ))}
-    </div>
-  )}
-</div>
+          {/* Autocomplete suggestions — separate floating card, gap below the pill */}
+          {isExpanded && suggestions.length > 0 && (
+            <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-[100] max-h-72 overflow-auto rounded-2xl border border-border bg-white text-left shadow-lg">
+              {suggestions.map((city) => (
+                <button
+                  key={city}
+                  onClick={() => handleSelect(city)}
+                  className="flex w-full items-center gap-3 border-b border-border/60 px-5 py-3 text-left text-foreground transition hover:bg-muted/30 last:border-0"
+                >
+                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-[15px] font-medium">{city}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* <div ref={containerRef} className="relative mt-10 mx-auto max-w-3xl">
           <div

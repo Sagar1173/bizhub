@@ -132,8 +132,8 @@ export default async function Home() {
             }),
           }}
         />
-        
-        <NewHero />
+        <Hero/>
+        {/* <NewHero /> */}
         
         <div className="min-h-screen bg-white md:mx-25">
        {activeSections.map((section, index) => (
