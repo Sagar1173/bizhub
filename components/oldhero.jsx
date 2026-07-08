@@ -107,7 +107,7 @@ const OldHero = () => {
   };
 
   return (
-    <section className="relative isolate z-40 w-full pb-20 pt-20 sm:pb-32 sm:pt-10 min-h-[450px] flex items-center">
+    <section className="relative isolate z-40 w-full pb-20 pt-20 sm:pb-32 sm:pt-10 min-h-[600px] flex items-center">
       {/* Background Image with Overlay and Clip Path */}
       <div
         className="absolute inset-0 -z-10 overflow-hidden bg-slate-900"
