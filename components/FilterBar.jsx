@@ -229,13 +229,13 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                   }
                   className={`flex items-center shrink-0 gap-1.5 px-3 py-1.5 rounded-full border text-xs md:text-sm transition-colors cursor-pointer whitespace-nowrap ${
                     businessType === type
-                      ? "bg-blue-50 border-blue-500 text-blue-700 font-semibold"
+                      ? "bg-[#E35335]-50 border-[#E35335] text-[#E35335] font-semibold"
                       : "border-gray-300 text-gray-700 hover:border-gray-800"
                   }`}
                 >
                   {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
                   {businessType === type && (
-                    <X size={14} className="text-blue-500" />
+                    <X size={14} className="text-[#E35335]" />
                   )}
                 </button>
               ))}
@@ -267,13 +267,13 @@ export default function FilterBar({ onNavigate, city, pathFilter }) {
                   }
                   className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-full border text-sm transition-colors cursor-pointer whitespace-nowrap min-h-[40px] ${
                     businessType === type
-                      ? "bg-blue-50 border-blue-500 text-blue-700 font-semibold"
+                      ? "bg-[#E35335]-50 border-[#E35335] text-[#E35335] font-semibold"
                       : "border-gray-300 text-gray-700 hover:border-gray-800"
                   }`}
                 >
                   {BUSINESS_TYPE_DISPLAY_MAP[type] || type}
                   {businessType === type && (
-                    <X size={14} className="text-blue-500" />
+                    <X size={14} className="text-[#E35335]" />
                   )}
                 </button>
               ))}
@@ -489,7 +489,7 @@ function PriceRangeSlider({ minPrice, maxPrice, onCommit }) {
   };
 
   const trackStyle = {
-    background: `linear-gradient(to right, #e5e7eb ${minPercent}%, #1d4ed8 ${minPercent}%, #1d4ed8 ${maxPercent}%, #e5e7eb ${maxPercent}%)`,
+    background: `linear-gradient(to right, #e5e7eb ${minPercent}%, #E35335 ${minPercent}%, #E35335 ${maxPercent}%, #e5e7eb ${maxPercent}%)`,
   };
 
   return (
@@ -538,7 +538,7 @@ function PriceRangeSlider({ minPrice, maxPrice, onCommit }) {
             setMaxDraft(PRICE_MAX);
             commit(PRICE_MIN, PRICE_MAX);
           }}
-          className="text-xs font-semibold text-blue-700 hover:text-blue-800"
+          className="text-xs font-semibold text-[#E35335] hover:text-[#E35335]/80 transition-colors"
         >
           Reset
         </button>
@@ -552,7 +552,7 @@ function PriceRangeSlider({ minPrice, maxPrice, onCommit }) {
           height: 16px;
           width: 16px;
           border-radius: 999px;
-          background: #1d4ed8;
+          background: #E35335;
           border: 2px solid #ffffff;
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
           cursor: pointer;
@@ -562,12 +562,13 @@ function PriceRangeSlider({ minPrice, maxPrice, onCommit }) {
         .price-range-input::-webkit-slider-runnable-track {
           height: 4px;
           background: transparent;
+          background: #E35335;
         }
         .price-range-input::-moz-range-thumb {
           height: 16px;
           width: 16px;
           border-radius: 999px;
-          background: #1d4ed8;
+          background: #E35335;
           border: 2px solid #ffffff;
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
           cursor: pointer;
@@ -587,7 +588,7 @@ function DropdownItem({ children, active, onClick }) {
     <button
       onClick={onClick}
       className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
-        active ? "bg-[#38003c] text-white" : "hover:bg-gray-100"
+        active ? "bg-[#E35335] text-white" : "hover:bg-gray-100"
       }`}
     >
       {children}
@@ -605,7 +606,7 @@ function FilterGroup({ title, options, value, onChange }) {
             key={o}
             onClick={() => onChange(o)}
             className={`px-3 py-2 rounded-lg border text-sm ${
-              value === o ? "bg-[#38003c] text-white" : "hover:bg-gray-100"
+              value === o ? "bg-[#E35335] text-white" : "hover:bg-gray-100"
             }`}
           >
             {o}+

@@ -243,7 +243,7 @@ const Header = () => {
 
   return (
     <>
-    <main className=" bg-white md:mx-25">
+    <main className=" bg-white">
          <header
         className={cn(
           "overflow-x-clip overflow-y-visible w-full z-50  ",

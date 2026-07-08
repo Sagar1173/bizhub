@@ -208,7 +208,7 @@ export default async function FeaturedListingsPage({ searchParams }) {
           }}
         />
       ) : null}
-      <main className="min-h-screen bg-white md:mx-25">
+      <main className="min-h-screen bg-white">
         <div className="w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
           <div className="mb-3 sm:mb-4">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 capitalize leading-tight">

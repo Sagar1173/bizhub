@@ -115,11 +115,11 @@ const Hero = () => {
   return (
     <section
       id="top"
-      className="relative w-full bg-white min-h-[calc(100vh-60px)] min-h-[calc(100dvh-100px)] flex items-center justify-center overflow-hidden py-16"
+      className="relative w-full  min-h-[550px] flex items-center justify-center overflow-hidden py-16"
     >
      <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url("/bizhubherocompre.png")' }} 
+        style={{ backgroundImage: 'url("/cropedhero.png")' }} 
       />
       {/* <div className="absolute inset-0 z-0 bg-gradient-to-r from-slate-950/70 via-slate-900/40 to-white/15" /> */}
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/65 via-black/70 to-black/10" />
